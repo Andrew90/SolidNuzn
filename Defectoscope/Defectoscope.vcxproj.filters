@@ -85,6 +85,45 @@
     <ClCompile Include="Windows\Viewers\Viewer.cpp">
       <Filter>Windows\Viewers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\Net\AsyncServer.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\CommonTCP.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\Frame.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\GetHostByName.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\InitTcp.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\NetClient.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\NetFrame.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Net\ServerHandler.cpp">
+      <Filter>Common\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Communication\TypeSize\TypeSizeProtocol.cpp">
+      <Filter>Communication\TypeSize</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Communication\Thickness\ThicknessProtocol.cpp">
+      <Filter>Communication\Thickness</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Communication\Strobes\StrobesProtocol.cpp">
+      <Filter>Communication\Strobes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Communication\StopCycle\StopCycleProtocol.cpp">
+      <Filter>Communication\StopSycle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Communication\SendArray\ThickArray.cpp">
+      <Filter>Communication\SendArray</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h">
@@ -218,6 +257,51 @@
     </ClInclude>
     <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp">
       <Filter>Common\templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\AsyncServer.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\CommonTCP.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\Frame.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\GetHostByName.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\InitTcp.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\NetClient.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\NetFrame.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\SendArray.hpp">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Net\ServerHandler.h">
+      <Filter>Common\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\IPprotocolProcedureList.hpp">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\TypeSize\TypeSizeProtocol.h">
+      <Filter>Communication\TypeSize</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\Thickness\ThicknessProtocol.h">
+      <Filter>Communication\Thickness</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\Strobes\StrobesProtocol.h">
+      <Filter>Communication\Strobes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\StopCycle\StopCycleProtocol.h">
+      <Filter>Communication\StopSycle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Communication\SendArray\ThickArray.h">
+      <Filter>Communication\SendArray</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +444,27 @@
     </Filter>
     <Filter Include="Common\Resource">
       <UniqueIdentifier>{94c1515e-850d-4e36-8169-199668d0550d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Net">
+      <UniqueIdentifier>{14eba0ca-8102-4b8f-bbc5-ef288534cf1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication">
+      <UniqueIdentifier>{6bccd69d-2c04-424a-8424-b3ef45d2fad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\SendArray">
+      <UniqueIdentifier>{18ad835d-88e7-4d6e-b6fa-c4961966bd5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\StopSycle">
+      <UniqueIdentifier>{f08b3a71-de5f-4cf9-a26a-ac12ca131ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\Strobes">
+      <UniqueIdentifier>{1a2b13d1-b673-4e6a-bba3-e8d38bb2887a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\Thickness">
+      <UniqueIdentifier>{c1d28fba-0297-4361-b7fd-822bff782670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\TypeSize">
+      <UniqueIdentifier>{1af8e83f-37a8-4799-9975-3f935d19f591}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
