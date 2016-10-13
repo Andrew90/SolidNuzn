@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)Windows;$(ProjectDir)..\Common;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Communication;$(ProjectDir)Windows;$(ProjectDir)..\Common;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,12 +83,25 @@
     <ClCompile Include="..\Common\Graphics\EmptyLeftAxes.cpp" />
     <ClCompile Include="..\Common\Graphics\FixedGridSeries.cpp" />
     <ClCompile Include="..\Common\Graphics\GridChart.cpp" />
+    <ClCompile Include="..\Common\Net\AsyncServer.cpp" />
+    <ClCompile Include="..\Common\Net\CommonTCP.cpp" />
+    <ClCompile Include="..\Common\Net\Frame.cpp" />
+    <ClCompile Include="..\Common\Net\GetHostByName.cpp" />
+    <ClCompile Include="..\Common\Net\InitTcp.cpp" />
+    <ClCompile Include="..\Common\Net\NetClient.cpp" />
+    <ClCompile Include="..\Common\Net\NetFrame.cpp" />
+    <ClCompile Include="..\Common\Net\ServerHandler.cpp" />
     <ClCompile Include="..\Common\tools_debug\DebugMess.cpp" />
     <ClCompile Include="..\Common\window_tool\EmptyWindow.cpp" />
     <ClCompile Include="..\Common\window_tool\HookKey.cpp" />
     <ClCompile Include="..\Common\window_tool\MenuAPI.cpp" />
     <ClCompile Include="..\Common\window_tool\Pass.cpp" />
     <ClCompile Include="..\Common\window_tool\SelectTypeSizeList.cpp" />
+    <ClCompile Include="..\Communication\SendArray\ThickArray.cpp" />
+    <ClCompile Include="..\Communication\StopCycle\StopCycleProtocol.cpp" />
+    <ClCompile Include="..\Communication\Strobes\StrobesProtocol.cpp" />
+    <ClCompile Include="..\Communication\Thickness\ThicknessProtocol.cpp" />
+    <ClCompile Include="..\Communication\TypeSize\TypeSizeProtocol.cpp" />
     <ClCompile Include="App\App.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\Common;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -121,6 +134,15 @@
     <ClInclude Include="..\Common\Graphics\EmptyLeftAxes.h" />
     <ClInclude Include="..\Common\Graphics\FixedGridSeries.h" />
     <ClInclude Include="..\Common\Graphics\GridChart.h" />
+    <ClInclude Include="..\Common\Net\AsyncServer.h" />
+    <ClInclude Include="..\Common\Net\CommonTCP.h" />
+    <ClInclude Include="..\Common\Net\Frame.h" />
+    <ClInclude Include="..\Common\Net\GetHostByName.h" />
+    <ClInclude Include="..\Common\Net\InitTcp.h" />
+    <ClInclude Include="..\Common\Net\NetClient.h" />
+    <ClInclude Include="..\Common\Net\NetFrame.h" />
+    <ClInclude Include="..\Common\Net\SendArray.hpp" />
+    <ClInclude Include="..\Common\Net\ServerHandler.h" />
     <ClInclude Include="..\Common\templates\templates.hpp" />
     <ClInclude Include="..\Common\templates\typelist.hpp" />
     <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp" />
@@ -133,6 +155,12 @@
     <ClInclude Include="..\Common\window_tool\message.h" />
     <ClInclude Include="..\Common\window_tool\Pass.h" />
     <ClInclude Include="..\Common\window_tool\SelectTypeSizeList.h" />
+    <ClInclude Include="..\Communication\IPprotocolProcedureList.hpp" />
+    <ClInclude Include="..\Communication\SendArray\ThickArray.h" />
+    <ClInclude Include="..\Communication\StopCycle\StopCycleProtocol.h" />
+    <ClInclude Include="..\Communication\Strobes\StrobesProtocol.h" />
+    <ClInclude Include="..\Communication\Thickness\ThicknessProtocol.h" />
+    <ClInclude Include="..\Communication\TypeSize\TypeSizeProtocol.h" />
     <ClInclude Include="..\resource.h" />
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\AppBase.h" />
