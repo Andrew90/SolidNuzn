@@ -87,6 +87,10 @@ IDB_Continue            BITMAP                  "..\\Common\\Resource\\continue.
 IDI_UPLOAD              ICON                    "..\\Common\\Resource\\upload.ico"
 IDI_LETTER              ICON                    "..\\Common\\Resource\\POSTITL.ICO"
 IDI_settings            ICON                    "..\\Common\\Resource\\settings.ico"
+IDI_Add                 ICON                    "..\\Common\\Resource\\Add.ico"
+IDI_Cancel              ICON                    "..\\Common\\Resource\\Cancel.ico"
+IDI_Exclam              ICON                    "..\\Common\\Resource\\Exclamation-icon.ico"
+IDI_Ok                  ICON                    "..\\Common\\Resource\\Ok-icon.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

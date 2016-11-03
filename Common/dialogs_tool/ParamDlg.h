@@ -1,7 +1,7 @@
 #pragma once
 #include "templates\typelist.hpp"
-#include "Base\Base.hpp"
-#include "App\AppBase.h"
+//#include "Base\Base.hpp"
+//#include "App\AppBase.h"
 #include "window_tool\message.h"
 #include "dialogs_tool\ParamDlg.hpp"
 #include "window_tool\Pass.h"
@@ -171,16 +171,16 @@ struct CancelBtn
 
 //template<class Base, class Table>struct TestPassword{bool operator()(HWND){return true;}};
 
-template<class Table>struct TestPassword<ParametersBase, Table>
-{
-	bool operator()(HWND h)
-	{
-		static const int t = TL::TypeInMultyList<ParametersBase::multy_type_list, Table>::Result::value;
-		return (0 == t)
-			? TypesizePasswordDlg().Do(h)
-			: OptionPasswordDlg().Do(h);
-	}
-};
+//template<class Table>struct TestPassword<ParametersBase, Table>
+//{
+//	bool operator()(HWND h)
+//	{
+//		static const int t = TL::TypeInMultyList<ParametersBase::multy_type_list, Table>::Result::value;
+//		return (0 == t)
+//			? TypesizePasswordDlg().Do(h)
+//			: OptionPasswordDlg().Do(h);
+//	}
+//};
 //-------------------------------------------------------------------
 template<class BaseParam, class TableParam, class List, class ButtonsList = TL::MkTlst<OkBtn, CancelBtn>::Result>class TemplDialogList
 {

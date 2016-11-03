@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <comutil.h>
-#include "typelist.hpp"
+#include "templates/typelist.hpp"
 //////////////////////////////////////////////////////////////////////
 template<class T>struct Singleton
 {

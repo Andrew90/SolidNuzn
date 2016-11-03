@@ -2,7 +2,7 @@
 #include <typeinfo>
 #include <windows.h>
 #include "window_tool\message.h"
-#include "..\resource.h"
+#include "resource.h"
 #include "templates\WindowsEventTemplate.hpp"
 //---------------------------------------------------------------------------------
 ATOM MyRegisterClass(WNDPROC WndProc

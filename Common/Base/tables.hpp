@@ -742,6 +742,22 @@ template<typename Table>struct Select
 			return 0;
 		}
 	}
+	template<typename list>int Execute(TL::Factory<list> &f)
+	{
+		try
+		{
+			head[wcslen(head) - 7] = '\0';
+			cmd->CommandText = head;
+			_variant_t rowsAffected; 
+			ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+			TL::foreach<list, set_to_>()(&f, rec.GetInterfacePtr());
+			return rec->Fields->GetItem(L"ID")->GetValue();
+		}
+		catch(...)
+		{
+			return 0;
+		}
+	}
 	int Execute(ADODB::_RecordsetPtr &rec)
 	{
 		try
@@ -1124,6 +1140,7 @@ struct CMD
 {
 	ADODB::_CommandPtr cmd;
 	CBase &base;
+	ADODB::_RecordsetPtr rec;
 	CMD(CBase &b)
 		: base(b)
 	{
@@ -1138,15 +1155,15 @@ struct CMD
 	}
 	template<class T>CMD &GetValue(wchar_t *nameParam, T &value)
 	{
-		_variant_t rowsAffected; 
-		ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+		//_variant_t rowsAffected; 
+		//ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 		value = rec->Fields->GetItem(nameParam)->GetValue();
 		return *this;
 	}
     CMD &GetValue(wchar_t *nameParam, wchar_t (&value)[128])
 	{
-		_variant_t rowsAffected; 
-		ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+	//	_variant_t rowsAffected; 
+	//	ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
         wchar_t *s = _bstr_t(rec->Fields->GetItem(nameParam)->GetValue());
 		wcsncpy(value, s, dimention_of(value));
 		return *this;
@@ -1154,7 +1171,8 @@ struct CMD
 	void Execute()
 	{
 		_variant_t rowsAffected; 
-		ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+		//ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+	    rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 	}
 	template<typename T>CMD &Param(T &t)
 	{       
@@ -1168,6 +1186,61 @@ struct CMD
 				 )
 		   );
 		return *this;
+	}
+//--------------------------------------------------------------------------------------------------
+	template<class T>struct convert
+	{
+		template<class O, class P>void operator()(O *o, P p)
+		{
+			o->value = Tpe<T>()(p);
+		}
+	};
+
+	template<class T, int N>struct convert<T[N]>
+	{
+		template<class O, class P>void operator()(O *o, P p)
+		{
+			T *f;
+			SafeArrayAccessData(p.parray, (void **)&f);
+			memmove(o->value, f, sizeof(o->value));
+			SafeArrayUnaccessData(p.parray);
+		}
+	};
+
+	template<int N>struct convert<Holder<N>>
+	{
+		template<class O, class P>void operator()(O *o, P p)
+		{
+			o->value = _bstr_t(p);
+		}
+	};
+	template<typename O, typename P>struct set_to_
+	{
+		void operator()(O *o, P *p)
+		{
+			convert<O::type_value>()(o, p->Fields->GetItem(o->name())->GetValue());
+		}
+	};
+//--------------------------------------------------------------------------------------------------
+	template<class List, template<class, class>class Proc, class Data>bool ExecuteLoop(Data &d)
+	{
+		try
+		{
+			_variant_t rowsAffected; 
+			rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+			TL::Factory<List> table;
+			while (!rec->EndOfFile) 
+			{
+				TL::foreach<List, set_to_>()(&table, rec.GetInterfacePtr());
+				if(Proc<TL::Factory<List>, Data>()(table, d)) return true;
+				rec->MoveNext(); 
+			}
+			return true;
+		}
+		catch(...)
+		{
+			return false;
+		}
 	}
 };
 

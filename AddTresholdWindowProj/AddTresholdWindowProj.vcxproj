@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6F97A1DE-A028-4589-B197-B3578B591921}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AddTresholdWindowProj</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)windows;$(ProjectDir);$(ProjectDir)../Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)GenVer.bat</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Версия гит</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\Common\Resource\Add.ico" />
+    <None Include="..\Common\Resource\arrow_down.bmp" />
+    <None Include="..\Common\Resource\arrow_left.bmp" />
+    <None Include="..\Common\Resource\arrow_right.bmp" />
+    <None Include="..\Common\Resource\arrow_up.bmp" />
+    <None Include="..\Common\Resource\BottomArr.bmp" />
+    <None Include="..\Common\Resource\Cancel.ico" />
+    <None Include="..\Common\Resource\clamp.bmp" />
+    <None Include="..\Common\Resource\Clamp1OnBtn.bmp" />
+    <None Include="..\Common\Resource\Clamp2OnBtn.bmp" />
+    <None Include="..\Common\Resource\continue.bmp" />
+    <None Include="..\Common\Resource\CycleBtn.bmp" />
+    <None Include="..\Common\Resource\DownArrow.bmp" />
+    <None Include="..\Common\Resource\Exclamation-icon.ico" />
+    <None Include="..\Common\Resource\ExitTubeBtn.bmp" />
+    <None Include="..\Common\Resource\LeftArr.bmp" />
+    <None Include="..\Common\Resource\LeftArrow.bmp" />
+    <None Include="..\Common\Resource\MashBtn.bmp" />
+    <None Include="..\Common\Resource\Ok-icon.ico" />
+    <None Include="..\Common\Resource\open_file.bmp" />
+    <None Include="..\Common\Resource\OptionsBtn.bmp" />
+    <None Include="..\Common\Resource\POSTITL.ICO" />
+    <None Include="..\Common\Resource\QueryBtn.bmp" />
+    <None Include="..\Common\Resource\RefreshBtn.bmp" />
+    <None Include="..\Common\Resource\ResetBtn.bmp" />
+    <None Include="..\Common\Resource\RightArr.bmp" />
+    <None Include="..\Common\Resource\RightArrow.bmp" />
+    <None Include="..\Common\Resource\save_as.bmp" />
+    <None Include="..\Common\Resource\SensorsUnit.bmp" />
+    <None Include="..\Common\Resource\sep.bmp" />
+    <None Include="..\Common\Resource\settings.ico" />
+    <None Include="..\Common\Resource\TopArr.bmp" />
+    <None Include="..\Common\Resource\UpArrow.bmp" />
+    <None Include="..\Common\Resource\upload.avi">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\Common\Resource\upload.ico" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Common\Base\Base.hpp" />
+    <ClInclude Include="..\Common\Base\ExpressBase.hpp" />
+    <ClInclude Include="..\Common\Base\tables.hpp" />
+    <ClInclude Include="..\Common\Base\TablesDefine.h" />
+    <ClInclude Include="..\Common\DlgTemplates\ParamDlg.h" />
+    <ClInclude Include="..\Common\DlgTemplates\ParamDlg.hpp" />
+    <ClInclude Include="..\Common\Graphics\Borders.h" />
+    <ClInclude Include="..\Common\Graphics\Chart.h" />
+    <ClInclude Include="..\Common\Graphics\ColorLabel.h" />
+    <ClInclude Include="..\Common\templates\templates.hpp" />
+    <ClInclude Include="..\Common\templates\typelist.hpp" />
+    <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp" />
+    <ClInclude Include="..\Common\tools_debug\DebugMess.h" />
+    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.h" />
+    <ClInclude Include="..\Common\window_tool\DlgFiles.h" />
+    <ClInclude Include="..\Common\window_tool\Emptywindow.h" />
+    <ClInclude Include="..\Common\window_tool\Grid.h" />
+    <ClInclude Include="..\Common\window_tool\GridItems.h" />
+    <ClInclude Include="..\Common\window_tool\HookKey.h" />
+    <ClInclude Include="..\Common\window_tool\InitToolbar.hpp" />
+    <ClInclude Include="..\Common\window_tool\ItemIni.h" />
+    <ClInclude Include="..\Common\window_tool\MenuAPI.h" />
+    <ClInclude Include="..\Common\window_tool\message.h" />
+    <ClInclude Include="..\Common\window_tool\Pass.h" />
+    <ClInclude Include="..\Common\window_tool\SelectTypeSizeList.h" />
+    <ClInclude Include="..\Common\window_tool\TEvent.h" />
+    <ClInclude Include="..\Common\window_tool\WindowsPosition.h" />
+    <ClInclude Include="AddTresholdWindowProj.h" />
+    <ClInclude Include="App\App.h" />
+    <ClInclude Include="App\AppBase.h" />
+    <ClInclude Include="App\config.h" />
+    <ClInclude Include="App\SelectHandler.h" />
+    <ClInclude Include="App\PasswordDlg.hpp" />
+    <ClInclude Include="Dates\ChartData.h" />
+    <ClInclude Include="Dates\Compute.h" />
+    <ClInclude Include="Dates\SaveLoadDates.h" />
+    <ClInclude Include="Dates\SolidData.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SolidGroupAlgoritm\ComputeSolidGroup.h" />
+    <ClInclude Include="SolidGroupAlgoritm\SolidBase.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Windows\AddThresholdsWindow\AddThresholdsWindow.h" />
+    <ClInclude Include="Windows\AddThresholdsWindow\GridWindow.h" />
+    <ClInclude Include="Windows\AddThresholdsWindow\TableData.h" />
+    <ClInclude Include="Windows\AddThresholdsWindow\ThresholdDataTable.h" />
+    <ClInclude Include="Windows\Common\Viewer.h" />
+    <ClInclude Include="Windows\Dialogs\Dialogs.h" />
+    <ClInclude Include="Windows\MainWindow\MainWindow.h" />
+    <ClInclude Include="Windows\MainWindow\MainWindowMenu.hpp" />
+    <ClInclude Include="Windows\MainWindow\MainWindowToolBar.h" />
+    <ClInclude Include="Windows\MainWindow\SignalViewer.h" />
+    <ClInclude Include="Windows\MainWindow\TopLabelViewer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Common\DlgTemplates\ParamDlg.cpp" />
+    <ClCompile Include="..\Common\Graphics\Borders.cpp" />
+    <ClCompile Include="..\Common\Graphics\Chart.cpp" />
+    <ClCompile Include="..\Common\Graphics\ColorLabel.cpp" />
+    <ClCompile Include="..\Common\tools_debug\DebugMess.cpp" />
+    <ClCompile Include="..\Common\window_tool\DlgFiles.cpp" />
+    <ClCompile Include="..\Common\window_tool\EmptyWindow.cpp" />
+    <ClCompile Include="..\Common\window_tool\Grid.cpp" />
+    <ClCompile Include="..\Common\window_tool\GridItems.cpp" />
+    <ClCompile Include="..\Common\window_tool\HookKey.cpp" />
+    <ClCompile Include="..\Common\window_tool\ItemIni.cpp" />
+    <ClCompile Include="..\Common\window_tool\MenuAPI.cpp" />
+    <ClCompile Include="..\Common\window_tool\Pass.cpp" />
+    <ClCompile Include="..\Common\window_tool\SelectTypeSizeList.cpp" />
+    <ClCompile Include="..\Common\window_tool\WindowsPosition.cpp" />
+    <ClCompile Include="AddTresholdWindowProj.cpp" />
+    <ClCompile Include="App\App.cpp" />
+    <ClCompile Include="App\AppBase.cpp" />
+    <ClCompile Include="App\SelectHandler.cpp" />
+    <ClCompile Include="Dates\ChartData.cpp" />
+    <ClCompile Include="Dates\Compute.cpp" />
+    <ClCompile Include="Dates\SaveLoadDates.cpp" />
+    <ClCompile Include="Dates\SolidData.cpp" />
+    <ClCompile Include="SolidGroupAlgoritm\ComputeSolidGroup.cpp" />
+    <ClCompile Include="SolidGroupAlgoritm\SolidBase.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Windows\AddThresholdsWindow\AddThresholdsWindow.cpp" />
+    <ClCompile Include="Windows\AddThresholdsWindow\GridWindow.cpp" />
+    <ClCompile Include="Windows\AddThresholdsWindow\ThresholdDataTable.cpp" />
+    <ClCompile Include="Windows\Common\Viewer.cpp" />
+    <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
+    <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp" />
+    <ClCompile Include="Windows\MainWindow\MainWindow.cpp" />
+    <ClCompile Include="Windows\MainWindow\MainWindowToolBar.cpp" />
+    <ClCompile Include="Windows\MainWindow\SignalViewer.cpp" />
+    <ClCompile Include="Windows\MainWindow\TopLabelViewer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Defectoscope\rc.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

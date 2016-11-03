@@ -58,30 +58,6 @@ void SelectTypeSizeList::Do(TCommand &m)
 	{
 		wchar_t buf[128];
 		GetWindowText(m.hControl, buf, dimention_of(buf));
-		/////////CBase base(ParametersBase().name());
-		/////////if(base.IsOpen())
-		/////////{			
-		/////////	NameParam::type_value name;
-		/////////	name = buf;
-		/////////	ParametersTable typeSizeParam;
-		/////////	int id = Select<ParametersTable>(base).eq<NameParam>(name).Execute(typeSizeParam);
-		/////////	if(id != 0)
-		/////////	{
-		/////////		CurrentParametersTable t;
-		/////////		t.items.get<CurrentID>().value = id;
-		/////////		UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
-		/////////
-		/////////		AppBase::InitTypeSizeTables(base);
-		/////////		if(obj&&ptr)(obj->*ptr)();
-		/////////
-		/////////		SetFocus(m.hwnd);
-		/////////		wchar_t b[256];
-		/////////		wchar_t bb[512];
-        /////////        ExistCurrentUSPCFile(b);
-		/////////		wsprintf(bb, L"%s %s", App::TitleApp(), b);
-		/////////		SetWindowText(m.hwnd, bb);
-		/////////	}
-		/////////}
 		if(NULL != ptr) (*ptr)(buf);
 		SetFocus(m.hwnd);
 	}

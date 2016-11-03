@@ -56,6 +56,7 @@ void View::operator()(TSize &l)
 	g.FillRectangle(&solidBrush, 0, 0, 10, l.Height);   
 	g.FillRectangle(&solidBrush, 0, 0, l.Width, 29);  
 
+	BeforeDraw(g);
 	chart->Draw(g);	
 }
 void View::operator()(TPaint &l)
@@ -141,12 +142,6 @@ void View::SizeOffs(TMouseMove &l)
 		if(offsetY >= maxCountSensors) offsetY = maxCountSensors - 1;
 	}
 }
-
-//void View::operator()(TSize &l)
-//{
-//	SizeOffs(storedMouseMove);
-//	//Parent::operator()(l);
-//}
 
 void View::operator()(TMouseMove &l)
 {

@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by Defectoscope.rc
+// Used by rc.rc
 //
 #define IDB_Refresh                     104
 #define IDB_SEP                         107
@@ -38,13 +38,18 @@
 #define IDB_arrow_left                  144
 #define IDB_Continue                    146
 #define IDR_UPLOAD_AVI                  149
+#define IDI_Add                         154
+#define IDI_Cancel                      155
+#define IDI_Exclam                      156
+#define IDI_ICON2                       157
+#define IDI_Ok                          157
 #define IDB_MashCutBtn                  214
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        150
+#define _APS_NEXT_RESOURCE_VALUE        158
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101

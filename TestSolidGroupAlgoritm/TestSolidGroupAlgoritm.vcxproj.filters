@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SolidGroupAlgoritm">
+      <UniqueIdentifier>{af15ff3d-ba13-46fd-84c3-4ae32c6043b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{93cc53d3-f26c-42a7-982f-c87af2f91089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools_debug">
+      <UniqueIdentifier>{ed8b5331-889e-4312-8555-f35ea8fb7740}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidGroupAlgoritm\ComputeSolidGroup.h">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidGroupAlgoritm\SolidBase.h">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\Base.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\ExpressBase.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\tables.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\TablesDefine.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\tools_debug\DebugMess.h">
+      <Filter>tools_debug</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSolidGroupAlgoritm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidGroupAlgoritm\ComputeSolidGroup.cpp">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidGroupAlgoritm\SolidBase.cpp">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\tools_debug\DebugMess.cpp">
+      <Filter>tools_debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

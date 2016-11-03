@@ -26,6 +26,8 @@ public:
 
 	void operator()(TMouseWell &);
 	void operator()(TMouseMove &);
+
+	virtual void BeforeDraw(Gdiplus::Graphics &){}
 protected:
 	int maxCountSensors;
 	void SizeOffs(TMouseMove &);

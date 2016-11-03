@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ResultItems.h"
 #include <Windows.h>
-#include <typeinfo>
 
 namespace
 {
@@ -49,8 +48,7 @@ namespace
 			!(type_in_list<List, Defect<Cross>>::value && type_in_list<List, Class2<Cross>>::value
 			|| type_in_list<List, Defect<Long>>::value && type_in_list<List, Class2<Long>>::value
 			)
-			&& 
-			(TL::Length<List>::value > 1);
+			&& (TL::Length<List>::value > 1);
 	};
 
 	template<int N = 3, class tmp = NullType>struct mk_list
@@ -186,7 +184,6 @@ namespace
 	template<>struct ColorText<Class2<Long>> {static const int value = 0xffff00;};
 	template<>struct ColorText<Above<Thick>> {static const int value = 0xff;};
 
-
 	template<class O, class P>struct __Text__
 	{
 		void operator()(P &p)
@@ -231,7 +228,6 @@ namespace
 	{
 		template<class O>void operator()(O &, int &d)
 		{
-			printf("%s\n", typeid(tmp).name());
 			d = OffsOf<all_result_list, tmp>::value;
 		}
 	};

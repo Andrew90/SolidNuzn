@@ -493,45 +493,34 @@ void LineSeries::Draw()
 			);
 		double dY = (double) (chart.rect.bottom - chart.rect.top - chart.offsetAxesBottom - chart.offsetAxesTop) / (chart.maxAxesY - chart.minAxesY);
 
-		double y = chart.rect.bottom - chart.offsetAxesBottom;
+		double yOffs = chart.rect.bottom - chart.offsetAxesBottom;
 
 		int width = chart.rect.right - chart.rect.left - chart.offsetAxesRight - chart.offsetAxesLeft;
 		double dX = (double)(width) / count;
 		int x0 = chart.rect.left + chart.offsetAxesLeft;
-		Point points[2000];
-		points[0].X = x0;
-		points[0].Y = int(y - data[0] * dY);
-		double x = 0;
-		int last = 0;
+		double minY = chart.minAxesY;
+		int y0 = int(yOffs - (data[0] - minY) * dY);
+		double x = x0;
+		int y = y0;
 		for(int i = 1; i < count; ++i)
 		{
-			if(dimention_of(points) < last) break;
 			x += dX;
-			int k = i;//(int)x;
-			points[k].X = int(x + x0);
-			if(last == k)
+			y = int(yOffs - (data[i] - minY) * dY);
+			if(x0 != int(x) || y0 != y)
 			{
-				int tmp = int(y - data[i] * dY);
-				if(points[k].Y < tmp) points[k].Y = tmp;
+				chart.g->DrawLine(&pen, x0, y0, (int)x, y);
+				x0 = int(x);
+				y0 = y;
 			}
-			else
-			{
-				points[k].Y =  int(y - data[i] * dY);
-			}
-			last = k;
 		}
-		chart.g->DrawLines(&pen, points, count);
 		chart.g->SetClip(&Region());
 	}
 }
 //-------------------------------------------------------------------------------------------------------------------
-void LineSeries::SetData(double *d, int c, double min, double max)
+void LineSeries::SetData(double *d, int c)
 {
 	data = d;
-	count = c;
-	chart.minScaleX = min;
-	chart.maxScaleX = max;
-	chart.dScaleX = (max - min) / count;
+	count = c;	
 }
 //-------------------------------------------------------------------------------------------------------------
 Cursor::Cursor(Chart &chart) 

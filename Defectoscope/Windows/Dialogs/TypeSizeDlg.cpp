@@ -21,40 +21,41 @@ namespace
 		wchar_t *Title(){return L"Применить";}
 		template<class Owner>void BtnHandler(Owner &owner, HWND h)
 		{
-			if(TestPassword<Owner::Base, Owner::Table>()(h))
-			{
-				HWND hWnd = owner.items.get<DlgItem<NameParam>>().hWnd;
-				wchar_t buf[128];
-				GetWindowText(hWnd, buf, dimention_of(buf));
-				if(0 == buf[0])
-				{
-					MessageBox(h, L"Необходимо ввести наименование типоразмера", L"Ошибка!!!", MB_ICONERROR);
-					return;
-				}
-				CBase base(Owner::Base().name());
-				if(base.IsOpen())
-				{
-					NameParam n;
-					n.value = buf;
-					unsigned id = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
-					if(0 != id)
-					{
-						MessageBox(h, L"Название типоразмера есть в базе", L"Предупреждение!!!", MB_ICONWARNING);
-						return;
-					}
-
-					Owner::Table &table = Singleton<Owner::Table>::Instance();
-					table.items.get<NameParam>().value = buf;
-
-					Insert_Into<Owner::Table>(table, base).Execute();
-					CurrentID cId;
-					cId.value = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
-					Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
-					Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
-
-					EndDialog(h, TRUE);
-				}
-			}
+#pragma message("todo 16 11 01")
+			//if(TestPassword<Owner::Base, Owner::Table>()(h))
+			//{
+			//	HWND hWnd = owner.items.get<DlgItem<NameParam>>().hWnd;
+			//	wchar_t buf[128];
+			//	GetWindowText(hWnd, buf, dimention_of(buf));
+			//	if(0 == buf[0])
+			//	{
+			//		MessageBox(h, L"Необходимо ввести наименование типоразмера", L"Ошибка!!!", MB_ICONERROR);
+			//		return;
+			//	}
+			//	CBase base(Owner::Base().name());
+			//	if(base.IsOpen())
+			//	{
+			//		NameParam n;
+			//		n.value = buf;
+			//		unsigned id = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
+			//		if(0 != id)
+			//		{
+			//			MessageBox(h, L"Название типоразмера есть в базе", L"Предупреждение!!!", MB_ICONWARNING);
+			//			return;
+			//		}
+			//
+			//		Owner::Table &table = Singleton<Owner::Table>::Instance();
+			//		table.items.get<NameParam>().value = buf;
+			//
+			//		Insert_Into<Owner::Table>(table, base).Execute();
+			//		CurrentID cId;
+			//		cId.value = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
+			//		Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
+			//		Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
+			//
+			//		EndDialog(h, TRUE);
+			//	}
+			//}
 		}
 	};
 }
@@ -89,28 +90,29 @@ namespace
 		wchar_t *Title(){return L"Применить";}
 		template<class Owner>void BtnHandler(Owner &owner, HWND h)
 		{
-			if(TestPassword<ParametersBase, ParametersTable>()(h))
-			{
-				CBase base(Owner::Base().name());
-				if(base.IsOpen())
-				{
-					NameParamD &t = owner.items.get<DlgItem<NameParamD>>().value;
-					int count = 0;
-					CMD(base).CommandText(L"SELECT count(NameParam) as C FROM ParametersTable").GetValue(L"C", count);
-					if(count <= 1)
-					{
-						MessageBox(h, L"В настройках должно быть не менее одного типоразмера", L"Предупреждение!!!", MB_ICONWARNING);
-						EndDialog(h, TRUE);
-						return;
-					}
-					Delete<ParametersTable>(base).eq<NameParam>(t.value).Execute();
-					Singleton<SelectTypeSizeList>::Instance().DelMenuItem(t.value);
-					wchar_t buf[128];
-					CMD(base).CommandText(L"select top 1 NameParam from ParametersTable").GetValue(L"NameParam", buf);
-					SelectHandler::Do(buf);
-					EndDialog(h, TRUE);
-				}
-			}
+#pragma message("todo 16 11 01")
+			//if(TestPassword<ParametersBase, ParametersTable>()(h))
+			//{
+			//	CBase base(Owner::Base().name());
+			//	if(base.IsOpen())
+			//	{
+			//		NameParamD &t = owner.items.get<DlgItem<NameParamD>>().value;
+			//		int count = 0;
+			//		CMD(base).CommandText(L"SELECT count(NameParam) as C FROM ParametersTable").GetValue(L"C", count);
+			//		if(count <= 1)
+			//		{
+			//			MessageBox(h, L"В настройках должно быть не менее одного типоразмера", L"Предупреждение!!!", MB_ICONWARNING);
+			//			EndDialog(h, TRUE);
+			//			return;
+			//		}
+			//		Delete<ParametersTable>(base).eq<NameParam>(t.value).Execute();
+			//		Singleton<SelectTypeSizeList>::Instance().DelMenuItem(t.value);
+			//		wchar_t buf[128];
+			//		CMD(base).CommandText(L"select top 1 NameParam from ParametersTable").GetValue(L"NameParam", buf);
+			//		SelectHandler::Do(buf);
+			//		EndDialog(h, TRUE);
+			//	}
+			//}
 		}
 	};
 }

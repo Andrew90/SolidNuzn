@@ -560,6 +560,16 @@ namespace TL
 	{
 		typedef Tail Result;
 	};
+	//------------------------------------------------------------------------------------------------------
+template<class List, class SubList>struct EraseListItem;
+template<class List, class Head, class Tail>struct EraseListItem<List, Tlst<Head, Tail>>
+{
+		typedef typename EraseListItem<typename EraseItem<List, Head>::Result, Tail>::Result Result;
+};
+template<class List>struct EraseListItem<List, NullType>
+{
+		typedef List Result;
+};
 //------------------------------------------------------------------------------------------------------
 	template<class List, class T>struct SelectT;
 	template<class Head, class Tail, class T>struct SelectT<Tlst<Head, Tail>, T>

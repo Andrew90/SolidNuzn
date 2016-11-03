@@ -1,6 +1,6 @@
 #pragma once
 #include <windows.h>
-#include "window_tool\message.h"
+#include "window_tool\TEvent.h"
 #include "templates\typelist.hpp"
 #include "tools_debug\DebugMess.h"
 //------------------------------------------------------------------------------------------
@@ -9,13 +9,6 @@ template<class T>struct MenuItem{};
 template<class T>struct TopMenu{};
 template<class T>struct SubMenu{typedef NullType list;};
 template<int>struct Separator{};
-
-class TEvent
-{
-public:
-	virtual void Do(TCommand &){}
-	virtual void Do(TNotify &){}
-};
 
 #pragma warning(disable:4995)
 template<class T>struct NameMenu
@@ -236,7 +229,7 @@ template<class T>void ChangeTextSubMenu(HWND h, wchar_t *text)
 }
 
 void EventDo(TCommand &m);
-void EventDo(TNotify &m);
+LRESULT EventDo(TNotify &m);
 
 #define MENU_TEXT(txt, item)template<>struct NameMenu<item >{wchar_t *operator()(HWND){return txt;}};
 #define MENU_ITEM(txt, item) MENU_TEXT(txt, MenuItem<item>) template<>struct Event<MenuItem<item> >:item{};

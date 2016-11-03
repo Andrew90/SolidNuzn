@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{d043665e-9e48-4c39-98c9-480e55bdafbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SolidGroupAlgoritm">
+      <UniqueIdentifier>{cd0bd490-ce19-4b3c-ba91-c72180952601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows">
+      <UniqueIdentifier>{1c682a27-0c2c-41f9-9620-56023cf3b9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\AddTresholdsWindow">
+      <UniqueIdentifier>{7ed28b3c-389c-4f2f-8267-92a216987f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\MainWindow">
+      <UniqueIdentifier>{eb37d87a-e0ce-4362-a414-e4f52ed2cfc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\Dialogs">
+      <UniqueIdentifier>{42b5cbd5-e2e0-47d4-acdd-04737811143c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{85669c47-6b77-4e16-9d28-64c6041fb474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\DlgTemplates">
+      <UniqueIdentifier>{7ac7914d-5df9-4fd4-939a-7ba0ebb2893b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Base">
+      <UniqueIdentifier>{a0bac03e-abab-4f04-b8db-323997cbface}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Resource">
+      <UniqueIdentifier>{4ff6588a-2817-4ec7-aa6b-00cb0207098d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\tools_debug">
+      <UniqueIdentifier>{71a40181-f40d-42aa-9e40-440baef8cc3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\window_tool">
+      <UniqueIdentifier>{73929938-b5b9-4803-bf64-c6f580798dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\templates">
+      <UniqueIdentifier>{d98ab9b9-afa6-4c42-9362-6d047a716a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Graphics">
+      <UniqueIdentifier>{a0dab411-0f0b-4393-9343-13befce34cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dates">
+      <UniqueIdentifier>{1602710e-3a41-4198-b405-788ad46ce0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\Common">
+      <UniqueIdentifier>{82c36f6e-8b6c-47c2-aad0-01a519dd83bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="..\Common\Resource\arrow_down.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\arrow_left.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\arrow_right.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\arrow_up.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\BottomArr.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\clamp.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Clamp1OnBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Clamp2OnBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\continue.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\CycleBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\DownArrow.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\ExitTubeBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\LeftArr.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\LeftArrow.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\MashBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\open_file.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\OptionsBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\POSTITL.ICO">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\QueryBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\RefreshBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\ResetBtn.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\RightArr.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\RightArrow.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\save_as.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\SensorsUnit.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\sep.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\settings.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\TopArr.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\UpArrow.bmp">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\upload.avi">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\upload.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Add.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Cancel.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Exclamation-icon.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+    <None Include="..\Common\Resource\Ok-icon.ico">
+      <Filter>Common\Resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddTresholdWindowProj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\templates\templates.hpp">
+      <Filter>Common\templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\templates\typelist.hpp">
+      <Filter>Common\templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp">
+      <Filter>Common\templates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\tools_debug\DebugMess.h">
+      <Filter>Common\tools_debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\Emptywindow.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\HookKey.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\InitToolbar.hpp">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\MenuAPI.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\message.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\Pass.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\SelectTypeSizeList.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\WindowsPosition.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\ItemIni.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="App\config.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\Grid.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\GridItems.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\Base.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\ExpressBase.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\tables.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\TablesDefine.h">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\DlgTemplates\ParamDlg.h">
+      <Filter>Common\DlgTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\DlgTemplates\ParamDlg.hpp">
+      <Filter>Common\DlgTemplates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\DlgFiles.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\TEvent.h">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AddThresholdsWindow\AddThresholdsWindow.h">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AddThresholdsWindow\GridWindow.h">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AddThresholdsWindow\TableData.h">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AddThresholdsWindow\ThresholdDataTable.h">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MainWindow\MainWindow.h">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MainWindow\MainWindowMenu.hpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MainWindow\MainWindowToolBar.h">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Dialogs\Dialogs.h">
+      <Filter>windows\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="App\AppBase.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\SelectHandler.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App\PasswordDlg.hpp">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MainWindow\SignalViewer.h">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Graphics\ColorLabel.h">
+      <Filter>Common\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Graphics\Chart.h">
+      <Filter>Common\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Graphics\Borders.h">
+      <Filter>Common\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Dates\ChartData.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
+    <ClInclude Include="Dates\SolidData.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MainWindow\TopLabelViewer.h">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Common\Viewer.h">
+      <Filter>windows\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Dates\SaveLoadDates.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
+    <ClInclude Include="Dates\Compute.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidGroupAlgoritm\ComputeSolidGroup.h">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidGroupAlgoritm\SolidBase.h">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddTresholdWindowProj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\tools_debug\DebugMess.cpp">
+      <Filter>Common\tools_debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\EmptyWindow.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\HookKey.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\MenuAPI.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\Pass.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\SelectTypeSizeList.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\WindowsPosition.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\ItemIni.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\Grid.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\GridItems.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\DlgTemplates\ParamDlg.cpp">
+      <Filter>Common\DlgTemplates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\window_tool\DlgFiles.cpp">
+      <Filter>Common\window_tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AddThresholdsWindow\AddThresholdsWindow.cpp">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AddThresholdsWindow\GridWindow.cpp">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AddThresholdsWindow\ThresholdDataTable.cpp">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MainWindow\MainWindow.cpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MainWindow\MainWindowToolBar.cpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="App\AppBase.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\SelectHandler.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\AboutWindow.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MainWindow\SignalViewer.cpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Graphics\ColorLabel.cpp">
+      <Filter>Common\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Graphics\Chart.cpp">
+      <Filter>Common\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Graphics\Borders.cpp">
+      <Filter>Common\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\ChartData.cpp">
+      <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\SolidData.cpp">
+      <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MainWindow\TopLabelViewer.cpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Common\Viewer.cpp">
+      <Filter>windows\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\SaveLoadDates.cpp">
+      <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\Compute.cpp">
+      <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidGroupAlgoritm\ComputeSolidGroup.cpp">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidGroupAlgoritm\SolidBase.cpp">
+      <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Defectoscope\rc.rc">
+      <Filter>Common\Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -216,9 +216,6 @@
     <ClInclude Include="..\Common\window_tool\Pass.h">
       <Filter>Common\window_tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\resource.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Windows\Viewers\ResultViewer.h">
       <Filter>Windows\Viewers</Filter>
     </ClInclude>

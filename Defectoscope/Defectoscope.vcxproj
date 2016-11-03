@@ -161,7 +161,6 @@
     <ClInclude Include="..\Communication\Strobes\StrobesProtocol.h" />
     <ClInclude Include="..\Communication\Thickness\ThicknessProtocol.h" />
     <ClInclude Include="..\Communication\TypeSize\TypeSizeProtocol.h" />
-    <ClInclude Include="..\resource.h" />
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\AppBase.h" />
     <ClInclude Include="App\AppKeyHandler.h" />

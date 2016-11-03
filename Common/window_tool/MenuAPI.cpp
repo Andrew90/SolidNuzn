@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <CommCtrl.h>
-#include "MenuAPI.h"
+#include "window_tool\MenuAPI.h"
 //---------------------------------------------------------------------------
 void EventDo(TCommand &m)
 {
@@ -32,8 +32,9 @@ void EventDo(TCommand &m)
 
 }
 
-void EventDo(TNotify &m)
+LRESULT EventDo(TNotify &m)
 {
 	TEvent *x = (TEvent *)GetWindowLongPtr(m.pnmh->hwndFrom, GWLP_USERDATA);
-	if(NULL != x) x->Do(m);
+	if(NULL != x) return x->Do(m);
+	return 0;
 }
