@@ -25,10 +25,10 @@ SignalViewer::SignalViewer()
 	chart.rect.top = 10;
 	chart.offsetAxesBottom = 10;
 	
-	chart.minAxesX = 0;
-	chart.maxAxesX = 99;
-	chart.minAxesY = -10;
-	chart.maxAxesY = 10;
+	//chart.minAxesX = 0;
+	//chart.maxAxesX = 99;
+	//chart.minAxesY = -10;
+	//chart.maxAxesY = 10;
 
 	cursor.cross = false;
 }
@@ -42,6 +42,8 @@ void SignalViewer::BeforeDraw(Gdiplus::Graphics &)
 	 chart.items.get<ReferenceMax>().SetData(reference.dataMax, reference.count);
 	 chart.items.get<VCursor1>().value = solidData.start;
 	 chart.items.get<VCursor2>().value = solidData.stop;
+	 chart.minAxesY = Singleton<GraphAxesTable>::Instance().items.get<PrimarySignalMin>().value;
+	 chart.maxAxesY = Singleton<GraphAxesTable>::Instance().items.get<PrimarySignalMax>().value;
 }
 //----------------------------------------------------------------------------------------------------
 

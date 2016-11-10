@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "MainWindowToolBar.h"
 #include "..\resource.h"
-#include "templates\typelist.hpp"
+#include "templates\templates.hpp"
 #include "window_tool\InitToolbar.hpp"
+#include "FrameWindow\FrameWindow.h"
+#include "window_tool\WindowsPosition.h"
+#include "window_tool\Emptywindow.h"
 
 #include "tools_debug\DebugMess.h"
 
@@ -56,7 +59,11 @@ namespace
 //-------------------------------------------------------------------------------
 	void Key<IDB_OptionsBtn>::Click(HWND h)
 	{
-		zprint("\n");	
+		zprint("\n");
+		RECT r;
+		WindowPosition::Get<FrameWindow>(r);
+		HWND hh = WindowTemplate(&Singleton<FrameWindow>::Instance(), L"", r.left, r.top, r.right, r.bottom);
+		ShowWindow(hh, SW_SHOWNORMAL);
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_down>::Click(HWND h)

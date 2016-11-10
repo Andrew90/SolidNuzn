@@ -29,7 +29,5 @@ public:
 
 	virtual void BeforeDraw(Gdiplus::Graphics &){}
 protected:
-	int maxY;
-	int maxX;
 	void SizeOffs(TMouseMove &);
 };

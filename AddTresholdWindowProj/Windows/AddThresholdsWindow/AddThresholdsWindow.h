@@ -14,7 +14,7 @@ public:
 	void operator()(TSize &);
 	void operator()(TGetMinMaxInfo &);
 	void operator()(TClose &);
-	void operator()(TDestroy &);
+	//void operator()(TDestroy &);
 
 	LRESULT operator()(TNotify &);
 	void operator()(TCommand &);

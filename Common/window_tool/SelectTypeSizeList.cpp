@@ -33,7 +33,7 @@
 
  
 
-SelectTypeSizeList::SelectTypeSizeList(): ptr(NULL){}// : obj(NULL), ptr(NULL){}
+SelectTypeSizeList::SelectTypeSizeList(): ptr(NULL){}
 
 void SelectTypeSizeList::Create(HWND h)
 {

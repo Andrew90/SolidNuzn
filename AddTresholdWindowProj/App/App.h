@@ -8,6 +8,9 @@ public:
 	static void Destroy();
 	static void PrintTopLabel(wchar_t *);
 	static void UpdateMainWindow();
+	static void AddMenuItem(wchar_t *);
+	static void DelMenuItem(wchar_t *);
+	static void SelMenuItem(wchar_t *);
 };
 
 template<class>struct Singleton;

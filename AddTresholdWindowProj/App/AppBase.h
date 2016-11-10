@@ -81,13 +81,37 @@ struct Descriptor1730Table
 	TItems items;
 	const wchar_t *name(){return L"Descriptor1730Table";}
  };
+
+DEFINE_PARAM(PrimarySignalMin , double, -10)
+DEFINE_PARAM(PrimarySignalMax , double, 10)
+DEFINE_PARAM(OffsetPointsMin  , double, -10)
+DEFINE_PARAM(OffsetPointsMax  , double, 10)
+
+DEFINE_PARAM(PrimarySignalOffset  , int, 300)
+DEFINE_PARAM(PrimarySignalWidth  , int, 800)
+struct GraphAxesTable
+ {
+	typedef TL::MkTlst<
+		PrimarySignalMin
+		, PrimarySignalMax
+		, OffsetPointsMin 
+		, OffsetPointsMax 
+		, PrimarySignalOffset
+		, PrimarySignalWidth
+	>::Result items_list;
+	typedef TL::Factory<items_list> TItems;
+	TItems items;
+	const wchar_t *name(){return L"GraphAxesTable";}
+ };
 //------------------------------------------------------------------------------------------------------------
+
  struct ParametersBase
  {
 	 typedef TL::MkTlst<
 		 InputBitTable
 		 , OutputBitTable
-		 , Descriptor1730Table		 
+		 , Descriptor1730Table
+		 , GraphAxesTable
 	 >::Result one_row_table_list;
 
 	 typedef TL::MkTlst<		
@@ -163,7 +187,7 @@ template<class T>struct CountRowsTable
 	   int count = 0;
 	   wchar_t buf[128];
 	   wsprintf(buf, L"SELECT count(*) as C FROM %s", T().name());
-	   CMD(base).CommandText(buf).GetValue(L"C", count);
+	   CMD(base).CommandText(buf).Execute().GetValue(L"C", count);
 	   return count;
 	}
 };

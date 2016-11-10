@@ -51,6 +51,8 @@ namespace
 					Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
 					Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
 
+					App::AddMenuItem(buf);
+
 					EndDialog(h, TRUE);
 				}
 			}
@@ -94,8 +96,7 @@ namespace
 				if(base.IsOpen())
 				{
 					NameParamD &t = owner.items.get<DlgItem<NameParamD>>().value;
-					int count = 0;
-					CMD(base).CommandText(L"SELECT count(NameParam) as C FROM ParametersTable").GetValue(L"C", count);
+					int count = CountRowsTable<ParametersTable>()(base);
 					if(count <= 1)
 					{
 						MessageBox(h, L"В настройках должно быть не менее одного типоразмера", L"Предупреждение!!!", MB_ICONWARNING);
@@ -103,10 +104,11 @@ namespace
 						return;
 					}
 					Delete<ParametersTable>(base).eq<NameParam>(t.value).Execute();
-					Singleton<SelectTypeSizeList>::Instance().DelMenuItem(t.value);
+					App::DelMenuItem(t.value);
 					wchar_t buf[128];
-					CMD(base).CommandText(L"select top 1 NameParam from ParametersTable").GetValue(L"NameParam", buf);
+					CMD(base).CommandText(L"select top 1 NameParam from ParametersTable").Execute().GetValue(L"NameParam", buf);
 					SelectHandler::Do(buf);
+					App::SelMenuItem(buf);
 					EndDialog(h, TRUE);
 				}
 			}

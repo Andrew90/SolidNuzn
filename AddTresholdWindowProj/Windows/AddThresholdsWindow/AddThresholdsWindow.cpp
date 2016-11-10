@@ -174,11 +174,11 @@ void AddThresholdWindow::operator()(TClose &l)
 	}
 	DestroyWindow(l.hwnd);
 }
-void AddThresholdWindow::operator()(TDestroy &)
-{
-#pragma message("после отладки удалить")	
-	PostQuitMessage(0);
-}
+//void AddThresholdWindow::operator()(TDestroy &)
+//{
+////#pragma message("после отладки удалить")	
+////	PostQuitMessage(0);
+//}
 
 LRESULT AddThresholdWindow::operator()(TNotify &l)
 {

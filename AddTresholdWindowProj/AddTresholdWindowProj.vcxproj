@@ -167,6 +167,11 @@
     <ClInclude Include="Windows\AddThresholdsWindow\ThresholdDataTable.h" />
     <ClInclude Include="Windows\Common\Viewer.h" />
     <ClInclude Include="Windows\Dialogs\Dialogs.h" />
+    <ClInclude Include="Windows\FrameWindow\FrameViewer.h" />
+    <ClInclude Include="Windows\FrameWindow\FrameWindow.h" />
+    <ClInclude Include="Windows\FrameWindow\FrameWindowMenu.hpp" />
+    <ClInclude Include="Windows\FrameWindow\FrameWindowToolBar.h" />
+    <ClInclude Include="Windows\FrameWindow\ThresholdsViewer.h" />
     <ClInclude Include="Windows\MainWindow\MainWindow.h" />
     <ClInclude Include="Windows\MainWindow\MainWindowMenu.hpp" />
     <ClInclude Include="Windows\MainWindow\MainWindowToolBar.h" />
@@ -209,6 +214,10 @@
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp" />
+    <ClCompile Include="Windows\FrameWindow\FrameViewer.cpp" />
+    <ClCompile Include="Windows\FrameWindow\FrameWindow.cpp" />
+    <ClCompile Include="Windows\FrameWindow\FrameWindowToolBar.cpp" />
+    <ClCompile Include="Windows\FrameWindow\ThresholdsViewer.cpp" />
     <ClCompile Include="Windows\MainWindow\MainWindow.cpp" />
     <ClCompile Include="Windows\MainWindow\MainWindowToolBar.cpp" />
     <ClCompile Include="Windows\MainWindow\SignalViewer.cpp" />

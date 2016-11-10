@@ -11,8 +11,6 @@ View::View(Chart &c)
     , cursor(c)
 	, offsetX(1)
 	, offsetY(1)
-	, maxY(60)
-	, maxX(10)
 {
 	label.fontHeight = 12;
 	label.top = 0;	
@@ -92,17 +90,16 @@ void View::operator()(TLButtonDown &l)
 
 void View::operator()(TMouseWell &l)
 {
-	dprint("----TMouseWell\n");
 	mouseMove = false;
 	if(0 == l.flags.lButton)
 	{
 		offsetX += l.delta / 120;
 		if(offsetX < 0) offsetX = 0;
-		if(offsetX >= maxX) offsetX = maxX - 1;
+		if(offsetX >= chart->maxAxesX) offsetX = chart->maxAxesX - 1;
 
 		double x = chart->rect.left + chart->offsetAxesLeft;
 		double lenX = chart->rect.right - chart->offsetAxesRight - chart->rect.left - chart->offsetAxesLeft;
-		double dX = lenX / maxX;
+		double dX = lenX / (chart->maxAxesX - chart->minAxesX);
 
 		storedMouseMove.x = WORD(x + dX * offsetX + dX / 2);
 	}
@@ -110,11 +107,11 @@ void View::operator()(TMouseWell &l)
 	{
 		offsetY += l.delta / 120;
 		if(offsetY < 0) offsetY = 0;
-		if(offsetY >= maxY) offsetY = maxY - 1;
+		if(offsetY >= chart->maxAxesY) offsetY = chart->maxAxesY - 1;
 
 		double y = chart->rect.bottom - chart->offsetAxesBottom;
 		double lenY = chart->rect.bottom - chart->offsetAxesBottom - chart->rect.top - chart->offsetAxesTop;
-		double dY = lenY / maxY;
+		double dY = lenY / (chart->maxAxesY - chart->minAxesY);
 
 		storedMouseMove.y = WORD(y - dY * offsetY - dY / 2);
 	}
@@ -125,30 +122,29 @@ void View::SizeOffs(TMouseMove &l)
 {
 	double x = chart->rect.left + chart->offsetAxesLeft;
 	double lenX = chart->rect.right - chart->offsetAxesRight - chart->rect.left - chart->offsetAxesLeft;
-	double dX = lenX / maxX;
+	double dX = lenX / (chart->maxAxesX - chart->minAxesX);
 
 	double offs = (double)l.x - x;
 	if(offs > 0)
 	{
 		offsetX = int(offs / dX);
-		if(offsetX >= maxX) offsetX = maxX - 1;
+		if(offsetX >= chart->maxAxesX - chart->minAxesX) offsetX = chart->minAxesX - 1;
 	}
 
 	double y = chart->rect.bottom - chart->offsetAxesBottom;
 	double lenY = chart->rect.bottom - chart->offsetAxesBottom - chart->rect.top - chart->offsetAxesTop;
-	double dY = lenY / maxY;
+	double dY = lenY / (chart->maxAxesY - chart->minAxesY);
 
 	offs = (double)y - l.y;
 	if(offs > 0)
 	{
 		offsetY = int(offs / dY);
-		if(offsetY >= maxY) offsetY = maxY - 1;
+		if(offsetY >= chart->maxAxesY) offsetY = chart->maxAxesY - 1;
 	}
 }
 
 void View::operator()(TMouseMove &l)
 {
-	dprint("TMouseMove\n");
 	if(mouseMove)
 	{
 		SizeOffs(l);

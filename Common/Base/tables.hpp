@@ -1168,11 +1168,12 @@ struct CMD
 		wcsncpy(value, s, dimention_of(value));
 		return *this;
 	}
-	void Execute()
+	CMD &Execute()
 	{
 		_variant_t rowsAffected; 
 		//ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 	    rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
+		return *this;
 	}
 	template<typename T>CMD &Param(T &t)
 	{       

@@ -47,16 +47,12 @@ void MainWindow::operator()(TSize &l)
 
 	int y = rt.bottom;
 	
-	TSize tw = {topLabelViewer.hWnd, WM_SIZE, 0, (WORD)r.right, (WORD)topLabelHeight};
-	SendMessage(MESSAGE(tw));
 	MoveWindow(topLabelViewer.hWnd , 0, y, r.right, topLabelHeight, true);
-
 	y += topLabelHeight;
 	int t = r.bottom - rt.bottom - rs.bottom - topLabelHeight;
-	TSize sv = {signalViewer.hWnd, WM_SIZE, 0, (WORD)r.right, (WORD)t};
-	SendMessage(MESSAGE(sv));
 	MoveWindow(signalViewer.hWnd , 0, y, r.right, t, true);
 }
+
 
 void MainWindow::operator()(TCommand &l)
 {
@@ -73,7 +69,10 @@ void MainWindow::operator()(TClose &l)
 	}
 }
 
-void MainWindow::operator()(TMouseWell &){}
+void MainWindow::operator()(TMouseWell &l)
+{
+	signalViewer(l);
+}
 
 void MainWindow::operator()(TGetMinMaxInfo &l)
 {

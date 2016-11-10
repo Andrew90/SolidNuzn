@@ -57,6 +57,9 @@
     <Filter Include="windows\Common">
       <UniqueIdentifier>{82c36f6e-8b6c-47c2-aad0-01a519dd83bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="windows\FrameWindow">
+      <UniqueIdentifier>{d55a5a8c-2f9d-407a-92b1-8baf2e8924d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -326,6 +329,21 @@
     <ClInclude Include="SolidGroupAlgoritm\SolidBase.h">
       <Filter>SolidGroupAlgoritm</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\FrameWindow\FrameViewer.h">
+      <Filter>windows\FrameWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\FrameWindow\FrameWindow.h">
+      <Filter>windows\FrameWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\FrameWindow\ThresholdsViewer.h">
+      <Filter>windows\FrameWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\FrameWindow\FrameWindowToolBar.h">
+      <Filter>windows\FrameWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\FrameWindow\FrameWindowMenu.hpp">
+      <Filter>windows\FrameWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -435,6 +453,18 @@
     </ClCompile>
     <ClCompile Include="SolidGroupAlgoritm\SolidBase.cpp">
       <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FrameWindow\FrameViewer.cpp">
+      <Filter>windows\FrameWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FrameWindow\FrameWindow.cpp">
+      <Filter>windows\FrameWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FrameWindow\ThresholdsViewer.cpp">
+      <Filter>windows\FrameWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FrameWindow\FrameWindowToolBar.cpp">
+      <Filter>windows\FrameWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
