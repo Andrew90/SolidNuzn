@@ -58,6 +58,7 @@ void View::operator()(TSize &l)
 	chart->rect.bottom = l.Height - 10;
 
 	BeforeDraw(g);
+	label.Draw(g);
 	chart->Draw(g);	
 }
 void View::operator()(TPaint &l)

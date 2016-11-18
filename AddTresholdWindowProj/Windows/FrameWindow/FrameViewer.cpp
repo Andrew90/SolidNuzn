@@ -16,6 +16,69 @@ using namespace Gdiplus;
 
 #pragma warning(disable : 4996)
 
+void FrameViewer::VThreshold::Draw()
+{
+	chart.g->SetClip(&Region(RectF(
+		REAL(chart.rect.left + chart.offsetAxesLeft + 3)
+		, REAL(chart.rect.top + chart.offsetAxesTop + 3)
+		, REAL((chart.rect.right - chart.offsetAxesRight) - (chart.rect.left + chart.offsetAxesLeft) - 6)
+		, REAL((chart.rect.bottom - chart.offsetAxesBottom) - (chart.rect.top + chart.offsetAxesTop) - 6)
+		)),
+		CombineModeReplace
+		);
+	for(int i = 0; i < dimention_of(owner->points); ++i)
+	{
+		value = owner->points[i];
+		VBorder::Draw();
+	}
+	chart.g->SetClip(&Region());
+}
+
+void FrameViewer::SumSig::Draw()
+{
+	if(NULL == reference || NULL == signal) return;
+	Color col(color);
+		Pen pen(col, 2);
+		chart.g->SetClip(&Region(RectF(
+			REAL(chart.rect.left + chart.offsetAxesLeft + 1)
+			, REAL(chart.rect.top + chart.offsetAxesTop + 1)
+			, REAL((chart.rect.right - chart.offsetAxesRight) - (chart.rect.left + chart.offsetAxesLeft) - 2)
+			, REAL((chart.rect.bottom - chart.offsetAxesBottom) - (chart.rect.top + chart.offsetAxesTop) - 2)
+			)),
+			CombineModeReplace
+			);
+		double dY = (double) (chart.rect.bottom - chart.rect.top - chart.offsetAxesBottom - chart.offsetAxesTop) / (chart.maxAxesY - chart.minAxesY);
+
+		double yOffs = chart.rect.bottom - chart.offsetAxesBottom;
+
+		int width = chart.rect.right - chart.rect.left - chart.offsetAxesRight - chart.offsetAxesLeft;
+		double dX = (double)width / (count - 1);
+		int x0 = chart.rect.left + chart.offsetAxesLeft;
+		double minY = chart.minAxesY;
+		int y0 = int(yOffs - (signal[0] - reference[0] - minY) * dY);
+		double x = x0;
+		int y = y0;
+		for(int i = 1; i < count; ++i)
+		{
+			x += dX;
+			y = int(yOffs - (signal[i] - reference[i] - minY) * dY);
+			if(x0 != int(x) || y0 != y)
+			{
+				chart.g->DrawLine(&pen, x0, y0, (int)x, y);
+				x0 = int(x);
+				y0 = y;
+			}
+		}
+		chart.g->SetClip(&Region());
+}
+
+void FrameViewer::SumSig::SetData(double *reference_, double *signal_, int count_)
+{
+   reference = reference_;
+   signal = signal_;
+   count = count_;
+}
+
 FrameViewer::FrameViewer()
 	: View(chart)
 	, chart(backScreen)	
@@ -24,26 +87,14 @@ FrameViewer::FrameViewer()
 	, x(0)
 {
 	chart.rect.left = 10;
-	chart.rect.top = 10;
+	chart.rect.top = 20;
 	chart.offsetAxesBottom = 10;
-	
-	//chart.minAxesX = 0;
-	//chart.maxAxesX = 99;
-	//chart.minAxesY = -10;
-	//chart.maxAxesY = 10;
 
-	cursor.cross = false;
+	chart.items.get<VThreshold>().owner = this;
 }
 //------------------------------------------------------------------------------
 void FrameViewer::BeforeDraw(Gdiplus::Graphics &)
 {
-	//chart.maxAxesX = solidData.currentOffset;
-	//chart.items.get<SignalMin>().SetData(signal.dataMin, signal.count);
-	//chart.items.get<SignalMax>().SetData(signal.dataMax, signal.count);
-	//chart.items.get<ReferenceMin>().SetData(reference.dataMin, reference.count);
-	//chart.items.get<ReferenceMax>().SetData(reference.dataMax, reference.count);
-	//chart.items.get<VCursor1>().value = solidData.start;
-	//chart.items.get<VCursor2>().value = solidData.stop;
 	chart.minAxesY = Singleton<GraphAxesTable>::Instance().items.get<PrimarySignalMin>().value;
 	chart.maxAxesY = Singleton<GraphAxesTable>::Instance().items.get<PrimarySignalMax>().value;
 
@@ -56,16 +107,14 @@ void FrameViewer::BeforeDraw(Gdiplus::Graphics &)
 //----------------------------------------------------------------------------------------------------
 void FrameViewer::IncFrame()
 {
-	x += width;
-	if(x >= solidData.currentOffset)	x =  solidData.currentOffset - width;
-	RepaintWindow(hWnd);
+	x += offset;
+	if(x + width >= solidData.currentOffset)	x =  solidData.currentOffset - width;
 }
 
 void FrameViewer::DecFrame()
 {
-	x -= width;
+	x -= offset;
 	if(x < 0)	x =  0;
-	RepaintWindow(hWnd);
 }
 
 

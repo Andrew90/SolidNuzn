@@ -4,6 +4,7 @@
 #include <math.h>
 #include "SolidBase.h"
 #include "tools_debug/DebugMess.h"
+#include "Dates\SaveLoadDates.h"
 
 namespace
 {
@@ -119,7 +120,7 @@ namespace
 
 	template<class P>struct __sql__<OffsetFile, P>
 	{
-		typedef Enable O;
+		typedef OffsetFile O;
 		void operator()(O &o, P &p)
 		{
 			 p.solidItem.offset = o.value;
@@ -161,6 +162,7 @@ void ComputeSolidGroup::Clear()
 
 bool ComputeSolidGroup::Load(wchar_t *name)
 {
+	persentsChanged = false;
 	Clear();
 	SolidBase sb;
 	CBase base(
@@ -348,11 +350,66 @@ namespace
 	}
 }
 
-void ComputeSolidGroup::AddThreshold(wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points])
+//void ComputeSolidGroup::AddThreshold(wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points])
+//{
+//	SolidItem s;
+//
+//	s.groupName = GetMapID(groupNameList, groupName);
+//	s.solidFile = GetMapID(fileNameList, solidFile);
+//
+//	s.offset = offset;
+//	memmove(s.points, points, sizeof(s.points));
+//	s.status = new_item;
+//	
+//	changeTresholds = true;
+//	double root = 0;
+//	for(int i = 0; i < count_points; ++i)
+//	{
+//		double a = points[i];
+//		root += a * a;
+//	}
+//	s.root = sqrt(root);
+//
+//	solidItems.insert(solidItems.begin(), s);
+//}
+
+void ComputeSolidGroup::AddThreshold()
 {
 	SolidItem s;
+//	static int count = 0;
+//	++count;
+	//wchar_t buf[128];
+	//wsprintf(buf, L"NONAME%2d", count);
+	//todo сохранение порога
 
-	s.groupName = GetMapID(groupNameList, groupName);
+	wchar_t *solidFile = (wchar_t *)currentFile.c_str();
+	wchar_t *solidGroup = L"NONAME";
+	wchar_t *subDir = L"Config";
+
+	if(!FileExist(subDir, solidFile))
+	{
+		wchar_t path[1024];
+		GetModuleFileName(0, path, 1024);
+		PathRemoveFileSpec(path);
+		wsprintf(&path[wcslen(path)], L"\\%s", subDir);
+		CreateDirectory(path, NULL);
+
+		if('\0' == solidFile[0])
+		{
+			currentFile = solidFile = CreateNameFile(subDir
+				, (wchar_t *)typeSizeName.c_str()
+				, solidGroup
+				, path
+				);
+		}
+		else
+		{
+			wsprintf(&path[wcslen(path)], L"\\%s", solidFile);
+		}
+		StoreDataFile(path);
+	}
+
+	s.groupName = GetMapID(groupNameList, solidGroup);
 	s.solidFile = GetMapID(fileNameList, solidFile);
 
 	s.offset = offset;
@@ -387,7 +444,71 @@ const wchar_t *ComputeSolidGroup::GetGroupName(int i)
 	return groupNameList[solidItems[i].groupName].name.c_str();
 }
 
-void ComputeSolidGroup::UpdateTresholds(){}
+void ComputeSolidGroup::UpdateTresholds()
+{
+	//todo сделать смену точек
+	changeTresholds = true;
+	double length = frequencySamples / (2 * 2 * frequencySignal);
+
+	int offsets[count_points];
+
+	for(int i = 0; i < count_points; ++i)
+	{
+	   offsets[i] = int(length * persents[i] / 100.0);
+	}
+
+	wchar_t path[1024];
+	GetModuleFileName(0, path, 1024);
+	PathRemoveFileSpec(path);
+	int len = wcslen(path);
+	wsprintf(&path[len], L"\\%s\\", L"Config");
+	len = wcslen(path);
+
+
+	for(auto i = solidItems.begin(); i != solidItems.end(); ++i)
+	{
+		wcscpy(&path[len], fileNameList[i->solidFile].name.c_str());
+		FILE *f;
+		f = _wfopen(path, L"r");
+		if(NULL != f)
+		{
+			int offset;
+			fread(&offset, sizeof(int), 1, f);
+			
+			int i_offset = i->offset - 1;
+			if(i_offset < 0) i_offset = 0;
+			fseek(f, i_offset * sizeof(double), SEEK_SET);
+
+			double data[2];
+			fread(data, sizeof(double), 2, f);
+			double dY = data[0]/(data[1] - data[0]);
+		    if(dY < 0) dY = -dY;
+
+			for(int j = 0; j < count_points; ++j)
+			{
+				fseek(f, (i_offset + offsets[j] + offset) * sizeof(double), SEEK_SET);
+				fread(data, sizeof(double), 2, f);
+				i->points[j] = data[0] + dY * (data[1] - data[0]);
+
+				fseek(f, (i_offset + offsets[j]) * sizeof(double), SEEK_SET);
+				fread(data, sizeof(double), 2, f);
+				i->points[j] -= data[0] + dY * (data[1] - data[0]);
+			}
+			fclose(f);
+			i->root = 0;
+			for(int j = 0; j < count_points; ++j)
+			{
+				i->root += i->points[j];
+			}
+			i->root = sqrt(i->root);
+			i->changed = true;
+		}
+		else
+		{
+			i->status = deleted;
+		}
+	}	
+}
 
 namespace
 {
@@ -523,6 +644,7 @@ namespace
 	{
 		int count;
 		double sumCorel;
+		int sumCount;
 	};
 }
 
@@ -560,13 +682,13 @@ bool ComputeSolidGroup::OneFrame(double (&points)[count_points], double &result,
 		int maxOffs = 0;
 		double maxCorel = 0;
 		for(auto i = corel.begin();  i != corel.end(); ++i)
-		{
-			if(i->second.count > 1) i->second.sumCorel /= i->second.count;
+		{			
 			if(i->second.sumCorel > maxCorel)
 			{
 				maxCorel = i->second.sumCorel;
 				maxOffs = i->first;
 			}
+			if(i->second.count > 1) i->second.sumCorel /= i->second.count;
 		}
 		result = corel[maxOffs].sumCorel;
 		groupName = (wchar_t *)groupNameList[maxOffs].name.c_str();
@@ -577,9 +699,7 @@ bool ComputeSolidGroup::OneFrame(double (&points)[count_points], double &result,
 
 bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int stop
 	, double &result, wchar_t *&groupName, unsigned &color)
-{
-	std::map<int, CountCorel> corel;
-
+{	
 	double length = frequencySamples / (2 * 2 * frequencySignal);
 	int minL = int(0.9 * length);
 	int maxL = int(1.1 * length);
@@ -593,7 +713,7 @@ bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int
 
 	double points[count_points];
 
-	std::for_each(solidItems.begin(), solidItems.end(), [](SolidItem &i){i.corelation = 0;});
+	std::for_each(solidItems.begin(), solidItems.end(), [](SolidItem &i){i.sumCorrelation = 0;i.numberMatches = 0;});
 
 	int numberPasses = 0;
 
@@ -602,7 +722,8 @@ bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int
 		while(reference[i] > 0 && i < stop) ++i;
 		int startPeriod = i;
 
-        
+		if(reference[i - 1] < 0) continue;
+       
 		double dY = reference[i - 1]/(reference[i] - reference[i - 1]);
 		if(dY < 0) dY = -dY;
 
@@ -631,7 +752,9 @@ bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int
 			root += a * a;
 		}
 		root = sqrt(root);
-
+		int maxCorelItem = -1;
+		int ind = 0;
+		double maxCor = 0;
 		for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
 		{
 			double *a = j->points;
@@ -641,39 +764,202 @@ bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int
 				res += a[k] * points[k];
 			}
 			res /= root * j->root;
+			j->corelation = res;
+			j->sumCorrelation += res;
 			
-			if(enabled == j->status)
+
+			if(enabled == j->status && res >= maxCor)
 			{
-				++corel[j->groupName].count;
-				corel[j->groupName].sumCorel += res;
+				maxCorelItem = ind;
+				maxCor = res;
 			}
-			j->corelation += res;
-			++numberPasses;
+			++ind;
 		}
+		++numberPasses;
+		if(-1 != maxCorelItem) ++solidItems[maxCorelItem].numberMatches;		
 	}
 
 	if(0 == numberPasses) numberPasses = 1;
-	std::for_each(solidItems.begin(), solidItems.end(), [numberPasses](SolidItem &i){i.corelation /= numberPasses;});
+	std::for_each(solidItems.begin(), solidItems.end(), [numberPasses](SolidItem &i){i.corelation = i.sumCorrelation / numberPasses;});
 
-	bool b = false;
-	if(corel.size() > 0)
+	std::map<int, CountCorel> corel;
+	for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
 	{
-		b = true;
-		int maxOffs = 0;
-		double maxCorel = 0;
-		for(auto i = corel.begin();  i != corel.end(); ++i)
-		{
-			if(i->second.count > 1) i->second.sumCorel /= i->second.count;
-			if(i->second.sumCorel > maxCorel)
-			{
-				maxCorel = i->second.sumCorel;
-				maxOffs = i->first;
-			}
-		}
-		result = corel[maxOffs].sumCorel;
-		groupName = (wchar_t *)groupNameList[maxOffs].name.c_str();
-		color	  =  groupNameList[maxOffs].color;
+		corel[j->groupName].count += j->numberMatches;
+		corel[j->groupName].sumCorel += j->corelation;		  //todo 1
+		++corel[j->groupName].sumCount;
 	}
-	return b;
+	int ind = 0;
+	int countItems = 0;
+	double maxCorel = 0;
+	int first = -1;
+	for(auto j = corel.begin(); j != corel.end(); ++j)
+	{
+		if(j->second.count > 0)
+		{
+			j->second.sumCorel /= j->second.sumCount;  //todo 2
+			if(j->second.count > countItems)
+			{
+				maxCorel = ind;
+				countItems = j->second.count;
+				maxCorel = j->second.sumCorel;
+				first = j->first;
+			}
+			else if(j->second.count == countItems)
+			{
+				maxCorel = ind;
+				maxCorel = j->second.sumCorel;
+				first = j->first;
+			}
+			++ind;
+		}
+	}
+
+	if(-1 != first)
+	{
+		result = 0;
+		for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
+		{
+			if(j->groupName == first && j->corelation > result) result = j->corelation;
+		}
+		groupName = (wchar_t *)groupNameList[first].name.c_str();
+		color	  =  groupNameList[first].color;
+		return true;
+	}
+	return false;
+}
+//Скопипастено см. ComputeSolidGroup::Frames
+bool ComputeSolidGroup::FramesOne(double(&points)[count_points], int(&offsets)[count_points],double *signal, double *reference
+	, int &start, int stop, double &result, wchar_t *&groupName, unsigned &color)
+{
+	double length = frequencySamples / (2 * 2 * frequencySignal);
+	int minL = int(0.9 * length);
+	int maxL = int(1.1 * length);
+
+	//int offsets[count_points];
+
+	for(int i = 0; i < count_points; ++i)
+	{
+	   offsets[i] = int(length * persents[i] / 100.0);
+	}
+
+	//double points[count_points];
+
+	std::for_each(solidItems.begin(), solidItems.end(), [](SolidItem &i){i.sumCorrelation = 0;i.numberMatches = 0;});
+
+	int numberPasses = 0;
+
+	for(int i = start; i < stop; ++i)
+	{
+		while(reference[i] > 0 && i < stop) ++i;
+		int startPeriod = i;
+
+		if(reference[i - 1] < 0) continue;
+       
+		double dY = reference[i - 1]/(reference[i] - reference[i - 1]);
+		if(dY < 0) dY = -dY;
+
+		while(reference[i] < 0 && i < stop) ++i;
+		int stopPeriod = i;
+
+		int tLen = stopPeriod - startPeriod;
+		if(tLen < minL || tLen > maxL) continue;
+
+		for(int j = 0; j < count_points; ++j)
+		{
+			int offs = offsets[j];
+			double y0 = signal[offs + startPeriod - 1];
+			double y1 = signal[offs + startPeriod];
+			points[j] = y0 + dY * (y1 - y0);
+
+			y0 = reference[offs + startPeriod - 1];
+			y1 = reference[offs + startPeriod];
+			points[j] -= y0 + dY * (y1 - y0);
+		}
+
+		double root = 0;
+		for(int j = 0; j < count_points; ++j)
+		{
+			double a = points[j];
+			root += a * a;
+		}
+		root = sqrt(root);
+		int maxCorelItem = -1;
+		int ind = 0;
+		double maxCor = 0;
+		for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
+		{
+			double *a = j->points;
+			double res = 0;
+			for(int k = 0; k < count_points; ++k)
+			{
+				res += a[k] * points[k];
+			}
+			res /= root * j->root;
+			j->corelation = res;
+			j->sumCorrelation += res;
+			
+
+			if(enabled == j->status && res >= maxCor)
+			{
+				maxCorelItem = ind;
+				maxCor = res;
+			}
+			++ind;
+		}
+		++numberPasses;
+		if(-1 != maxCorelItem) ++solidItems[maxCorelItem].numberMatches;
+		start = startPeriod;
+		break;
+	}
+
+	if(0 == numberPasses) numberPasses = 1;
+	std::for_each(solidItems.begin(), solidItems.end(), [numberPasses](SolidItem &i){i.corelation = i.sumCorrelation / numberPasses;});
+
+	std::map<int, CountCorel> corel;
+	for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
+	{
+		corel[j->groupName].count += j->numberMatches;
+		corel[j->groupName].sumCorel += j->corelation;
+		++corel[j->groupName].sumCount;
+	}
+	int ind = 0;
+	int countItems = 0;
+	double maxCorel = 0;
+	int first = -1;
+	for(auto j = corel.begin(); j != corel.end(); ++j)
+	{
+		if(j->second.count > 0)
+		{
+			j->second.sumCorel /= j->second.sumCount;
+			if(j->second.count > countItems)
+			{
+				maxCorel = ind;
+				countItems = j->second.count;
+				maxCorel = j->second.sumCorel;
+				first = j->first;
+			}
+			else if(j->second.count == countItems)
+			{
+				maxCorel = ind;
+				maxCorel = j->second.sumCorel;
+				first = j->first;
+			}
+			++ind;
+		}
+	}
+
+	if(-1 != result)
+	{
+		result = 0;
+		for(auto j = solidItems.begin(); j != solidItems.end(); ++j)
+		{
+			if(j->groupName == first && j->corelation > result) result = j->corelation;
+		}
+		groupName = (wchar_t *)groupNameList[first].name.c_str();
+		color	  =  groupNameList[first].color;
+		return true;
+	}
+	return false;	
 }
 

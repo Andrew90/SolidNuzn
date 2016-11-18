@@ -14,4 +14,8 @@ public:
 		Chart::Draw(graph);
 		TL::foreach<List, __draw__>()(&items, this);
 	}
+	template<class lst>void DrawItems(Gdiplus::Graphics &graph)
+	{
+		TL::foreach<lst, __draw__>()(&items, this);
+	}
 };

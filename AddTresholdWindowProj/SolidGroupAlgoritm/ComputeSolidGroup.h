@@ -33,6 +33,8 @@ public:
 		int solidFile;
 		int offset;
 		double corelation;
+		double sumCorrelation;
+		int numberMatches;
 		TStatus status;
 		double root;
 		double points[count_points];
@@ -50,13 +52,19 @@ public:
 	int frequencySignal;
 
 	bool changeTresholds;
-	std::wstring currentTypesize;
+	std::wstring currentFile;
+	//std::wstring currentPathFile;
+	std::wstring currentGroupName;
+	int offset;
+	double points[count_points];
+	bool persentsChanged;
 	void Clear();
 	bool Load(wchar_t *);
 	void Load();
 	void Save();
 
-	void AddThreshold(wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points]);
+	//void AddThreshold(wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points]);
+	void AddThreshold();//wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points]);
 	void DelThreshold(int id);
 
 	void SetGroupName(int, wchar_t *);
@@ -69,6 +77,7 @@ public:
 
 	bool OneFrame(double (&)[count_points], double &, wchar_t *&, unsigned &);
 	bool Frames(double* signal, double *reference, int start, int stop, double &, wchar_t *&, unsigned &);
+	bool FramesOne(double(&)[count_points], int(&)[count_points],double *signal, double *reference, int &start, int stop, double &, wchar_t *&, unsigned &);
 private:
 	void InitRootAll();
 };

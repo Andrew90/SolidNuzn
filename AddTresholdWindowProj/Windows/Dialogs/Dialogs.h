@@ -24,4 +24,7 @@ DLG(AddTypeSizeDlg)
 DLG(DelTypeSizeDlg)
 DLG(AboutWindow)
 
+DLG(ThresholdDlg)
+DLG(PrimarySignalDlg)
+
 #undef DLG

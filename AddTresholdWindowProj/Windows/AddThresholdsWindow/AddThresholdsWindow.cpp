@@ -39,12 +39,21 @@ typedef TL::CreateNumList<Point, 0, ComputeSolidGroup::count_points - 1>::Result
 
 template<class O, class P>struct __set_tresh__;
 template<int N, class P>struct __set_tresh__<Point<N>, P>
+{
+	void operator()(Point<N> &o, P &p)
 	{
-		void operator()(Point<N> &o, P &p)
-		{
-			 o.value = p[N];
-		}
-	};
+		o.value = p[N];
+	}
+};
+
+template<class O, class P>struct __get_tresh__;
+template<int N, class P>struct __get_tresh__<Point<N>, P>
+{
+	void operator()(Point<N> &o, P &p)
+	{
+		p[N] = o.value;
+	}
+};
 
 template<int N>struct ParamTitle<Point<N>>
 {
@@ -62,13 +71,17 @@ template<int N>struct Largen   <Point<N>>{typename Point<N>::type_value operator
 void __set_points__(HWND h)
 {
 	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
-	TresholdsTable t;
+	TresholdsTable t;	
 	TL::foreach<__point_list__, __set_tresh__>()(t.items, solidGroup.persents);
 
 	if(TemplDialogList<NullType, TresholdsTable
 		, __point_list__
 		, TL::MkTlst<OkBtn, CancelBtn>::Result>(t).Do(h, L"Смещение порогов"))
 	{
+		TL::foreach<__point_list__, __get_tresh__>()(t.items, solidGroup.persents);
+
+		solidGroup.persentsChanged = true;
+		solidGroup.UpdateTresholds();
 	}
 }
 namespace
@@ -174,11 +187,6 @@ void AddThresholdWindow::operator()(TClose &l)
 	}
 	DestroyWindow(l.hwnd);
 }
-//void AddThresholdWindow::operator()(TDestroy &)
-//{
-////#pragma message("после отладки удалить")	
-////	PostQuitMessage(0);
-//}
 
 LRESULT AddThresholdWindow::operator()(TNotify &l)
 {
@@ -187,7 +195,6 @@ LRESULT AddThresholdWindow::operator()(TNotify &l)
 
 void AddThresholdWindow::operator()(TCommand &l)
 {
-	zprint("~~~~~\n");
 	EventDo(l);
 }
 
@@ -209,3 +216,14 @@ void AddThresholdWindow::Show()
 		ShowWindow(h, SW_SHOWNORMAL);
 	}		
 }
+
+ void AddThresholdWindow::Update()
+ {
+	HWND h = FindWindow(WindowClass<AddThresholdWindow>()(), 0);
+	if(NULL != h)
+	{			
+		RepaintWindow(h);
+		SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
+		SetForegroundWindow(h);
+	}
+ }

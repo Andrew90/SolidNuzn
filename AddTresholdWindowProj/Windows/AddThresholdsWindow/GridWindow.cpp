@@ -11,6 +11,7 @@
 #include "DlgTemplates\ParamDlg.h"
 #include "window_tool/MenuApi.h"
 #include "window_tool/DlgFiles.h"
+#include "FrameWindow\FrameWindow.h"
 
 namespace
 {
@@ -204,6 +205,11 @@ void GridWindow::SetColorToGrid(NMLVCUSTOMDRAW *d)
 }
 void GridWindow::LClick(LPNMITEMACTIVATE d)
 {	
+	unsigned i = d->iItem;
+	if(i < solidGroup.solidItems.size())
+	{
+		FrameWindow::SelectTreshGraph(solidGroup.solidItems[i].points);
+	}
 }
 
 namespace

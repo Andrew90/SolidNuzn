@@ -60,14 +60,14 @@ struct GroupTable
 
 template<int>struct Point;
 
-DEFINE_PARAM_NUM(Point, 0, double, 10)
-DEFINE_PARAM_NUM(Point, 1, double, 20)
-DEFINE_PARAM_NUM(Point, 2, double, 30)
-DEFINE_PARAM_NUM(Point, 3, double, 40)
-DEFINE_PARAM_NUM(Point, 4, double, 50)
-DEFINE_PARAM_NUM(Point, 5, double, 60)
-DEFINE_PARAM_NUM(Point, 6, double, 70)
-DEFINE_PARAM_NUM(Point, 7, double, 80)
+DEFINE_PARAM_NUM(Point, 0, double, -6)
+DEFINE_PARAM_NUM(Point, 1, double, -4)
+DEFINE_PARAM_NUM(Point, 2, double, -2)
+DEFINE_PARAM_NUM(Point, 3, double, 0)
+DEFINE_PARAM_NUM(Point, 4, double, 2)
+DEFINE_PARAM_NUM(Point, 5, double, 4)
+DEFINE_PARAM_NUM(Point, 6, double, 6)
+DEFINE_PARAM_NUM(Point, 7, double, 8)
 
 DEFINE_PARAM_ID(GroupName, int, 1)
 DEFINE_PARAM_ID(FileNameTable, int, 1)

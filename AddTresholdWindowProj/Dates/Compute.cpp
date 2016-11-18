@@ -18,7 +18,8 @@ bool Compute::SubCompute(int(&tresholds)[8], int start, int stop, double *signal
 
 void Compute::Do()
 {
-	
+	//TODO Сделать сбор данных
+	//TODO в начале цикла обнуление имени сохраняемого файла  computeSolidGroup.currentFile
 }
 
 void Compute::Recalculation()
@@ -45,6 +46,9 @@ void Compute::Recalculation()
 		, groupName
 		, Wchar_from<double>(result)()
 		);
+
+	if(NULL != groupName)computeSolidGroup.currentGroupName = groupName;
+	else computeSolidGroup.currentGroupName = L"";
 
 	Singleton<L502Signal>::Instance().Set(solidData.signal, solidData.currentOffset);
 	Singleton<L502Reference>::Instance().Set(solidData.reference, solidData.currentOffset);

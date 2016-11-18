@@ -484,10 +484,10 @@ void LineSeries::Draw()
 		Color col(color);
 		Pen pen(col, 2);
 		chart.g->SetClip(&Region(RectF(
-			REAL(chart.rect.left + chart.offsetAxesLeft + 3)
-			, REAL(chart.rect.top + chart.offsetAxesTop + 3)
-			, REAL((chart.rect.right - chart.offsetAxesRight) - (chart.rect.left + chart.offsetAxesLeft) - 6)
-			, REAL((chart.rect.bottom - chart.offsetAxesBottom) - (chart.rect.top + chart.offsetAxesTop) - 6)
+			REAL(chart.rect.left + chart.offsetAxesLeft + 1)
+			, REAL(chart.rect.top + chart.offsetAxesTop + 1)
+			, REAL((chart.rect.right - chart.offsetAxesRight) - (chart.rect.left + chart.offsetAxesLeft) - 2)
+			, REAL((chart.rect.bottom - chart.offsetAxesBottom) - (chart.rect.top + chart.offsetAxesTop) - 2)
 			)),
 			CombineModeReplace
 			);
@@ -496,7 +496,7 @@ void LineSeries::Draw()
 		double yOffs = chart.rect.bottom - chart.offsetAxesBottom;
 
 		int width = chart.rect.right - chart.rect.left - chart.offsetAxesRight - chart.offsetAxesLeft;
-		double dX = (double)(width) / count;
+		double dX = (double)width / (count - 1);
 		int x0 = chart.rect.left + chart.offsetAxesLeft;
 		double minY = chart.minAxesY;
 		int y0 = int(yOffs - (data[0] - minY) * dY);
@@ -526,7 +526,7 @@ void LineSeries::SetData(double *d, int c)
 Cursor::Cursor(Chart &chart) 
 	: chart(chart)
 	, oMove(NULL), ptrMove(NULL)
-	, cross(true)
+	, cross(false)
 {}	
 
 bool Cursor::VerticalCursor(TMouseMove &l, VGraphics &g)

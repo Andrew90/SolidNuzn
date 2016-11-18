@@ -9,6 +9,7 @@
 #include "App\AppBase.h"
 #include "window_tool\Emptywindow.h"
 #include "App\SelectHandler.h"
+#include "Dates\CounterTubes.h"
 
 namespace
 {
@@ -19,9 +20,10 @@ namespace
 void App::Init()
 {
 	AppBase().Init();
-
+	NameParam::type_value &nameParam = Singleton<ParametersTable>::Instance().items.get<NameParam>().value;
 	//SolidBase().Change(Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
-	computeSolidGroup.Load(Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
+	computeSolidGroup.Load(nameParam);
+	CounterTubes::Load(nameParam);
 #if 1
 	RECT r;
 	WindowPosition::Get<MainWindow>(r);

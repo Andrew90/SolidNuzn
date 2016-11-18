@@ -344,6 +344,9 @@
     <ClInclude Include="Windows\FrameWindow\FrameWindowMenu.hpp">
       <Filter>windows\FrameWindow</Filter>
     </ClInclude>
+    <ClInclude Include="Dates\CounterTubes.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -465,6 +468,12 @@
     </ClCompile>
     <ClCompile Include="Windows\FrameWindow\FrameWindowToolBar.cpp">
       <Filter>windows\FrameWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\CounterTubes.cpp">
+      <Filter>Dates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

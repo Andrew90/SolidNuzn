@@ -5,6 +5,7 @@
 #include "templates\templates.hpp"
 #include "window_tool\WindowsPosition.h"
 #include "AddThresholdsWindow\AddThresholdsWindow.h"
+#include "Dialogs\Dialogs.h"
 
 namespace FrameWindowMenu
 {
@@ -48,8 +49,8 @@ namespace FrameWindowMenu
 	struct GraphUnits{};
 	MENU_TEXT(L"График", TopMenu<GraphUnits>)
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
-    struct PointsOffsets{static void Do(HWND){}};
-	struct FirstSignal{static void Do(HWND){}};
+	struct PointsOffsets: ThresholdDlg{};//{static void Do(HWND){}};
+	struct FirstSignal: PrimarySignalDlg{};//{static void Do(HWND){}};
 
 	MENU_ITEM(L"Точки смещения", PointsOffsets)
 	MENU_ITEM(L"Первичный сигнал", FirstSignal)
@@ -61,7 +62,6 @@ namespace FrameWindowMenu
 			, MenuItem<FirstSignal>
 		>::Result list;
 	};
-
 
 	typedef TL::MkTlst<
 		TopMenu<MainFile>

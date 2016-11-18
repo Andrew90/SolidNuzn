@@ -24,13 +24,6 @@ SignalViewer::SignalViewer()
 	chart.rect.left = 10;
 	chart.rect.top = 10;
 	chart.offsetAxesBottom = 10;
-	
-	//chart.minAxesX = 0;
-	//chart.maxAxesX = 99;
-	//chart.minAxesY = -10;
-	//chart.maxAxesY = 10;
-
-	cursor.cross = false;
 }
 //------------------------------------------------------------------------------
 void SignalViewer::BeforeDraw(Gdiplus::Graphics &)

@@ -12,10 +12,13 @@ class FrameWindow
 	friend Singleton<FrameWindow>;
 	HWND hStatusWindow;
 	FrameWindowToolBar toolBar;
+public:
 	ThresholdsViewer thresholdsViewer;
 	FrameViewer frameViewer;
+private:
 	FrameWindow(){}
 	FrameWindow &operator =(const FrameWindow &);
+	void IncDecFrame();
 public:
 	HWND hWnd;
 	LRESULT operator()(TCreate &);
@@ -29,4 +32,8 @@ public:
 
 	void IncFrame();
 	void DecFrame();
+
+	void AddTreshold();
+
+	static void SelectTreshGraph(double *);
 };

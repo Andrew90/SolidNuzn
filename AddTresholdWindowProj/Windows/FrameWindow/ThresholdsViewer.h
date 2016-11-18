@@ -5,7 +5,8 @@
 #include "templates/typelist.hpp"
 
 class ThresholdsViewer
-{	
+{
+public:
 	struct Lines: public LineSeries
 	{
 		Lines(Chart &);
@@ -14,8 +15,9 @@ class ThresholdsViewer
 	class FrameLine: public LineSeries
 	{
 	public:
+		double data[8];
+	public:
 		FrameLine(Chart &);
-		void Draw();
 	};
 	Gdiplus::Bitmap *backScreen;	
 public:
@@ -33,4 +35,7 @@ public:
 	LRESULT operator()(TCreate &);
 	void operator()(TSize &);
 	void operator()(TPaint &);
+	void operator()(TRButtonDown &);
+	void operator()(TUser &l);
+	static void Draw(double *);	
 };

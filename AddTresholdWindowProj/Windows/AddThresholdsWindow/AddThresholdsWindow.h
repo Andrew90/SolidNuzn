@@ -20,4 +20,5 @@ public:
 	void operator()(TCommand &);
 
 	static void Show();
+	static void Update();
 };

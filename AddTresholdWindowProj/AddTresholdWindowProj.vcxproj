@@ -154,6 +154,7 @@
     <ClInclude Include="App\PasswordDlg.hpp" />
     <ClInclude Include="Dates\ChartData.h" />
     <ClInclude Include="Dates\Compute.h" />
+    <ClInclude Include="Dates\CounterTubes.h" />
     <ClInclude Include="Dates\SaveLoadDates.h" />
     <ClInclude Include="Dates\SolidData.h" />
     <ClInclude Include="Resource.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="App\SelectHandler.cpp" />
     <ClCompile Include="Dates\ChartData.cpp" />
     <ClCompile Include="Dates\Compute.cpp" />
+    <ClCompile Include="Dates\CounterTubes.cpp" />
     <ClCompile Include="Dates\SaveLoadDates.cpp" />
     <ClCompile Include="Dates\SolidData.cpp" />
     <ClCompile Include="SolidGroupAlgoritm\ComputeSolidGroup.cpp" />
@@ -213,6 +215,7 @@
     <ClCompile Include="Windows\AddThresholdsWindow\ThresholdDataTable.cpp" />
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
+    <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameViewer.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameWindow.cpp" />
