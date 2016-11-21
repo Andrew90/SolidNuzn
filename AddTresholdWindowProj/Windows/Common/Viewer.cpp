@@ -96,7 +96,7 @@ void View::operator()(TMouseWell &l)
 	{
 		offsetX += l.delta / 120;
 		if(offsetX < 0) offsetX = 0;
-		if(offsetX >= chart->maxAxesX) offsetX = chart->maxAxesX - 1;
+		if(offsetX >= chart->maxAxesX) offsetX = int(chart->maxAxesX - 1);
 
 		double x = chart->rect.left + chart->offsetAxesLeft;
 		double lenX = chart->rect.right - chart->offsetAxesRight - chart->rect.left - chart->offsetAxesLeft;
@@ -108,7 +108,7 @@ void View::operator()(TMouseWell &l)
 	{
 		offsetY += l.delta / 120;
 		if(offsetY < 0) offsetY = 0;
-		if(offsetY >= chart->maxAxesY) offsetY = chart->maxAxesY - 1;
+		if(offsetY >= chart->maxAxesY) offsetY = int(chart->maxAxesY - 1);
 
 		double y = chart->rect.bottom - chart->offsetAxesBottom;
 		double lenY = chart->rect.bottom - chart->offsetAxesBottom - chart->rect.top - chart->offsetAxesTop;
@@ -129,7 +129,7 @@ void View::SizeOffs(TMouseMove &l)
 	if(offs > 0)
 	{
 		offsetX = int(offs / dX);
-		if(offsetX >= chart->maxAxesX - chart->minAxesX) offsetX = chart->minAxesX - 1;
+		if(offsetX >= chart->maxAxesX - chart->minAxesX) offsetX = int(chart->minAxesX - 1);
 	}
 
 	double y = chart->rect.bottom - chart->offsetAxesBottom;
@@ -140,7 +140,7 @@ void View::SizeOffs(TMouseMove &l)
 	if(offs > 0)
 	{
 		offsetY = int(offs / dY);
-		if(offsetY >= chart->maxAxesY) offsetY = chart->maxAxesY - 1;
+		if(offsetY >= chart->maxAxesY) offsetY = int(chart->maxAxesY - 1);
 	}
 }
 

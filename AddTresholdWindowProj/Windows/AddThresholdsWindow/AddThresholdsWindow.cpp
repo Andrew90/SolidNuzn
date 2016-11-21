@@ -10,6 +10,7 @@
 #include "SolidGroupAlgoritm\SolidBase.h"
 #include "window_tool\MenuAPI.h"
 #include "DlgTemplates\ParamDlg.h"
+#include "FrameWindow\FrameWindow.h"
 
 //#pragma comment(lib, "Comctl32.lib")
 namespace
@@ -31,7 +32,7 @@ struct OkBtn
 	{
 		if(!TL::find<typename Owner::list, __test__>()(&owner.items, &h))return;
 		TL::foreach<typename Owner::list, __ok_btn__>()(owner.items);
-		EndDialog(h, TRUE);
+		EndDialog(h, TRUE);		
 	}
 };
 
@@ -51,7 +52,7 @@ template<int N, class P>struct __get_tresh__<Point<N>, P>
 {
 	void operator()(Point<N> &o, P &p)
 	{
-		p[N] = o.value;
+		p[N] = (int)o.value;
 	}
 };
 
@@ -80,8 +81,12 @@ void __set_points__(HWND h)
 	{
 		TL::foreach<__point_list__, __get_tresh__>()(t.items, solidGroup.persents);
 
-		solidGroup.persentsChanged = true;
 		solidGroup.UpdateTresholds();
+		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+		if(NULL != hh)
+		{
+			((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
+		}
 	}
 }
 namespace

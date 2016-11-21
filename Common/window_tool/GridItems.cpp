@@ -5,7 +5,8 @@ void SetRow(HWND hWnd, int count)
 {
 	LV_ITEM l;
 	l.mask = LVIF_TEXT | LVIF_IMAGE;
-	for(int i = 0; i < count; ++i)
+	int c = ListView_GetItemCount(hWnd);
+	for(int i = c; i < count; ++i)
 	{
 		l.iItem = i;
 		l.iSubItem = 0;

@@ -103,7 +103,7 @@ bool FileExist(wchar_t *subDir, wchar_t *fileName)
 	wchar_t path[1024];
 	GetModuleFileName(0, path, 1024);
 	PathRemoveFileSpec(path);
-	wsprintf(&path[wcslen(path)], L"\\%s\\", subDir, fileName);
+	wsprintf(&path[wcslen(path)], L"\\%s\\%s", subDir, fileName);
 	return 0 != PathFileExists(path);
 }
 

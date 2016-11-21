@@ -72,6 +72,7 @@ void FrameWindow::IncDecFrame()
 	double result;
 	wchar_t *nameGroup;
 	unsigned color;
+//	int offset;
 	computeSolidGroup.offset = frameViewer.x;
 	if(computeSolidGroup.FramesOne(
 		thresh
@@ -85,6 +86,7 @@ void FrameWindow::IncDecFrame()
 		, color
 		))
 	{	
+		computeSolidGroup.start = computeSolidGroup.offset;
 		memmove(thresholdsViewer.chart.items.get<ThresholdsViewer::FrameLine>().data, thresh, sizeof(thresh)); 
 		memmove(computeSolidGroup.points, thresh, sizeof(thresh));
 		wchar_t *s = thresholdsViewer.label.buffer;
@@ -140,24 +142,15 @@ void FrameWindow::DecFrame()
 
 void FrameWindow::AddTreshold()
 {
-	//static int count = 0;
-	//wchar_t buf[128];
-	//wsprintf(buf, L"NONAME_%2d", count);
-	//computeSolidGroup.AddThreshold(
-	//	buf
-	//	, (wchar_t *)computeSolidGroup.typeSizeName.c_str()
-	//	, frameViewer.x
-	//	, thresholdsViewer.chart.items.get<ThresholdsViewer::FrameLine>().data
-	//	);
-	//++count;
-	//TODO добавить порог
 	computeSolidGroup.AddThreshold();
 	HWND h = FindWindow(WindowClass<AddThresholdWindow>()(), 0);
 	if(NULL != h)
 	{			
-		RepaintWindow(h);
-		SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
-		SetForegroundWindow(h);
+	   AddThresholdWindow *o = (AddThresholdWindow *)GetWindowLong(h, GWL_USERDATA);
+	   SetRow(o->grid.hWnd, computeSolidGroup.solidItems.size());
+	   RepaintWindow(h);
+	   SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
+	   SetForegroundWindow(h);
 	}
 }
 

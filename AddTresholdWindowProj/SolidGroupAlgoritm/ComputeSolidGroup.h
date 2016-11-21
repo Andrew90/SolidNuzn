@@ -56,6 +56,7 @@ public:
 	//std::wstring currentPathFile;
 	std::wstring currentGroupName;
 	int offset;
+	int start;
 	double points[count_points];
 	bool persentsChanged;
 	void Clear();

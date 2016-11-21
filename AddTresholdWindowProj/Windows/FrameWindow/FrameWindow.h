@@ -18,6 +18,7 @@ public:
 private:
 	FrameWindow(){}
 	FrameWindow &operator =(const FrameWindow &);
+public:
 	void IncDecFrame();
 public:
 	HWND hWnd;

@@ -233,6 +233,21 @@ void ComputeSolidGroup::Save()
 		val = (wchar_t *)typeSizeName.c_str();
 		int currentID = Select<SolidParametersTable>(base).eq<NameParam>(val).Execute();
 
+		if(persentsChanged)
+		{
+			Update<SolidParametersTable>(base)
+				.set<Offset<0>>(persents[0])
+				.set<Offset<1>>(persents[1])
+				.set<Offset<2>>(persents[2])
+				.set<Offset<3>>(persents[3])
+				.set<Offset<4>>(persents[4])
+				.set<Offset<5>>(persents[5])
+				.set<Offset<6>>(persents[6])
+				.set<Offset<7>>(persents[7])
+			.Where().ID(currentID).Execute();
+			persentsChanged = false;
+		}
+
 		{
 			std::map<int, GroupNameItem> tmpGroupName;
 			for(auto i = groupNameList.begin(); i != groupNameList.end();)
@@ -412,7 +427,7 @@ void ComputeSolidGroup::AddThreshold()
 	s.groupName = GetMapID(groupNameList, solidGroup);
 	s.solidFile = GetMapID(fileNameList, solidFile);
 
-	s.offset = offset;
+	s.offset = start;
 	memmove(s.points, points, sizeof(s.points));
 	s.status = new_item;
 	
@@ -448,6 +463,7 @@ void ComputeSolidGroup::UpdateTresholds()
 {
 	//todo сделать смену точек
 	changeTresholds = true;
+	persentsChanged = true;
 	double length = frequencySamples / (2 * 2 * frequencySignal);
 
 	int offsets[count_points];
@@ -469,7 +485,7 @@ void ComputeSolidGroup::UpdateTresholds()
 	{
 		wcscpy(&path[len], fileNameList[i->solidFile].name.c_str());
 		FILE *f;
-		f = _wfopen(path, L"r");
+		f = _wfopen(path, L"rb");
 		if(NULL != f)
 		{
 			int offset;
@@ -477,7 +493,8 @@ void ComputeSolidGroup::UpdateTresholds()
 			
 			int i_offset = i->offset - 1;
 			if(i_offset < 0) i_offset = 0;
-			fseek(f, i_offset * sizeof(double), SEEK_SET);
+			int ofs = i_offset * sizeof(double) + sizeof(int);
+			fseek(f, ofs, SEEK_SET);
 
 			double data[2];
 			fread(data, sizeof(double), 2, f);
@@ -486,19 +503,34 @@ void ComputeSolidGroup::UpdateTresholds()
 
 			for(int j = 0; j < count_points; ++j)
 			{
-				fseek(f, (i_offset + offsets[j] + offset) * sizeof(double), SEEK_SET);
+//todo XZZZZZXXZXXZXXZXZXZ
+				ofs = (i_offset + offsets[j] + offset) * sizeof(double) + sizeof(int);
+				fseek(f, ofs, SEEK_SET);
 				fread(data, sizeof(double), 2, f);
-				i->points[j] = data[0] + dY * (data[1] - data[0]);
+				double t = data[0] + dY * (data[1] - data[0]);
 
-				fseek(f, (i_offset + offsets[j]) * sizeof(double), SEEK_SET);
+				ofs = (i_offset + offsets[j]) * sizeof(double) + sizeof(int);
+				fseek(f, ofs, SEEK_SET);
 				fread(data, sizeof(double), 2, f);
-				i->points[j] -= data[0] + dY * (data[1] - data[0]);
+				t -= data[0] + dY * (data[1] - data[0]);
+				i->points[j] = t;
 			}
+			dprint("%f %f %f %f %f %f %f %f\n"
+				, i->points[0]
+			    , i->points[1]
+			    , i->points[2]
+			    , i->points[3]
+			    , i->points[4]
+			    , i->points[5]
+			    , i->points[6]
+			    , i->points[7]
+				);
 			fclose(f);
 			i->root = 0;
 			for(int j = 0; j < count_points; ++j)
 			{
-				i->root += i->points[j];
+				double x = i->points[j];
+				i->root += x * x;
 			}
 			i->root = sqrt(i->root);
 			i->changed = true;
@@ -867,13 +899,13 @@ bool ComputeSolidGroup::FramesOne(double(&points)[count_points], int(&offsets)[c
 
 		for(int j = 0; j < count_points; ++j)
 		{
-			int offs = offsets[j];
-			double y0 = signal[offs + startPeriod - 1];
-			double y1 = signal[offs + startPeriod];
+			int offs = offsets[j] + startPeriod;
+			double y0 = signal[offs - 1];
+			double y1 = signal[offs];
 			points[j] = y0 + dY * (y1 - y0);
 
-			y0 = reference[offs + startPeriod - 1];
-			y1 = reference[offs + startPeriod];
+			y0 = reference[offs - 1];
+			y1 = reference[offs];
 			points[j] -= y0 + dY * (y1 - y0);
 		}
 
