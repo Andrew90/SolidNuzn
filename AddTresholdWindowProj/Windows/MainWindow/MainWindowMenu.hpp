@@ -66,14 +66,11 @@ namespace MainWindowMenu
 
 	MENU_ITEM(L"Создать типоразмер", MainCreateTypesize)
 	MENU_ITEM(L"Удалить типоразмер", MainDeleteTypeSize)
-	//MENU_ITEM(L"Добавить образец", MainAddItem)
 	MENU_ITEM(L"Обнулить счётчик", MainClearCounter)
 
 	template<>struct TopMenu<MainOptionTypeSize>
 	{
 		typedef TL::MkTlst<
-			//MenuItem<MainAddItem>
-			//, Separator<0>
 			 MenuItem<MainCreateTypesize>
 			, MenuItem<MainDeleteTypeSize>
 			, Separator<1>

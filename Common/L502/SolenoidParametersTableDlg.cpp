@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "Dialogs.h"
-#include "App/AppBase.h"
-#include "DlgTemplates\ParamDlg.h"
+#include "SolenoidParametersTableDlg.h"
+#include "AppBase.h"
+#include "ParamDlg.h"
 #include "L502SolidGroup.h"
 
 template<>struct DlgItem<Frequency502>
@@ -152,11 +152,11 @@ struct OkBtn
 
 void SolenoidParametersTableDlg::Do(HWND h)
 {
-	//if(TemplDialog<SolenoidParametersTable, TL::MkTlst<SolenoidParametersTableDlgSpace::OkBtn, CancelBtn>::Result>(Singleton<SolenoidParametersTable>::Instance()).Do(h, L"Настройки генератора"))
-	//{
-	//	if(Singleton<L502SolidGroup>::Instance().SetupParams())
-	//	{
-	//		MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка!!!", MB_ICONERROR);
-	//	}
-	//}
+	if(TemplDialog<SolenoidParametersTable, TL::MkTlst<SolenoidParametersTableDlgSpace::OkBtn, CancelBtn>::Result>(Singleton<SolenoidParametersTable>::Instance()).Do(h, L"Настройки генератора"))
+	{
+		if(Singleton<L502SolidGroup>::Instance().SetupParams())
+		{
+			MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка!!!", MB_ICONERROR);
+		}
+	}
 }
