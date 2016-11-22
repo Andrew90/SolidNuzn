@@ -60,6 +60,9 @@
     <Filter Include="windows\FrameWindow">
       <UniqueIdentifier>{d55a5a8c-2f9d-407a-92b1-8baf2e8924d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="windows\ColorPanel">
+      <UniqueIdentifier>{839c5e05-aa16-4ace-8f29-8b9b6c6e0371}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -347,6 +350,12 @@
     <ClInclude Include="Dates\CounterTubes.h">
       <Filter>Dates</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\MainWindow\GridCounterViewer.h">
+      <Filter>windows\MainWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\ColorPanel\ColorPanel.h">
+      <Filter>windows\ColorPanel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -474,6 +483,18 @@
     </ClCompile>
     <ClCompile Include="Dates\CounterTubes.cpp">
       <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MainWindow\GridCounterViewer.cpp">
+      <Filter>windows\MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\ColorPanel\ColorPanel.cpp">
+      <Filter>windows\ColorPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

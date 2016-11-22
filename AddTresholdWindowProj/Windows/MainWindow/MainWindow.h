@@ -4,6 +4,7 @@
 #include "window_tool\SelectTypeSizeList.h"
 #include "MainWindow\SignalViewer.h"
 #include "MainWindow\TopLabelViewer.h"
+#include "MainWindow\GridCounterViewer.h"
 template<class>struct Singleton;
 class App;
 class MainWindow
@@ -15,6 +16,7 @@ class MainWindow
 	SelectTypeSizeList select;
 	TopLabelViewer topLabelViewer;
 	SignalViewer signalViewer;
+	GridCounterViewer gridCounterViewer;
 	MainWindow(){}
 	MainWindow &operator =(const MainWindow &);
 public:
@@ -23,7 +25,7 @@ public:
 	void operator()(TDestroy &);
 	void operator()(TSize &);
 	void operator()(TCommand &);
-
+	LRESULT operator()(TNotify &);
 	void operator()(TUser &);
 	void operator()(TClose &);
 	void operator()(TMouseWell &);

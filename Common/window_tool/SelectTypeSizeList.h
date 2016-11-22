@@ -4,7 +4,7 @@ class SelectTypeSizeList: public TEvent
 {
 public:
    HWND hWnd;
-   void (*ptr)(wchar_t *);
+   void (*ptr)(HWND, wchar_t *);
 public: 
 	SelectTypeSizeList();
 	void Create(HWND);

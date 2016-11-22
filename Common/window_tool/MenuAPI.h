@@ -32,11 +32,11 @@ template<class T>struct EnableMenuInit
 template<class T>struct Event
 #if 1
 {
-	static int &Do(HWND)
+	static void Do(HWND)
 	{
-		static int x;
-		zprint(__FUNCTION__);
-		return x;
+		//static int x;
+		//zprint(__FUNCTION__);
+		//return x;
 	}
 }
 #endif
@@ -207,7 +207,7 @@ template<class P, int N>struct __insert_item_menu__<Separator<N>, P>
 };
 template<class T>void EnableMenu(HWND h, bool state = true)
 {
-	MENUITEMINFO mii;
+	MENUITEMINFO mii = {};
 	mii.cbSize = sizeof(MENUITEMINFO);
 	mii.fMask = MIIM_STATE;
 	HMENU hMenu = GetMenu(h);
@@ -217,7 +217,7 @@ template<class T>void EnableMenu(HWND h, bool state = true)
 		mii.fState = state ? MFS_ENABLED : MFS_DISABLED;
 		SetMenuItemInfo(hMenu, id, false, &mii);
 		DrawMenuBar(h);
-	}
+	}	
 }
 template<class T>void ChangeTextSubMenu(HWND h, wchar_t *text)
 {
@@ -233,3 +233,24 @@ LRESULT EventDo(TNotify &m);
 
 #define MENU_TEXT(txt, item)template<>struct NameMenu<item >{wchar_t *operator()(HWND){return txt;}};
 #define MENU_ITEM(txt, item) MENU_TEXT(txt, MenuItem<item>) template<>struct Event<MenuItem<item> >:item{};
+
+//template<class T>CheckMenuItem(HWND h, bool b)
+//{
+//	unsigned t = MF_BYCOMMAND | MF_ENABLED;
+//	t |= b ? MF_CHECKED: MF_UNCHECKED;
+//	CheckMenuItem(h, (ULONG_PTR)Event<O>::Do, 
+//}
+
+template<class T>void CheckMenu(HWND h, bool state = true)
+{
+	MENUITEMINFO mii = {};
+	mii.cbSize = sizeof(MENUITEMINFO);
+	mii.fMask = MIIM_STATE;
+	HMENU hMenu = GetMenu(h);
+	static const unsigned short id = (unsigned short)Event<T>::Do;
+	if(GetMenuItemInfo(hMenu, id, false, &mii))
+	{
+		mii.fState = state ? MFS_CHECKED : MFS_UNCHECKED;
+		SetMenuItemInfo(hMenu, id, false, &mii);
+	}
+}

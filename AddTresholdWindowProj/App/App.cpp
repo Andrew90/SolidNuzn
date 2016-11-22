@@ -11,6 +11,8 @@
 #include "App\SelectHandler.h"
 #include "Dates\CounterTubes.h"
 
+#include "MainWindow\MainWindowMenu.hpp"
+
 namespace
 {
 	MainWindow &mainWindow = Singleton<MainWindow>::Instance();
@@ -31,6 +33,7 @@ void App::Init()
 	ShowWindow(h, SW_SHOWNORMAL);
 	SelectHandler::Init(mainWindow.select.hWnd);
 	mainWindow.select.ptr = SelectHandler::Do;
+	//UpdateMainWindow();
 #else
 #if 1
  //  ComputeSolidGroup &sg = Singleton<ComputeSolidGroup>::Instance();
@@ -62,6 +65,7 @@ void App::UpdateMainWindow()
 {
 	RepaintWindow(mainWindow.signalViewer.hWnd);
 	RepaintWindow(mainWindow.topLabelViewer.hWnd);
+	mainWindow.gridCounterViewer.Update();
 }
 
 void App::AddMenuItem(wchar_t *n)
@@ -77,5 +81,19 @@ void App::DelMenuItem(wchar_t *n)
 void App::SelMenuItem(wchar_t *n)
 {
 	mainWindow.select.SelMenuItem(n);
+}
+
+void App::ClearCounter()
+{
+	CounterTubes::Clear();
+	mainWindow.gridCounterViewer.Update();
+}
+
+void App::CheckMenuItem()
+{
+	static bool x = true;
+	x ^= true;
+   CheckMenu<TopMenu<MainWindowMenu::MainOptionUnits>>(mainWindow.hWnd, x);
+	//EnableMenu<Event<MainWindowMenu::L502ParamDlg>>(mainWindow.hWnd, x);
 }
 

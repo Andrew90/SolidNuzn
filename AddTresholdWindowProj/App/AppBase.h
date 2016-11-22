@@ -17,10 +17,12 @@ struct CurrentParametersTable
 };
 //------------------------------------------------------------------------------------------
 STR_PARAM(NameParam, 128, L"NONAME")
+DEFINE_PARAM(MessagePanelVisible  , bool, false)
  struct ParametersTable
  {
 	typedef TL::MkTlst<	
 		 NameParam
+		 , MessagePanelVisible
 	>::Result items_list;
 	typedef TL::Factory<items_list> TItems;
 	TItems items;

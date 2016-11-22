@@ -4,5 +4,5 @@
 namespace SelectHandler
 {
 	void Init(HWND);
-	void Do(wchar_t *);
+	void Do(HWND, wchar_t *);
 }

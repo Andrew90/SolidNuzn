@@ -3,6 +3,7 @@
 #include "App\AppBase.h"
 #include "SolidGroupAlgoritm\SolidBase.h"
 #include "Base\tables.hpp"
+#include "MainWindow\MainWindowMenu.hpp"
 
 namespace SelectHandler
 {
@@ -17,14 +18,6 @@ namespace SelectHandler
 
 	void Init(HWND hWnd)
 	{
-		//CBase base(ParametersBase().name());
-		//if(base.IsOpen())
-		//{
-		//	Select<ParametersTable>(base).ExecuteLoop<__sel__>(hWnd);
-		//	int num = ComboBox_FindStringExact(hWnd, 0, Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
-		//	if(CB_ERR != num) ComboBox_SetCurSel(hWnd, num);
-		//}
-
 #pragma message("делать выбор типоразмера")
 		ParametersBase parameters;
 		CBase base(
@@ -35,23 +28,6 @@ namespace SelectHandler
 
 		if(base.IsOpen())
 		{
-			//int id = Select<SolidParametersTable>(base).eq<NameParam>(
-			//	(NameParam::type_value)Singleton<ParametersTable>::Instance().items.get<NameParam>().value
-			//	).Execute();
-			//if(0 == id) return;
-			//
-			//wchar_t *query =
-			//	L"SELECT GroupName"\
-			//	L" FROM (GroupTable LEFT JOIN TresholdsTable"\
-			//	L" ON GroupTable.ID = TresholdsTable.GroupNameID)"\
-			//	L" WHERE TresholdsTable.SolidParametersTableID = ?"\
-			//	L" ORDER BY GroupName"				
-			//	;
-			//		
-			//CMD(base).CommandText(query)
-			//	.Param(id)
-			//	.ExecuteLoop<TL::MkTlst<GroupName>::Result, __sel__>(hWnd);
-
 			CMD(base).CommandText(L"SELECT NameParam FROM ParametersTable ORDER BY NameParam")
 				.ExecuteLoop<TL::MkTlst<NameParam>::Result, __sel__>(hWnd);
 		    int num = ComboBox_FindStringExact(hWnd, 0
@@ -62,7 +38,7 @@ namespace SelectHandler
 
 	}
 
-	void Do(wchar_t *buf)
+	void Do(HWND h, wchar_t *buf)
 	{
 		CBase base(ParametersBase().name());
 		if(base.IsOpen())
@@ -79,6 +55,8 @@ namespace SelectHandler
 		
 				AppBase::InitTypeSizeTables(base);
 				Singleton<ComputeSolidGroup>::Instance().Load(buf);
+				bool x = Singleton<ParametersTable>::Instance().items.get<MessagePanelVisible>().value;
+				CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
 			}
 		}
 	}

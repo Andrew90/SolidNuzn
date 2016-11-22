@@ -149,7 +149,7 @@ namespace
 LRESULT AddThresholdWindow::operator()(TCreate &l)
 {
 	Menu<MainMenu>().Init(l.hwnd);
-	grid.Create(l, &gridViewer);
+	grid.Create(l.hwnd, &gridViewer);
 	return 0;
 }
 

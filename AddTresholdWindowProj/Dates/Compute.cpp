@@ -4,6 +4,7 @@
 #include "templates\templates.hpp"
 #include "SolidGroupAlgoritm\ComputeSolidGroup.h"
 #include "App\App.h"
+#include "ColorPanel\ColorPanel.h"
 
 namespace
 {
@@ -41,7 +42,8 @@ void Compute::Recalculation()
 		, color
 		);
 	wchar_t buf[1024];
-	wsprintf(buf, L"<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
+	wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
+		, computeSolidGroup.currentFile.c_str()
 		, color
 		, groupName
 		, Wchar_from<double>(result)()
@@ -55,4 +57,6 @@ void Compute::Recalculation()
 
 	App::PrintTopLabel(buf);
 	App::UpdateMainWindow();
+
+	ColorPanel::SetText(groupName, color);
 }

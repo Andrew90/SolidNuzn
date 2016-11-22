@@ -11,6 +11,9 @@ public:
 	static void AddMenuItem(wchar_t *);
 	static void DelMenuItem(wchar_t *);
 	static void SelMenuItem(wchar_t *);
+
+	static void ClearCounter();
+	static void CheckMenuItem();
 };
 
 template<class>struct Singleton;

@@ -60,10 +60,7 @@ void LoadDateFile::Do(HWND h)
 			{
 				if(s[i] == '\\' || s[i] == '/')
 				{
-					//wcscpy(path, &s[i+1]);
 					computeSolidGroup.currentFile = &s[i+1];
-				//	s[i] = 0;
-					//computeSolidGroup.currentPathFile = s;
 					break;
 				}
 			}

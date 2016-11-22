@@ -107,7 +107,7 @@ namespace
 					App::DelMenuItem(t.value);
 					wchar_t buf[128];
 					CMD(base).CommandText(L"select top 1 NameParam from ParametersTable").Execute().GetValue(L"NameParam", buf);
-					SelectHandler::Do(buf);
+					SelectHandler::Do(h, buf);
 					App::SelMenuItem(buf);
 					EndDialog(h, TRUE);
 				}

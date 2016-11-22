@@ -27,4 +27,17 @@ DLG(AboutWindow)
 DLG(ThresholdDlg)
 DLG(PrimarySignalDlg)
 
+struct InitMessagePanel
+{
+	static int Do();
+};
+
+struct OpenMessagePanel
+{
+	static bool Do();
+};
+
+DLG(SaveWindowPositionDlg)
+DLG(SolenoidParametersTableDlg)
+
 #undef DLG

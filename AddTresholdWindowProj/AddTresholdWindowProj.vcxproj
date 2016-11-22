@@ -166,6 +166,7 @@
     <ClInclude Include="Windows\AddThresholdsWindow\GridWindow.h" />
     <ClInclude Include="Windows\AddThresholdsWindow\TableData.h" />
     <ClInclude Include="Windows\AddThresholdsWindow\ThresholdDataTable.h" />
+    <ClInclude Include="Windows\ColorPanel\ColorPanel.h" />
     <ClInclude Include="Windows\Common\Viewer.h" />
     <ClInclude Include="Windows\Dialogs\Dialogs.h" />
     <ClInclude Include="Windows\FrameWindow\FrameViewer.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Windows\FrameWindow\FrameWindowMenu.hpp" />
     <ClInclude Include="Windows\FrameWindow\FrameWindowToolBar.h" />
     <ClInclude Include="Windows\FrameWindow\ThresholdsViewer.h" />
+    <ClInclude Include="Windows\MainWindow\GridCounterViewer.h" />
     <ClInclude Include="Windows\MainWindow\MainWindow.h" />
     <ClInclude Include="Windows\MainWindow\MainWindowMenu.hpp" />
     <ClInclude Include="Windows\MainWindow\MainWindowToolBar.h" />
@@ -213,14 +215,18 @@
     <ClCompile Include="Windows\AddThresholdsWindow\AddThresholdsWindow.cpp" />
     <ClCompile Include="Windows\AddThresholdsWindow\GridWindow.cpp" />
     <ClCompile Include="Windows\AddThresholdsWindow\ThresholdDataTable.cpp" />
+    <ClCompile Include="Windows\ColorPanel\ColorPanel.cpp" />
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
+    <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameViewer.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameWindow.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameWindowToolBar.cpp" />
     <ClCompile Include="Windows\FrameWindow\ThresholdsViewer.cpp" />
+    <ClCompile Include="Windows\MainWindow\GridCounterViewer.cpp" />
     <ClCompile Include="Windows\MainWindow\MainWindow.cpp" />
     <ClCompile Include="Windows\MainWindow\MainWindowToolBar.cpp" />
     <ClCompile Include="Windows\MainWindow\SignalViewer.cpp" />

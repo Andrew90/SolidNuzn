@@ -20,6 +20,8 @@ LRESULT MainWindow::operator()(TCreate &l)
 	signalViewer.hWnd = CreateChildWindow(l.hwnd, (WNDPROC)&Viewer<SignalViewer>::Proc, L"SignalViewer", &signalViewer);
 	topLabelViewer.hWnd = CreateChildWindow(l.hwnd, (WNDPROC)&Viewer<TopLabelViewer>::Proc, L"TopLabelViewer", &topLabelViewer);
 
+	gridCounterViewer.Create(toolBar.hWnd);
+
 	return 0;
 }
 void MainWindow::operator()(TDestroy &)
@@ -43,6 +45,8 @@ void MainWindow::operator()(TSize &l)
 	RECT r;
 	GetClientRect(l.hwnd, &r);	
 
+	MoveWindow(gridCounterViewer.grid.hWnd, width + 400 + 30,  2, 145, rt.bottom - rt.top - 2 - 2, TRUE);
+
 	static const int topLabelHeight = 28;
 
 	int y = rt.bottom;
@@ -57,6 +61,11 @@ void MainWindow::operator()(TSize &l)
 void MainWindow::operator()(TCommand &l)
 {
 	EventDo(l);
+}
+
+LRESULT MainWindow::operator()(TNotify &l)
+{
+	return EventDo(l);
 }
 
 void MainWindow::operator()(TUser &l){ l.ptr(l.data);}

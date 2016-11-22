@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "App\config.h"
 #include "MainWindowToolBar.h"
 #include "..\resource.h"
 #include "templates\templates.hpp"
@@ -6,8 +7,15 @@
 #include "FrameWindow\FrameWindow.h"
 #include "window_tool\WindowsPosition.h"
 #include "window_tool\Emptywindow.h"
+//#include "MainWindow\MainWindowMenu.hpp"
 
 #include "tools_debug\DebugMess.h"
+
+#ifdef DEBUG_ITEMS
+#include "Dates\CounterTubes.h"
+#include "App\App.h"
+#include "window_tool\MenuAPI.h"
+#endif
 
 namespace 
 {
@@ -32,7 +40,6 @@ namespace
 		typedef TL::MkTlst<
 		SeparatorToolbar<0>
 		, BUTTON_KEY(IDB_CycleBtn)
-	//	, BUTTON_KEY(IDB_Continue)
 		, BUTTON_KEY(IDB_Reset)
 		, BUTTON_KEY(IDB_OptionsBtn) 		
 		, SeparatorToolbar<1>
@@ -41,6 +48,7 @@ namespace
 		, BUTTON_KEY(IDB_arrow_up)
 		, BUTTON_KEY(IDB_arrow_left) 
 		, BUTTON_KEY(IDB_arrow_right)
+		, BUTTON_KEY(IDB_Reset)
 		, SeparatorToolbar<2>
 #endif
 		>::Result tool_button_list;
@@ -68,27 +76,31 @@ namespace
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_down>::Click(HWND h)
 	{
-		zprint("\n");	
+		App::CheckMenuItem();
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_up>::Click(HWND h)
 	{
-		zprint("\n");	
+		CounterTubes::Inc(L"D");
+		 App::UpdateMainWindow();
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_left>::Click(HWND h)
 	{
-		zprint("\n");			
+		CounterTubes::Inc(L"K");
+		 App::UpdateMainWindow();
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_right>::Click(HWND h)
 	{
-		zprint("\n");			
+		CounterTubes::Inc(L"E");
+		 App::UpdateMainWindow();
 	}
 //----------------------------------------------------------------------------
 	void Key<IDB_Reset>::Click(HWND h)
 	{
-		zprint("\n");	
+		CounterTubes::Inc(L"F");
+		 App::UpdateMainWindow();
 	}
 }
 //--------------------------------------------------------------------------------------------

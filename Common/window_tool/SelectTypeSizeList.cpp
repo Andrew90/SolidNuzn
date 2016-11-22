@@ -58,7 +58,7 @@ void SelectTypeSizeList::Do(TCommand &m)
 	{
 		wchar_t buf[128];
 		GetWindowText(m.hControl, buf, dimention_of(buf));
-		if(NULL != ptr) (*ptr)(buf);
+		if(NULL != ptr) (*ptr)(m.hwnd, buf);
 		SetFocus(m.hwnd);
 	}
 }
