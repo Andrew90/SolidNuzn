@@ -6,6 +6,7 @@ class Device1730
 	Automation::BDaq::BDaqDevice *device;
 	Automation::BDaq::BDaqDio    *dio;
 	bool isOpen;
+public:
 	unsigned input;
 	unsigned output;
 public:	

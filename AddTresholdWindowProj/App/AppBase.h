@@ -29,49 +29,41 @@ DEFINE_PARAM(MessagePanelVisible  , bool, false)
 	const wchar_t *name(){return L"ParametersTable";}
  };
 //--------------------------------------------------------------------------------------------------------
-DEFINE_PARAM(i—ontrol—ircuits  , unsigned, 1 << 0)
-DEFINE_PARAM(iCycle            , unsigned, 1 << 1)
-DEFINE_PARAM(iReady            , unsigned, 1 << 2)
-DEFINE_PARAM(iControl          , unsigned, 1 << 3)
-DEFINE_PARAM(iBase             , unsigned, 1 << 4)
-DEFINE_PARAM(iReserve          , unsigned, 1 << 5)
+DEFINE_PARAM(TubeInUnit  , unsigned, 1 << 0)
+DEFINE_PARAM(UnitOn            , unsigned, 1 << 1)
 
 struct InputBitTable
  {
 	typedef TL::MkTlst<
-		i—ontrol—ircuits
-		, iCycle          
-		, iReady          
-		, iControl        
-		, iBase           
-		, iReserve        
+		TubeInUnit
+		, UnitOn          
 	>::Result items_list;
 	typedef TL::Factory<items_list> TItems;
 	TItems items;
 	const wchar_t *name(){return L"InputBitTable";}
  };
 
-DEFINE_PARAM(oWork            , unsigned, 1 << 0)
-DEFINE_PARAM(oToShiftThe      , unsigned, 1 << 1)
-DEFINE_PARAM(oResult1         , unsigned, 1 << 2)
-DEFINE_PARAM(oResult2         , unsigned, 1 << 3)
-DEFINE_PARAM(oPowerBM         , unsigned, 1 << 4)
-DEFINE_PARAM(oReserve         , unsigned, 1 << 5)
-
-struct OutputBitTable
- {
-	typedef TL::MkTlst<
-		oWork      
-		, oToShiftThe  //ÔÂÂÍÎ‡‰Í‡
-		, oResult1   
-		, oResult2   
-		, oPowerBM   
-		, oReserve   
-	>::Result items_list;
-	typedef TL::Factory<items_list> TItems;
-	TItems items;
-	const wchar_t *name(){return L"OutputBitTable";}
- };
+//DEFINE_PARAM(oWork            , unsigned, 1 << 0)
+//DEFINE_PARAM(oToShiftThe      , unsigned, 1 << 1)
+//DEFINE_PARAM(oResult1         , unsigned, 1 << 2)
+//DEFINE_PARAM(oResult2         , unsigned, 1 << 3)
+//DEFINE_PARAM(oPowerBM         , unsigned, 1 << 4)
+//DEFINE_PARAM(oReserve         , unsigned, 1 << 5)
+//
+//struct OutputBitTable
+// {
+//	typedef TL::MkTlst<
+//		oWork      
+//		, oToShiftThe  //ÔÂÂÍÎ‡‰Í‡
+//		, oResult1   
+//		, oResult2   
+//		, oPowerBM   
+//		, oReserve   
+//	>::Result items_list;
+//	typedef TL::Factory<items_list> TItems;
+//	TItems items;
+//	const wchar_t *name(){return L"OutputBitTable";}
+// };
 
  DEFINE_PARAM(Descriptor1730, unsigned, 0)
 struct Descriptor1730Table
@@ -143,7 +135,7 @@ struct TcpCommunications
  {
 	 typedef TL::MkTlst<
 		 InputBitTable
-		 , OutputBitTable
+		// , OutputBitTable
 		 , Descriptor1730Table
 		 , GraphAxesTable
 		 , SolenoidParametersTable

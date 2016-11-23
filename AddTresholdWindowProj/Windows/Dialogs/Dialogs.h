@@ -41,5 +41,6 @@ DLG(SaveWindowPositionDlg)
 DLG(SolenoidParametersTableDlg)
 
 DLG(TcpCommunicationsDlg)
+DLG(InputBitDlg)
 
 #undef DLG

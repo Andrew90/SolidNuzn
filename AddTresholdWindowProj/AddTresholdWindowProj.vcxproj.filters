@@ -544,6 +544,9 @@
     <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp">
       <Filter>windows\Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Defectoscope\rc.rc">

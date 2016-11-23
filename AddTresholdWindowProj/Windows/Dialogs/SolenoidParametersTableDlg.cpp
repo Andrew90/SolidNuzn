@@ -25,7 +25,7 @@ PARAM_TITLE(Frequency502, L"Частота сбора одного канала(устанавливается при пуск
 PARAM_TITLE(FrequencyGenerator, L"Частота генератора(устанавливается при пусконаладке)")
 
 MIN_EQUAL_VALUE(Frequency502, 500)
-MAX_EQUAL_VALUE(Frequency502, 20000)
+MAX_EQUAL_VALUE(Frequency502, 40000)
 
 
 

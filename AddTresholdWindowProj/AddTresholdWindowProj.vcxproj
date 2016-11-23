@@ -230,6 +230,7 @@
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp" />
     <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp" />
