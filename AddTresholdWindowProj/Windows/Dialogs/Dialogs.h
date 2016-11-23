@@ -40,4 +40,6 @@ struct OpenMessagePanel
 DLG(SaveWindowPositionDlg)
 DLG(SolenoidParametersTableDlg)
 
+DLG(TcpCommunicationsDlg)
+
 #undef DLG

@@ -63,6 +63,18 @@
     <Filter Include="windows\ColorPanel">
       <UniqueIdentifier>{839c5e05-aa16-4ace-8f29-8b9b6c6e0371}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Devices">
+      <UniqueIdentifier>{0b8369fd-428f-4ce2-9950-c9657bad21b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Devices\1730">
+      <UniqueIdentifier>{180e7678-134e-4def-80ca-4dff0db3ee7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Devices\L502">
+      <UniqueIdentifier>{b90b7790-5c3a-47f6-b53e-4d42f7b9cc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Devices\1730\Inc">
+      <UniqueIdentifier>{50d44286-38d7-46ad-a8d4-c13fcef6376c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -356,6 +368,33 @@
     <ClInclude Include="Windows\ColorPanel\ColorPanel.h">
       <Filter>windows\ColorPanel</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\L502\e502api.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\l502api.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\L502SolidGroup.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\lcard_pstdint.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\lpcie.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\pstdint.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\L502\x502api.h">
+      <Filter>Common\Devices\L502</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\1730\Device1730.h">
+      <Filter>Common\Devices\1730</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\1730\inc\BDaqCL.h">
+      <Filter>Common\Devices\1730\Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -494,6 +533,15 @@
       <Filter>windows\ColorPanel</Filter>
     </ClCompile>
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\L502\L502SolidGroup.cpp">
+      <Filter>Common\Devices\L502</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\1730\Device1730.cpp">
+      <Filter>Common\Devices\1730</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp">
       <Filter>windows\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>

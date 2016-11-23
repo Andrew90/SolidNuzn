@@ -106,6 +106,38 @@ struct GraphAxesTable
 	const wchar_t *name(){return L"GraphAxesTable";}
  };
 //------------------------------------------------------------------------------------------------------------
+DEFINE_PARAM(Frequency502, int, 4000)
+DEFINE_PARAM(FrequencyGenerator, int, 6)
+DEFINE_PARAM(InputRangeSignal, int, 0)
+DEFINE_PARAM(RangeReferenceSignal, int, 0)
+struct SolenoidParametersTable
+{
+	typedef TL::MkTlst<
+		Frequency502
+		, FrequencyGenerator
+		, InputRangeSignal
+		, RangeReferenceSignal
+	>::Result items_list;
+	typedef NullType unique_list;
+	typedef TL::Factory<items_list> TItems;
+	TItems items;
+	const wchar_t *name(){return L"SolenoidParametersTable";}
+};
+//--------------------------------------------------------------
+DEFINE_PARAM(PortTCP, int, 2030)
+STR_PARAM(AddresTCP, 17, L"192.168.1.100")
+struct TcpCommunications
+{
+	typedef TL::MkTlst<	
+		PortTCP
+		, AddresTCP
+	>::Result items_list;
+	typedef NullType unique_list;
+	typedef TL::Factory<items_list> TItems;
+	TItems items;
+	const wchar_t *name(){return L"TcpCommunications";}
+};
+//---------------------------------------------------------------
 
  struct ParametersBase
  {
@@ -114,6 +146,8 @@ struct GraphAxesTable
 		 , OutputBitTable
 		 , Descriptor1730Table
 		 , GraphAxesTable
+		 , SolenoidParametersTable
+		 , TcpCommunications
 	 >::Result one_row_table_list;
 
 	 typedef TL::MkTlst<		

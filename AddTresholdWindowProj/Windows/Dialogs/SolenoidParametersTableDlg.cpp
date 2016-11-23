@@ -2,7 +2,8 @@
 #include "Dialogs.h"
 #include "App/AppBase.h"
 #include "DlgTemplates\ParamDlg.h"
-#include "L502SolidGroup.h"
+#include "L502\L502SolidGroup.h"
+#include "App\PasswordDlg.hpp"
 
 template<>struct DlgItem<Frequency502>
 {
@@ -75,10 +76,6 @@ template<>struct CurrentValue<RangeReferenceSignal>
 template<>struct DlgSubItems<InputRangeSignal, int>: ComboBoxSubItem<InputRangeSignal>{};
 template<>struct DlgSubItems<RangeReferenceSignal, int>: ComboBoxSubItem<RangeReferenceSignal>{};
 
-
-
-
-
 template<class P>struct __ok_btn__<DlgItem<RangeReferenceSignal>, P>
 {
 	typedef DlgItem<RangeReferenceSignal> O;
@@ -136,10 +133,11 @@ struct OkBtn
 	wchar_t *Title(){return L"Применить";}
 	template<class Owner>void BtnHandler(Owner &owner, HWND h)
 	{
-		if(TestPassword<Owner::Table>()(h))
+		if(TestPassword<Owner::Base, Owner::Table>()(h))
 		{
 			if(__ok_table_btn__<
-				Owner::Table
+				Owner::Base
+				, Owner::Table
 				, typename TL::SubListFromMultyList<ParametersBase::multy_type_list, Owner::Table>::Result
 			>()(h, owner))
 			{
@@ -152,11 +150,12 @@ struct OkBtn
 
 void SolenoidParametersTableDlg::Do(HWND h)
 {
-	//if(TemplDialog<SolenoidParametersTable, TL::MkTlst<SolenoidParametersTableDlgSpace::OkBtn, CancelBtn>::Result>(Singleton<SolenoidParametersTable>::Instance()).Do(h, L"Настройки генератора"))
-	//{
-	//	if(Singleton<L502SolidGroup>::Instance().SetupParams())
-	//	{
-	//		MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка!!!", MB_ICONERROR);
-	//	}
-	//}
+	if(TemplDialog<ParametersBase, SolenoidParametersTable, TL::MkTlst<SolenoidParametersTableDlgSpace::OkBtn, CancelBtn>::Result>
+		(Singleton<SolenoidParametersTable>::Instance()).Do(h, L"Настройки генератора"))
+	{
+		if(Singleton<L502SolidGroup>::Instance().SetupParams())
+		{
+			MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка!!!", MB_ICONERROR);
+		}
+	}
 }

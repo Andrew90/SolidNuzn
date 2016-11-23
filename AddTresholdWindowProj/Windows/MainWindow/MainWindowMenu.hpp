@@ -61,7 +61,6 @@ namespace MainWindowMenu
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 	struct MainCreateTypesize: AddTypeSizeDlg{};//{static void Do(HWND h){zprint("");}};
 	struct MainDeleteTypeSize: DelTypeSizeDlg{};//{static void Do(HWND h){zprint("");}};
-	//struct MainAddItem {static void Do(HWND h){zprint("");}};
 	struct MainClearCounter {static void Do(HWND){App::ClearCounter();}};
 
 	MENU_ITEM(L"Создать типоразмер", MainCreateTypesize)
@@ -78,13 +77,15 @@ namespace MainWindowMenu
 		>::Result list;
 	};
 
-	struct MainOptionUnits {static void Do(HWND h){zprint("");}};
-	struct L502ParamDlg {static void Do(HWND h){zprint("");}};
-	struct CommunicationOptions {static void Do(HWND h){zprint("");}};
+	struct MainOptionUnits {};//static void Do(HWND h){zprint("");}};
+	//struct L502ParamDlg {static void Do(HWND h){zprint("");}};
+	//struct CommunicationOptions {static void Do(HWND h){zprint("");}};
+
 	struct SolenoidParametersTable: SolenoidParametersTableDlg{};// {static void Do(HWND h){zprint("");}};
-	struct AdcInputPortsDlg {static void Do(HWND h){zprint("");}};
-	struct DInputPortsDlg {static void Do(HWND h){zprint("");}};
-	struct SyncroDlg {static void Do(HWND h){zprint("");}};
+	struct NetOptions: TcpCommunicationsDlg{};
+	//struct AdcInputPortsDlg {static void Do(HWND h){zprint("");}};
+	//struct DInputPortsDlg {static void Do(HWND h){zprint("");}};
+	//struct SyncroDlg {static void Do(HWND h){zprint("");}};
 	struct SaveWindowPosition: SaveWindowPositionDlg{};//{static void Do(HWND h){zprint("");}};
 	struct MessagePanel
 	{
@@ -96,12 +97,13 @@ namespace MainWindowMenu
 	};
 
 	MENU_TEXT(L"Настройки", TopMenu<MainOptionUnits>)
-	MENU_ITEM(L"Настройка аналоговой платы"       , L502ParamDlg)	
-	MENU_ITEM(L"Настройка сетевого подключения"   , CommunicationOptions)	
-	MENU_ITEM(L"Настройки генератора"             , SolenoidParametersTable)
-	MENU_ITEM(L"Настройки входов аналоговой платы", AdcInputPortsDlg)
-	MENU_ITEM(L"Настройки входов дискретной платы", DInputPortsDlg)
-	MENU_ITEM(L"Синхронизация", MenuItem<SyncroDlg>)
+	//MENU_ITEM(L"Настройка аналоговой платы"       , L502ParamDlg)	
+	//MENU_ITEM(L"Настройка сетевого подключения"   , CommunicationOptions)	
+	MENU_ITEM(L"Настройка сетевого подключения", NetOptions)
+	MENU_ITEM(L"Настройки генератора"          , SolenoidParametersTable)
+	//MENU_ITEM(L"Настройки входов аналоговой платы", AdcInputPortsDlg)
+	//MENU_ITEM(L"Настройки входов дискретной платы", DInputPortsDlg)
+	//MENU_ITEM(L"Синхронизация", MenuItem<SyncroDlg>)
 	MENU_ITEM(L"Сохранить координаты окна", SaveWindowPosition)//WindowPositionDlg<MainWindow>)
 	MENU_ITEM(L"Панель сообщений", MessagePanel)
 
@@ -110,12 +112,13 @@ namespace MainWindowMenu
 	template<>struct TopMenu<MainOptionUnits>
 	{
 		typedef TL::MkTlst<
-			MenuItem<L502ParamDlg>
-			, MenuItem<CommunicationOptions>	
+			//			MenuItem<L502ParamDlg>
+			//	, MenuItem<CommunicationOptions>	
+			MenuItem<NetOptions>
 			, MenuItem<SolenoidParametersTable>
-			, MenuItem<AdcInputPortsDlg>
-			, MenuItem<DInputPortsDlg>
-			, MenuItem<SyncroDlg>
+			//, MenuItem<AdcInputPortsDlg>
+			//, MenuItem<DInputPortsDlg>
+			//, MenuItem<SyncroDlg>
 			, Separator<1>			
 			, MenuItem<SaveWindowPosition>
 			, MenuItem<MessagePanel>

@@ -119,6 +119,8 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\1730\Device1730.h" />
+    <ClInclude Include="..\Common\1730\inc\BDaqCL.h" />
     <ClInclude Include="..\Common\Base\Base.hpp" />
     <ClInclude Include="..\Common\Base\ExpressBase.hpp" />
     <ClInclude Include="..\Common\Base\tables.hpp" />
@@ -128,6 +130,13 @@
     <ClInclude Include="..\Common\Graphics\Borders.h" />
     <ClInclude Include="..\Common\Graphics\Chart.h" />
     <ClInclude Include="..\Common\Graphics\ColorLabel.h" />
+    <ClInclude Include="..\Common\L502\e502api.h" />
+    <ClInclude Include="..\Common\L502\l502api.h" />
+    <ClInclude Include="..\Common\L502\L502SolidGroup.h" />
+    <ClInclude Include="..\Common\L502\lcard_pstdint.h" />
+    <ClInclude Include="..\Common\L502\lpcie.h" />
+    <ClInclude Include="..\Common\L502\pstdint.h" />
+    <ClInclude Include="..\Common\L502\x502api.h" />
     <ClInclude Include="..\Common\templates\templates.hpp" />
     <ClInclude Include="..\Common\templates\typelist.hpp" />
     <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp" />
@@ -182,10 +191,12 @@
     <ClInclude Include="Windows\MainWindow\TopLabelViewer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\1730\Device1730.cpp" />
     <ClCompile Include="..\Common\DlgTemplates\ParamDlg.cpp" />
     <ClCompile Include="..\Common\Graphics\Borders.cpp" />
     <ClCompile Include="..\Common\Graphics\Chart.cpp" />
     <ClCompile Include="..\Common\Graphics\ColorLabel.cpp" />
+    <ClCompile Include="..\Common\L502\L502SolidGroup.cpp" />
     <ClCompile Include="..\Common\tools_debug\DebugMess.cpp" />
     <ClCompile Include="..\Common\window_tool\DlgFiles.cpp" />
     <ClCompile Include="..\Common\window_tool\EmptyWindow.cpp" />
@@ -220,6 +231,7 @@
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp" />
     <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TypeSizeDlg.cpp" />
     <ClCompile Include="Windows\FrameWindow\FrameViewer.cpp" />

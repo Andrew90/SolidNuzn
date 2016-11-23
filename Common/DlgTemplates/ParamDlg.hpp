@@ -249,21 +249,21 @@ template<class Base, class Table, class T>struct __ok_table_btn__
 	typedef typename T::__template_must_be_overridded__ noused; 
 };
 
-//template<class Base, class Table>struct __ok_table_btn__<Base, Table, ParametersBase::one_row_table_list>
-//{
-//	template<class T>bool operator()(HWND h, T &t)
-//	{
-//		if(!TL::find<T::list, __test__>()(&t.items, &h))return false;
-//		CBase base(Base().name());
-//		if(base.IsOpen())
-//		{
-//			__update_data__<Table> _data(base);
-//			TL::foreach<T::list, __ok_btn__>()(&t.items, &_data);
-//			_data.update.Where().ID(1).Execute();
-//		}
-//		return true;
-//	}
-//};
+template<class Base, class Table>struct __ok_table_btn__<Base, Table, typename Base::one_row_table_list>
+{
+	template<class T>bool operator()(HWND h, T &t)
+	{
+		if(!TL::find<T::list, __test__>()(&t.items, &h))return false;
+		CBase base(Base().name());
+		if(base.IsOpen())
+		{
+			__update_data__<Table> _data(base);
+			TL::foreach<T::list, __ok_btn__>()(&t.items, &_data);
+			_data.update.Where().ID(1).Execute();
+		}
+		return true;
+	}
+};
 template<class, class, class>class TemplDialog;
 
 template<class Base, class Table, class B>struct Insert
@@ -366,11 +366,11 @@ template<class T, int edit_width = 140>struct EditReadOnlyItems
 		, WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | WS_TABSTOP | ES_READONLY
 			, 10, dy, edit_width, 25, h, 0, (HINSTANCE)::GetModuleHandle(NULL), NULL
 			);
-		HWND h = CreateWindow(L"static", ParamTitle<T>()()
+		HWND hh = CreateWindow(L"static", ParamTitle<T>()()
 			, WS_VISIBLE | WS_CHILD
 			, edit_width + 20, dy + 3, dlg_width, 20, h, 0, (HINSTANCE)::GetModuleHandle(NULL), NULL
 			);
-		SetWindowLong(hWnd, GWL_USERDATA, h);
+		SetWindowLong(hWnd, GWL_USERDATA, (LONG)hh);
 		dy += 25;
 		return hWnd;
 	}

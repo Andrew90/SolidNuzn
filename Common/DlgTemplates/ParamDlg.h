@@ -6,6 +6,7 @@
 #include "DlgTemplates/ParamDlg.hpp"
 //#include "Pass.h"
 #include "tools_debug/DebugMess.h"
+#include "App\PasswordDlg.hpp"
 //-------------------------------------------------------------------------------------------------------------------------------
 template<class T>struct DlgItem;
 bool TemplDlg_Do(HWND hWnd, wchar_t *title, DLGPROC proc, LPARAM param);
@@ -134,7 +135,7 @@ public:
 	}
 };
 
-template<class, class Table>struct TestPassword;
+//template<class Base, class Table>struct TestPassword;
 
 struct OkBtn
 {

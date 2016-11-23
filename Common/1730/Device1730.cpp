@@ -1,13 +1,6 @@
 #include "stdafx.h"
 #include "Device1730.h"
-#include "DebugMess.h"
-#include "ArchiveEvents.h"
-
-#ifdef XDEBUG
-#define dprint debug.print
-#else	
-#define  dprint
-#endif	
+#include "tools_debug/DebugMess.h"
 
 using namespace Automation::BDaq;
 
@@ -16,8 +9,6 @@ using namespace Automation::BDaq;
 Device1730::Device1730()
 	: device(NULL)
 	, dio(NULL)
-	, input(archiveEvents.map->input)
-	, output(archiveEvents.map->output)
 {}
 //------------------------------------------------------------------------------
 bool Device1730::Init(wchar_t *deviceDescription)
