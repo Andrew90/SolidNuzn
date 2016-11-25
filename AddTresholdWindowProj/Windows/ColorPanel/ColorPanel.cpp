@@ -61,7 +61,7 @@ ColorPanel::ColorPanel()
 
 LRESULT ColorPanel::operator()(TCreate &l)
 {
-	Menu<ColorPanelMenu::items_list>().Init(l.hwnd);
+	//Menu<ColorPanelMenu::items_list>().Init(l.hwnd);
 	return 0;
 }
 
@@ -123,6 +123,14 @@ void ColorPanel::operator()(TCommand &l)
 {
 	EventDo(l);
 }
+
+void ColorPanel::operator()(TDestroy &m)
+{
+	StoredWindowPosition<ColorPanel>::Do(m.hwnd);
+	SetWindowLongPtr(m.hwnd, GWLP_USERDATA, NULL);
+	delete backScreen;
+    backScreen = NULL;	
+}
 //--------------------------------------------------------------------------------
 namespace
 {
@@ -130,30 +138,28 @@ namespace
 }
 //-------------------------------------------------------------------------------------------------
 void ColorPanel::__SetText__(wchar_t *txt, unsigned color)
-{
-	if(!openColorPanel && NULL != hWnd)
-	{
-		DestroyWindow(hWnd);
-		hWnd = NULL;
-		return;
-	}
+{	
 	wcsncpy(buf, txt, dimention_of(buf));
 	backColor = color;
-	
-	HWND h = FindWindow(WindowClass<ColorPanel>()(), 0);
-	if(NULL != h)
-	{			
-		RepaintWindow(h);
-		SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
-		SetForegroundWindow(h);
+
+	if(openColorPanel)
+	{
+
+		HWND h = FindWindow(WindowClass<ColorPanel>()(), 0);
+		if(NULL != h)
+		{			
+			RepaintWindow(h);
+			SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
+			SetForegroundWindow(h);
+		}
+		else
+		{		
+			RECT r;
+			WindowPosition::Get<ColorPanel>(r);
+			HWND h = WindowTemplate(this, L"", r.left, r.top, r.right, r.bottom);
+			ShowWindow(h, SW_SHOWNORMAL);
+		}	
 	}
-	else
-	{		
-		RECT r;
-		WindowPosition::Get<ColorPanel>(r);
-		HWND h = WindowTemplate(this, L"", r.left, r.top, r.right, r.bottom);
-		ShowWindow(h, SW_SHOWNORMAL);
-	}		
 }
 //---------------------------------------------------
 void ColorPanel::SetText(wchar_t *txt, unsigned color)
@@ -162,33 +168,63 @@ void ColorPanel::SetText(wchar_t *txt, unsigned color)
 }
 //---------------------------------------------
 void ColorPanel::__Clear__()
-{
-	if(!openColorPanel && NULL != hWnd)
-	{
-		DestroyWindow(hWnd);
-		hWnd = NULL;
-		return;
-	}
+{	
 	buf[0] = 0;
 	backColor = 0xffaaaaaa;
-	
-	HWND h = FindWindow(WindowClass<ColorPanel>()(), 0);
-	if(NULL != h)
-	{			
-		RepaintWindow(h);
-		SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
-		SetForegroundWindow(h);
+
+	if(openColorPanel)
+	{	
+		HWND h = FindWindow(WindowClass<ColorPanel>()(), 0);
+		if(NULL != h)
+		{			
+			RepaintWindow(h);
+			SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
+			SetForegroundWindow(h);
+		}
+		else
+		{		
+			RECT r;
+			WindowPosition::Get<ColorPanel>(r);
+			HWND h = WindowTemplate(this, L"", r.left, r.top, r.right, r.bottom);
+			ShowWindow(h, SW_SHOWNORMAL);
+		}	
 	}
-	else
-	{		
-		RECT r;
-		WindowPosition::Get<ColorPanel>(r);
-		HWND h = WindowTemplate(this, L"", r.left, r.top, r.right, r.bottom);
-		ShowWindow(h, SW_SHOWNORMAL);
-	}		
 }
 
 void ColorPanel::Clear()
 {
 	Singleton<ColorPanel>::Instance().__Clear__();
+}
+
+void ColorPanel::Close()
+{
+	HWND hh = FindWindow(WindowClass<ColorPanel>()(), 0);
+	if(NULL != hh)
+	{
+		DestroyWindow(hh);
+	}
+}
+
+void ColorPanel::Open()
+{
+	if(openColorPanel)
+	{
+		RECT r;
+		WindowPosition::Get<ColorPanel>(r);
+		HWND h = WindowTemplate(&Singleton<ColorPanel>::Instance()
+			, L"", r.left, r.top, r.right, r.bottom);
+		ShowWindow(h, SW_SHOWNORMAL);
+		DWORD dwStyle = GetWindowLong(h, GWL_STYLE);
+		dwStyle &= ~(WS_SYSMENU);
+		SetWindowLong(h, GWL_STYLE, dwStyle);
+	}
+}
+
+void ColorPanel::operator()(TGetMinMaxInfo &l)
+{
+	if(NULL != l.pMinMaxInfo)
+	{
+		l.pMinMaxInfo->ptMinTrackSize.x = 300;
+		l.pMinMaxInfo->ptMinTrackSize.y = 200;
+	}	
 }

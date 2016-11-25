@@ -75,6 +75,18 @@
     <Filter Include="Common\Devices\1730\Inc">
       <UniqueIdentifier>{50d44286-38d7-46ad-a8d4-c13fcef6376c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common\Communication">
+      <UniqueIdentifier>{a851a051-9e90-4825-b31e-3bd8ea79e620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Communication\TCP">
+      <UniqueIdentifier>{79c53d30-3456-43e3-8c05-842f56863895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Communication\CommunicationTube">
+      <UniqueIdentifier>{67a0f3b0-846d-445c-9327-e04abc6b2ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="windows\IOports">
+      <UniqueIdentifier>{bed1e9d7-d951-4a0d-a2a9-6961831325ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -395,6 +407,30 @@
     <ClInclude Include="..\Common\1730\inc\BDaqCL.h">
       <Filter>Common\Devices\1730\Inc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\TCP\Client.h">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\TCP\CommonTcp.h">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\TCP\server.h">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CommunicationTube\ClientTreshold.h">
+      <Filter>Common\Communication\CommunicationTube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\CommunicationTube\Communication.h">
+      <Filter>Common\Communication\CommunicationTube</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\IOports\IOportsViewer.h">
+      <Filter>windows\IOports</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\IOports\IOportsWindow.h">
+      <Filter>windows\IOports</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\IOports\IOportsWindowMenu.hpp">
+      <Filter>windows\IOports</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -546,6 +582,30 @@
     </ClCompile>
     <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp">
       <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\TCP\Client.cpp">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\TCP\CommonTcp.cpp">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\TCP\server.cpp">
+      <Filter>Common\Communication\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CommunicationTube\ClientTreshold.cpp">
+      <Filter>Common\Communication\CommunicationTube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\CommunicationTube\Communication.cpp">
+      <Filter>Common\Communication\CommunicationTube</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\IOports\IOportsDlg.cpp">
+      <Filter>windows\IOports</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\IOports\IOportsViewer.cpp">
+      <Filter>windows\IOports</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\IOports\IOportsWindow.cpp">
+      <Filter>windows\IOports</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

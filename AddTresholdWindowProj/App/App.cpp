@@ -12,6 +12,7 @@
 #include "Dates\CounterTubes.h"
 
 #include "MainWindow\MainWindowMenu.hpp"
+#include "ColorPanel\ColorPanel.h"
 
 namespace
 {
@@ -33,6 +34,9 @@ void App::Init()
 	ShowWindow(h, SW_SHOWNORMAL);
 	SelectHandler::Init(mainWindow.select.hWnd);
 	mainWindow.select.ptr = SelectHandler::Do;
+
+	IOportsDlg_Start();
+	ColorPanel::Open();
 	//UpdateMainWindow();
 #else
 #if 1

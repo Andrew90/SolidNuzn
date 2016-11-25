@@ -16,7 +16,9 @@ class MainWindow
 	SelectTypeSizeList select;
 	TopLabelViewer topLabelViewer;
 	SignalViewer signalViewer;
+public:
 	GridCounterViewer gridCounterViewer;
+private:
 	MainWindow(){}
 	MainWindow &operator =(const MainWindow &);
 public:

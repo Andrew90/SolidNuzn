@@ -27,20 +27,23 @@ DLG(AboutWindow)
 DLG(ThresholdDlg)
 DLG(PrimarySignalDlg)
 
-struct InitMessagePanel
-{
-	static int Do();
-};
-
 struct OpenMessagePanel
 {
 	static bool Do();
 };
+int MessagePanel_Init();
 
 DLG(SaveWindowPositionDlg)
 DLG(SolenoidParametersTableDlg)
 
 DLG(TcpCommunicationsDlg)
 DLG(InputBitDlg)
+
+struct IOportsDlg
+{
+	static bool Do();
+};
+int IOportsDlg_Init();
+void IOportsDlg_Start();
 
 #undef DLG

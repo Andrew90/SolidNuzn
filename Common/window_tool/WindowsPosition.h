@@ -24,8 +24,8 @@ public:
 		GetWindowRect(h, &r);
 		if(r.left < 0) r.left = 0;
 		if(r.top < 0) r.top = 0;
-		r.right -= r.left;
-		r.bottom -= r.top;
+		//r.right -= r.left;
+		//r.bottom -= r.top;
 		WindowPosition::Set<T>(r);
 	}
 };

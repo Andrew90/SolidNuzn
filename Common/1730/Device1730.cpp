@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Device1730.h"
 #include "tools_debug/DebugMess.h"
+#include "App/config.h"
 
+#ifndef DEBUG_ITEMS
 using namespace Automation::BDaq;
-
-#define Mess(n)
 
 Device1730::Device1730()
 	: device(NULL)
@@ -66,4 +66,44 @@ unsigned Device1730::ReadOutput()
 	return res;
 }
 //----------------------------------------------------------------------------
+#else
+Device1730::Device1730()
+	: device(NULL)
+	, dio(NULL)
+{}
+//------------------------------------------------------------------------------
+bool Device1730::Init(wchar_t *deviceDescription)
+{
+	return true;
+}
+//-------------------------------------------------------------------------
+void Device1730::Destroy()
+{	
+}
+//--------------------------------------------------------------------------
+bool Device1730::IsOpen()
+{
+	return true;
+}
+//--------------------------------------------------------------------------
+unsigned Device1730::Read()
+{
+	return input = rand() % 0xffff;
+}
+//--------------------------------------------------------------------------
+void Device1730::Write()
+{
+	output = rand() % 0xffff;
+}
+void Device1730::Write(unsigned out)
+{
+	output = out;
+	dio->DoWrite(startPoint, 2, (BYTE *)&output);
+}
+//--------------------------------------------------------------------------
+unsigned Device1730::ReadOutput()
+{
+	return rand() % 0xffff;
+}
+#endif
 

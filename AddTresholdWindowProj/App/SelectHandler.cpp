@@ -4,6 +4,8 @@
 #include "SolidGroupAlgoritm\SolidBase.h"
 #include "Base\tables.hpp"
 #include "MainWindow\MainWindowMenu.hpp"
+#include "Dates\CounterTubes.h"
+#include "MainWindow\MainWindow.h"
 
 namespace SelectHandler
 {
@@ -57,6 +59,8 @@ namespace SelectHandler
 				Singleton<ComputeSolidGroup>::Instance().Load(buf);
 				bool x = Singleton<ParametersTable>::Instance().items.get<MessagePanelVisible>().value;
 				CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
+				CounterTubes::Load(name);
+				Singleton<MainWindow>::Instance().gridCounterViewer.Update();
 			}
 		}
 	}

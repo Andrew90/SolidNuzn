@@ -15,6 +15,11 @@ public:
 	void operator()(TSize &);
 	void operator()(TPaint &);
 	void operator()(TCommand &);
+	void operator()(TDestroy &);
+	void operator()(TGetMinMaxInfo &);
 	static void SetText(wchar_t *, unsigned);
 	static void Clear();
+
+	static void Close();
+	static void Open();
 };

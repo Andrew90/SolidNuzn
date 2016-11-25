@@ -4,20 +4,21 @@
 #include "App\App.h"
 #include "window_tool\WindowsPosition.h"
 #include "MainWindow\MainWindow.h"
+#include "ColorPanel\ColorPanel.h"
 
 namespace
 {
 	 ParametersTable &params = Singleton<ParametersTable>::Instance();
 }
 
-int InitMessagePanel::Do()
+int MessagePanel_Init()
 {
-	return Singleton<ParametersTable>::Instance().items.get<MessagePanelVisible>().value
+	return params.items.get<MessagePanelVisible>().value
 			? MFS_CHECKED
 			: MFS_UNCHECKED;
 }
 
-bool OpenMessagePanel::Do()
+bool OpenMessagePanel_Check()
 {
 	try
 	{
@@ -38,6 +39,20 @@ bool OpenMessagePanel::Do()
 		return false;
 	}
 };
+
+bool OpenMessagePanel::Do()
+{
+	bool result = OpenMessagePanel_Check();
+	if(result)
+	{
+		ColorPanel::Open();
+	}
+	else
+	{
+		ColorPanel::Close();
+	}
+	return result;
+}
 
 void SaveWindowPositionDlg::Do(HWND h)
 {

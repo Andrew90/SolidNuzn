@@ -92,12 +92,22 @@ namespace MainWindowMenu
 		}
 	};
 
+	struct IOportsDlg__
+	{
+		static void Do(HWND h)
+		{
+			bool x = IOportsDlg::Do();
+			CheckMenu<MenuItem<IOportsDlg__>>(h, x);
+		}
+	};
+
 	MENU_TEXT(L"Настройки", TopMenu<MainOptionUnits>)
 	MENU_ITEM(L"Настройка сетевого подключения", NetOptions)
 	MENU_ITEM(L"Настройки генератора"          , SolenoidParametersTable)
 	MENU_ITEM(L"Смещения входных дискретных портов"          , InputBit)
 	MENU_ITEM(L"Сохранить координаты окна", SaveWindowPosition)
 	MENU_ITEM(L"Панель сообщений", MessagePanel)
+	MENU_ITEM(L"Просмотр дискретных входов", IOportsDlg__)
 
 
 
@@ -110,6 +120,7 @@ namespace MainWindowMenu
 			, Separator<1>			
 			, MenuItem<SaveWindowPosition>
 			, MenuItem<MessagePanel>
+			, MenuItem<IOportsDlg__>
 		>::Result list;
 	};
 
@@ -117,7 +128,15 @@ namespace MainWindowMenu
 	{
 		int operator()(HWND)
 		{
-			return InitMessagePanel::Do();
+			return MessagePanel_Init();
+		}
+	};
+
+	template<>struct EnableMenuInit<MenuItem<IOportsDlg__>>
+	{
+		int operator()(HWND)
+		{
+			return IOportsDlg_Init();
 		}
 	};
 
