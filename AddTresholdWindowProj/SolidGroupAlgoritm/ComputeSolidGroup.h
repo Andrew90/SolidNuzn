@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "SolidGroupAlgoritm\CommunicationIDItems.h"
 
 struct GroupNameItem
 {
@@ -41,6 +42,7 @@ public:
 		bool changed;
 	};
 public:
+	CommunicationIDItems communicationIDItems;
 	std::map<int, GroupNameItem> groupNameList;
 	std::map<int, FileNameItem> fileNameList;
 	std::vector<SolidItem> solidItems;

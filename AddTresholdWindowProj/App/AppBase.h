@@ -148,8 +148,7 @@ struct DifferentOptionsTable
 	const wchar_t *name(){return L"DifferentOptionsTable";}
 };
 //---------------------------------------------------------------
-DEFINE_PARAM(CommunicationTypeID, int, -1);
-DEFINE_PARAM(CurrentID, int, 1);
+DEFINE_PARAM(CommunicationTypeID, int, 0);
 STR_PARAM(CommunicationTypeName, 32, L"DeleteIt")
 struct CommunicationTypeTable
 {

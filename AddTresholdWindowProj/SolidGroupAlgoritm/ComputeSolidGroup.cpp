@@ -160,6 +160,21 @@ void ComputeSolidGroup::Clear()
 	solidItems.clear();
 }
 
+namespace
+{
+	template<class T, class D>struct __select_id__
+	{
+		bool operator()(int, T &t, D &d)
+		{
+			d.Add(
+				t.items.get<CommunicationTypeName>().value
+				, t.items.get<CommunicationTypeID>().value
+				);
+			return false;
+		}
+	};
+}
+
 bool ComputeSolidGroup::Load(wchar_t *name)
 {
 	persentsChanged = false;
@@ -178,6 +193,9 @@ bool ComputeSolidGroup::Load(wchar_t *name)
 		typeSizeName = name;
 		int id = Select<SolidParametersTable>(base).eq<NameParam>(nameParam.value).Execute(pt);
 
+		Select<CommunicationTypeTable>(base).eq<CurrentID>(id).ExecuteLoop<__select_id__>(communicationIDItems);
+
+		communicationIDItems.Clear();
 		TL::foreach<SolidParametersTable::items_list, __parameters_table__>()(
 			pt.items
 			, *this
