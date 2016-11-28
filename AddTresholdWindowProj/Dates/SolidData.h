@@ -14,6 +14,6 @@ public:
 	double signal[MAX_ZONES_COUNT];
 public:	
 	void Clear();
-	void SetData(double *data, int count, int start);
+	void SetData(double *data, int count);
 };
 

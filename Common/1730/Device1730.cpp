@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Device1730.h"
 #include "tools_debug/DebugMess.h"
-#include "App/config.h"
 
 #ifndef DEBUG_ITEMS
 using namespace Automation::BDaq;
@@ -11,7 +10,7 @@ Device1730::Device1730()
 	, dio(NULL)
 {}
 //------------------------------------------------------------------------------
-bool Device1730::Init(wchar_t *deviceDescription)
+bool Device1730::Init(int deviceDescription)
 {
 	Destroy();
 	long errorCode = BDaqDevice::Open( deviceDescription, ModeWrite, device);
@@ -68,11 +67,9 @@ unsigned Device1730::ReadOutput()
 //----------------------------------------------------------------------------
 #else
 Device1730::Device1730()
-	: device(NULL)
-	, dio(NULL)
 {}
 //------------------------------------------------------------------------------
-bool Device1730::Init(wchar_t *deviceDescription)
+bool Device1730::Init(int deviceDescription)
 {
 	return true;
 }
@@ -98,7 +95,6 @@ void Device1730::Write()
 void Device1730::Write(unsigned out)
 {
 	output = out;
-	dio->DoWrite(startPoint, 2, (BYTE *)&output);
 }
 //--------------------------------------------------------------------------
 unsigned Device1730::ReadOutput()

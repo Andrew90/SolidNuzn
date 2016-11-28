@@ -17,14 +17,10 @@ struct CurrentParametersTable
 };
 //------------------------------------------------------------------------------------------
 STR_PARAM(NameParam, 128, L"NONAME")
-DEFINE_PARAM(MessagePanelVisible  , bool, false)
-DEFINE_PARAM(IOPortsVisible, bool, false)
  struct ParametersTable
  {
 	typedef TL::MkTlst<	
-		 NameParam
-		 , MessagePanelVisible
-		 , IOPortsVisible
+		 NameParam		
 	>::Result items_list;
 	typedef TL::Factory<items_list> TItems;
 	TItems items;
@@ -67,16 +63,16 @@ struct InputBitTable
 //	const wchar_t *name(){return L"OutputBitTable";}
 // };
 
- DEFINE_PARAM(Descriptor1730, unsigned, 0)
-struct Descriptor1730Table
- {
-	typedef TL::MkTlst<
-		Descriptor1730
-	>::Result items_list;
-	typedef TL::Factory<items_list> TItems;
-	TItems items;
-	const wchar_t *name(){return L"Descriptor1730Table";}
- };
+// DEFINE_PARAM(Descriptor1730, unsigned, 0)
+//struct Descriptor1730Table
+// {
+//	typedef TL::MkTlst<
+//		Descriptor1730
+//	>::Result items_list;
+//	typedef TL::Factory<items_list> TItems;
+//	TItems items;
+//	const wchar_t *name(){return L"Descriptor1730Table";}
+// };
 
 DEFINE_PARAM(PrimarySignalMin , double, -10)
 DEFINE_PARAM(PrimarySignalMax , double, 10)
@@ -132,16 +128,34 @@ struct TcpCommunications
 	const wchar_t *name(){return L"TcpCommunications";}
 };
 //---------------------------------------------------------------
-
+DEFINE_PARAM(CommunicationRemoveUnit, bool, false)
+DEFINE_PARAM(CounterTubesStored, bool, false)
+DEFINE_PARAM(MessagePanelVisible  , bool, false)
+DEFINE_PARAM(IOPortsVisible, bool, false)
+DEFINE_PARAM(DeviceDescription1730, int, 1)
+struct DifferentOptionsTable
+{
+	typedef TL::MkTlst<
+		CommunicationRemoveUnit
+		, CounterTubesStored
+		 , MessagePanelVisible
+		 , IOPortsVisible
+		 , DeviceDescription1730
+	>::Result items_list;
+	typedef NullType unique_list;
+	typedef TL::Factory<items_list> TItems;
+	TItems items;
+	const wchar_t *name(){return L"DifferentOptionsTable";}
+};
+//---------------------------------------------------------------
  struct ParametersBase
  {
 	 typedef TL::MkTlst<
 		 InputBitTable
-		// , OutputBitTable
-		 , Descriptor1730Table
 		 , GraphAxesTable
 		 , SolenoidParametersTable
 		 , TcpCommunications
+		 , DifferentOptionsTable
 	 >::Result one_row_table_list;
 
 	 typedef TL::MkTlst<		

@@ -5,8 +5,10 @@
 #include "MainWindow\SignalViewer.h"
 #include "MainWindow\TopLabelViewer.h"
 #include "MainWindow\GridCounterViewer.h"
+
 template<class>struct Singleton;
 class App;
+
 class MainWindow
 {
 	friend App;
@@ -19,7 +21,7 @@ class MainWindow
 public:
 	GridCounterViewer gridCounterViewer;
 private:
-	MainWindow(){}
+	MainWindow();
 	MainWindow &operator =(const MainWindow &);
 public:
 	HWND hWnd;

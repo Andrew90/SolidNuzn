@@ -8,7 +8,7 @@
 
 namespace
 {
-	 ParametersTable &params = Singleton<ParametersTable>::Instance();
+	 DifferentOptionsTable &params = Singleton<DifferentOptionsTable>::Instance();
 }
 
 int MessagePanel_Init()
@@ -28,9 +28,7 @@ bool OpenMessagePanel_Check()
 		if(base.IsOpen())
 		{
 			Update<ParametersTable>(base).set<MessagePanelVisible>(result)
-				.Where().eq<NameParam>(
-				params.items.get<NameParam>().value
-				).Execute();
+				.Where().ID(1).Execute();
 		}
 		return result;
 	}

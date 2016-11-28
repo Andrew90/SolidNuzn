@@ -87,6 +87,9 @@
     <Filter Include="windows\IOports">
       <UniqueIdentifier>{bed1e9d7-d951-4a0d-a2a9-6961831325ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Automat">
+      <UniqueIdentifier>{88581982-7a7d-4285-80a7-d2541ae023bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -220,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="..\Common\tools_debug\DebugMess.h">
       <Filter>Common\tools_debug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.h">
-      <Filter>Common\window_tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\window_tool\Emptywindow.h">
       <Filter>Common\window_tool</Filter>
@@ -431,6 +431,12 @@
     <ClInclude Include="Windows\IOports\IOportsWindowMenu.hpp">
       <Filter>windows\IOports</Filter>
     </ClInclude>
+    <ClInclude Include="Automat\Automat.h">
+      <Filter>Automat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.hpp">
+      <Filter>Common\window_tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -606,6 +612,12 @@
     </ClCompile>
     <ClCompile Include="Windows\IOports\IOportsWindow.cpp">
       <Filter>windows\IOports</Filter>
+    </ClCompile>
+    <ClCompile Include="Automat\Automat.cpp">
+      <Filter>Automat</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Dialogs\Descriptor1730Dlg.cpp">
+      <Filter>windows\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

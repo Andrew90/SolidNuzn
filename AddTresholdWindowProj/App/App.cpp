@@ -13,6 +13,9 @@
 
 #include "MainWindow\MainWindowMenu.hpp"
 #include "ColorPanel\ColorPanel.h"
+#include "App/config.h"
+
+#include "Automat\Automat.h"
 
 namespace
 {
@@ -27,6 +30,9 @@ void App::Init()
 	//SolidBase().Change(Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
 	computeSolidGroup.Load(nameParam);
 	CounterTubes::Load(nameParam);
+
+	bool run = Automat::Init1730();
+	
 #if 1
 	RECT r;
 	WindowPosition::Get<MainWindow>(r);
@@ -37,6 +43,12 @@ void App::Init()
 
 	IOportsDlg_Start();
 	ColorPanel::Open();
+
+	Automat::Init();
+	if(run) 
+	{
+		Automat::Run();
+	}
 	//UpdateMainWindow();
 #else
 #if 1
@@ -91,6 +103,16 @@ void App::ClearCounter()
 {
 	CounterTubes::Clear();
 	mainWindow.gridCounterViewer.Update();
+}
+
+void App::UpdateGroupCounter()
+{
+	wchar_t *s = (wchar_t *)computeSolidGroup.currentGroupName.c_str();
+	if('\0' != s[0])
+	{
+		CounterTubes::Inc(s);
+		mainWindow.gridCounterViewer.Update();
+	}
 }
 
 void App::CheckMenuItem()

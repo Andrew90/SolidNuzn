@@ -9,7 +9,7 @@
 
 namespace
 {
-	 ParametersTable &params = Singleton<ParametersTable>::Instance();
+	 DifferentOptionsTable &params = Singleton<DifferentOptionsTable>::Instance();
 }
 
 int IOportsDlg_Init()
@@ -29,9 +29,7 @@ bool IOportsDlg_Check()
 		if(base.IsOpen())
 		{
 			Update<ParametersTable>(base).set<IOPortsVisible>(result)
-				.Where().eq<NameParam>(
-				params.items.get<NameParam>().value
-				).Execute();
+				.Where().ID(1).Execute();
 		}
 		return result;
 	}

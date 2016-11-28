@@ -12,5 +12,3 @@ public:
   bool Connect(int , wchar_t *);
   void Close();
 };
-
-extern ClientTreshold clientTreshold;

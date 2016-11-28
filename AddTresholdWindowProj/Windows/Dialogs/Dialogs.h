@@ -38,6 +38,7 @@ DLG(SolenoidParametersTableDlg)
 
 DLG(TcpCommunicationsDlg)
 DLG(InputBitDlg)
+DLG(Descriptor1730Dlg)
 
 struct IOportsDlg
 {

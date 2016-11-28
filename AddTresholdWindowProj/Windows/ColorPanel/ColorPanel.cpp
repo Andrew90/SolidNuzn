@@ -134,7 +134,7 @@ void ColorPanel::operator()(TDestroy &m)
 //--------------------------------------------------------------------------------
 namespace
 {
-	bool &openColorPanel = Singleton<ParametersTable>::Instance().items.get<MessagePanelVisible>().value;
+	bool &openColorPanel = Singleton<DifferentOptionsTable>::Instance().items.get<MessagePanelVisible>().value;
 }
 //-------------------------------------------------------------------------------------------------
 void ColorPanel::__SetText__(wchar_t *txt, unsigned color)

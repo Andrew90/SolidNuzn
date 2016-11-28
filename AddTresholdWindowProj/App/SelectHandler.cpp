@@ -57,7 +57,7 @@ namespace SelectHandler
 		
 				AppBase::InitTypeSizeTables(base);
 				Singleton<ComputeSolidGroup>::Instance().Load(buf);
-				bool x = Singleton<ParametersTable>::Instance().items.get<MessagePanelVisible>().value;
+				bool x = Singleton<DifferentOptionsTable>::Instance().items.get<MessagePanelVisible>().value;
 				CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
 				CounterTubes::Load(name);
 				Singleton<MainWindow>::Instance().gridCounterViewer.Update();

@@ -81,6 +81,7 @@ namespace MainWindowMenu
 
 	struct SolenoidParametersTable: SolenoidParametersTableDlg{};// {static void Do(HWND h){zprint("");}};
 	struct NetOptions: TcpCommunicationsDlg{};
+	struct Descriptor1730Item : Descriptor1730Dlg{};
 	struct InputBit: InputBitDlg{};
 	struct SaveWindowPosition: SaveWindowPositionDlg{};//{static void Do(HWND h){zprint("");}};
 	struct MessagePanel
@@ -104,19 +105,29 @@ namespace MainWindowMenu
 	MENU_TEXT(L"Настройки", TopMenu<MainOptionUnits>)
 	MENU_ITEM(L"Настройка сетевого подключения", NetOptions)
 	MENU_ITEM(L"Настройки генератора"          , SolenoidParametersTable)
-	MENU_ITEM(L"Смещения входных дискретных портов"          , InputBit)
+	MENU_ITEM(L"Смещения входных дискретных портов", InputBit)
+	MENU_ITEM(L"Дескриптор платы 1730"          , Descriptor1730Item)
 	MENU_ITEM(L"Сохранить координаты окна", SaveWindowPosition)
 	MENU_ITEM(L"Панель сообщений", MessagePanel)
 	MENU_ITEM(L"Просмотр дискретных входов", IOportsDlg__)
 
-
+	struct Descriptor1730__{};
+	template<>struct SubMenu<Descriptor1730__>
+	{
+		typedef TL::TypeToTypeLst<
+			typename TL::MkTlst<InputBit, Descriptor1730Item>::Result
+			, MenuItem
+		>::Result list;
+	};
+	MENU_TEXT(L"Плата 1730" , SubMenu<Descriptor1730__>)
 
 	template<>struct TopMenu<MainOptionUnits>
 	{
 		typedef TL::MkTlst<
 			MenuItem<NetOptions>
 			, MenuItem<SolenoidParametersTable>
-			, MenuItem<InputBit>
+		//	, MenuItem<InputBit>
+			, SubMenu<Descriptor1730__>
 			, Separator<1>			
 			, MenuItem<SaveWindowPosition>
 			, MenuItem<MessagePanel>

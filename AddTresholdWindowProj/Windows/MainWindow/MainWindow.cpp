@@ -5,12 +5,45 @@
 #include "tools_debug\DebugMess.h"
 #include "MainWindow\MainWindowMenu.hpp"
 #include "window_tool\Emptywindow.h"
+#include "App/AppBase.h"
+#include "window_tool\CheckBoxWidget.hpp"
 
+template<class T>struct CommunicationCheckBox
+{
+	bool &value;
+	CommunicationCheckBox()
+		: value(Singleton<DifferentOptionsTable>::Instance().items.get<T>().value)
+	{}
+protected:
+	void Command(TCommand &m, bool b)
+	{
+		value = b;
+		CBase base(
+			ParametersBase().name()
+			);
+		if(base.IsOpen())
+		{
+		   Update<DifferentOptionsTable>(base).set<T>(b).Where().ID(1).Execute();
+		}
+	}
+	bool Init(HWND h)
+	{		
+		return value;
+	}
+};
+
+CheckBoxWidget<CommunicationCheckBox<CommunicationRemoveUnit>> __communicationCheckBox__;
+
+MainWindow::MainWindow()
+{}
 
 LRESULT MainWindow::operator()(TCreate &l)
 {
 	Menu<MainWindowMenu::items_list>().Init(l.hwnd);
 	toolBar.Init(l.hwnd);
+
+	__communicationCheckBox__.Init(toolBar.hWnd, L"Работа со станцией");
+
 	hStatusWindow = CreateStatusWindow(WS_CHILD | WS_VISIBLE, NULL, l.hwnd, 0);
 	int pParts[] = {550,900, 3000};
 	SendMessage(hStatusWindow, SB_SETPARTS, 3, (LPARAM)pParts);
@@ -46,6 +79,8 @@ void MainWindow::operator()(TSize &l)
 	GetClientRect(l.hwnd, &r);	
 
 	MoveWindow(gridCounterViewer.grid.hWnd, width + 400 + 30,  2, 145, rt.bottom - rt.top - 2 - 2, TRUE);
+
+	__communicationCheckBox__.Size(width, 52, 250, 20);
 
 	static const int topLabelHeight = 28;
 

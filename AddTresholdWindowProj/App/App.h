@@ -1,5 +1,7 @@
 #pragma once
 #include "Dates\ChartData.h"
+#include "1730\Device1730.h"
+
 class App
 {
 	struct Impl;
@@ -14,6 +16,7 @@ public:
 
 	static void ClearCounter();
 	static void CheckMenuItem();
+	static void UpdateGroupCounter();
 };
 
 template<class>struct Singleton;

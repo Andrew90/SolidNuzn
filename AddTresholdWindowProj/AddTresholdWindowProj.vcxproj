@@ -146,7 +146,7 @@
     <ClInclude Include="..\Common\templates\typelist.hpp" />
     <ClInclude Include="..\Common\templates\WindowsEventTemplate.hpp" />
     <ClInclude Include="..\Common\tools_debug\DebugMess.h" />
-    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.h" />
+    <ClInclude Include="..\Common\window_tool\CheckBoxWidget.hpp" />
     <ClInclude Include="..\Common\window_tool\DlgFiles.h" />
     <ClInclude Include="..\Common\window_tool\Emptywindow.h" />
     <ClInclude Include="..\Common\window_tool\Grid.h" />
@@ -166,6 +166,7 @@
     <ClInclude Include="App\config.h" />
     <ClInclude Include="App\SelectHandler.h" />
     <ClInclude Include="App\PasswordDlg.hpp" />
+    <ClInclude Include="Automat\Automat.h" />
     <ClInclude Include="Dates\ChartData.h" />
     <ClInclude Include="Dates\Compute.h" />
     <ClInclude Include="Dates\CounterTubes.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="App\AppBase.cpp" />
     <ClCompile Include="App\SelectHandler.cpp" />
+    <ClCompile Include="Automat\Automat.cpp" />
     <ClCompile Include="Dates\ChartData.cpp" />
     <ClCompile Include="Dates\Compute.cpp" />
     <ClCompile Include="Dates\CounterTubes.cpp" />
@@ -243,6 +245,7 @@
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\Descriptor1730Dlg.cpp" />
     <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp" />
