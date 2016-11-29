@@ -18,7 +18,7 @@ namespace Automat
 	Device1730 &device1730 = Singleton<Device1730>::Instance();
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 	SolidData &solidData = Singleton<SolidData>::Instance();
-	Compute &compute = Singleton<Compute>::Instance();
+	//Compute &compute = Singleton<Compute>::Instance();
 
 	const unsigned &tubeInUnit = Singleton<InputBitTable>::Instance().items.get<TubeInUnit>().value;
 	const unsigned &unitOn = Singleton<InputBitTable>::Instance().items.get<UnitOn>().value;
@@ -84,11 +84,12 @@ namespace Automat
 				App::PrintTopLabel(L"<ff>Ожидание трубы");
 
 				unsigned input;
-
-				do
+				///< Ожидание бита "Труба в модуле"
+				do	 
 				{
 					Sleep(5);
 					input = device1730.Read();
+					///< Если бит "Устоновка включена" = 0 то выход из цикла
 					if(!(unitOn & input))
 					{
 						App::PrintTopLabel(L"<ff0000>Установка отключена");
@@ -104,6 +105,7 @@ namespace Automat
 
 				int numberCycles = 0;
 				double data[8 * 1024];
+				///< Цикл сбора данных
 				do
 				{
 					Sleep(10);
@@ -121,7 +123,7 @@ namespace Automat
 					if(++numberCycles > 500)
 					{
 						numberCycles = 0;
-						// TODO Сделать обновление экрана через ~5 сек
+						///< обновление экрана через ~5 сек
 						App::UpdateMainWindow();
 					}
 				}
@@ -129,7 +131,8 @@ namespace Automat
 
 				l502SolidGroup.Stop();
 
-				compute.Recalculation();
+				//compute.Recalculation();
+				Compute::Recalculation();
 				App::UpdateGroupCounter();
 
 			}

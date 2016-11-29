@@ -6,57 +6,46 @@
 #include "App\App.h"
 #include "ColorPanel\ColorPanel.h"
 
-namespace
+namespace Compute
 {
 	SolidData &solidData = Singleton<SolidData>::Instance();
 	ComputeSolidGroup &computeSolidGroup = Singleton<ComputeSolidGroup>::Instance();
-}
 
-bool Compute::SubCompute(int(&tresholds)[8], int start, int stop, double *signal, double *reference)
-{
-	return false;
-}
+	void Recalculation()
+	{
+		solidData.start = int(0.1 * solidData.currentOffset);
+		solidData.stop = solidData.currentOffset - solidData.start;
 
-void Compute::Do()
-{
-	//TODO —делать сбор данных
-	//TODO в начале цикла обнуление имени сохран€емого файла  computeSolidGroup.currentFile
-}
+		double result = 0;
+		wchar_t *groupName = NULL;
+		unsigned color = 0;
 
-void Compute::Recalculation()
-{
-	solidData.start = int(0.1 * solidData.currentOffset);
-	solidData.stop = solidData.currentOffset - solidData.start;
+		computeSolidGroup.Frames(
+			solidData.signal
+			, solidData.reference
+			, solidData.start
+			, solidData.stop
+			, result
+			, groupName
+			, color
+			);
+		wchar_t buf[1024];
+		wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
+			, computeSolidGroup.currentFile.c_str()
+			, color
+			, groupName
+			, Wchar_from<double>(result)()
+			);
 
-	double result = 0;
-	wchar_t *groupName = NULL;
-	unsigned color = 0;
+		if(NULL != groupName)computeSolidGroup.currentGroupName = groupName;
+		else computeSolidGroup.currentGroupName = L"";
 
-	computeSolidGroup.Frames(
-		solidData.signal
-		, solidData.reference
-		, solidData.start
-		, solidData.stop
-		, result
-		, groupName
-		, color
-		);
-	wchar_t buf[1024];
-	wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
-		, computeSolidGroup.currentFile.c_str()
-		, color
-		, groupName
-		, Wchar_from<double>(result)()
-		);
+		Singleton<L502Signal>::Instance().Set(solidData.signal, solidData.currentOffset);
+		Singleton<L502Reference>::Instance().Set(solidData.reference, solidData.currentOffset);
 
-	if(NULL != groupName)computeSolidGroup.currentGroupName = groupName;
-	else computeSolidGroup.currentGroupName = L"";
+		App::PrintTopLabel(buf);
+		App::UpdateMainWindow();
 
-	Singleton<L502Signal>::Instance().Set(solidData.signal, solidData.currentOffset);
-	Singleton<L502Reference>::Instance().Set(solidData.reference, solidData.currentOffset);
-
-	App::PrintTopLabel(buf);
-	App::UpdateMainWindow();
-
-	ColorPanel::SetText(groupName, color);
+		ColorPanel::SetText(groupName, color);
+	}
 }

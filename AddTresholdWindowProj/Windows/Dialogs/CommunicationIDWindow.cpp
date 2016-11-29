@@ -357,9 +357,9 @@ namespace
 					}
 				}
 			}
-		}
-		SetWindowLongPtr(l.hwnd, GWLP_USERDATA, NULL);
-		DestroyWindow(l.hwnd);
+			SetWindowLongPtr(l.hwnd, GWLP_USERDATA, NULL);
+			DestroyWindow(l.hwnd);
+		}		
 	}
 
 	void Comm_CancelBtn::Do(TCommand &l)

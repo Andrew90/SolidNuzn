@@ -19,7 +19,8 @@ namespace MainWindowMenu
 		static void Do(HWND h)
 		{
 			LoadDateFile::Do(h);
-			Singleton<Compute>::Instance().Recalculation();
+			//Singleton<Compute>::Instance().Recalculation();
+			Compute::Recalculation();
 		}
 	};
 	struct SaveDateFile__:  SaveDateFile{};//{static void Do(HWND){}};
@@ -27,7 +28,8 @@ namespace MainWindowMenu
 	{
 		static void Do(HWND)
 		{
-			Singleton<Compute>::Instance().Recalculation();
+			//Singleton<Compute>::Instance().Recalculation();
+			Compute::Recalculation();
 		}
 	};
 	struct MainExit
