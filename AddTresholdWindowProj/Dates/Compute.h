@@ -6,7 +6,7 @@ class Compute
 	Compute(){}
 	Compute &operator =(const Compute &);
 public:
-	bool SubCompute(int(&tresholds)[8], int start, int stop, double *signal, double *reference);
-	void Do();
+	//bool SubCompute(int(&tresholds)[8], int start, int stop, double *signal, double *reference);
+	//void Do();
 	void Recalculation();
 };

@@ -2,14 +2,11 @@
 #include "Automat/Automat.h"
 #include "App/AppBase.h"
 #include "CommunicationTube\ClientTreshold.h"
-//#include "MainWindow/MainWindow.h"
 #include "App/config.h"
-
 #include "L502\L502SolidGroup.h"
 #include "Dates\SolidData.h"
 #include "Dates\Compute.h"
 #include "Dates\CounterTubes.h"
-//#include "SolidGroupAlgoritm\ComputeSolidGroup.h"
 
 namespace Automat
 {
@@ -17,7 +14,6 @@ namespace Automat
 	HANDLE hThread = NULL;
 	bool &communicationRemoveUnit = Singleton<DifferentOptionsTable>::Instance().items.get<CommunicationRemoveUnit>().value;
 	TcpCommunications &tcpCommunications = Singleton<TcpCommunications>::Instance(); 
-	//MainWindow &mainWindow = Singleton<MainWindow>::Instance();
 	ClientTreshold &clientTreshold = Singleton<ClientTreshold>::Instance();
 	Device1730 &device1730 = Singleton<Device1730>::Instance();
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
@@ -42,21 +38,21 @@ namespace Automat
 	   throw ResetException();
 	}
 																  
-	void WaitBit(bool b)
-	{
-		unsigned input;
-		do
-		{
-			Sleep(5);
-			input = device1730.Read();
-			if(!(unitOn & input))
-			{
-				App::PrintTopLabel(L"<ff0000>Установка отключена");
-				throw ResetException();
-			}
-		}
-		while(b == (0 != (tubeInUnit & input)));
-	}
+	//void WaitBit(bool b)
+	//{
+	//	unsigned input;
+	//	do
+	//	{
+	//		Sleep(5);
+	//		input = device1730.Read();
+	//		if(!(unitOn & input))
+	//		{
+	//			App::PrintTopLabel(L"<ff0000>Установка отключена");
+	//			throw ResetException();
+	//		}
+	//	}
+	//	while(b == (0 != (tubeInUnit & input)));
+	//}
 
 	void Init()
 	{
@@ -87,14 +83,25 @@ namespace Automat
 
 				App::PrintTopLabel(L"<ff>Ожидание трубы");
 
-				WaitBit(true);
+				unsigned input;
+
+				do
+				{
+					Sleep(5);
+					input = device1730.Read();
+					if(!(unitOn & input))
+					{
+						App::PrintTopLabel(L"<ff0000>Установка отключена");
+						throw ResetException();
+					}
+				}
+				while(0 == (tubeInUnit & input));
 
 				App::PrintTopLabel(L"<ff00>Сбор данных");
 
 				l502SolidGroup.Start();
 				solidData.Clear();
 
-				unsigned input;
 				int numberCycles = 0;
 				double data[8 * 1024];
 				do
