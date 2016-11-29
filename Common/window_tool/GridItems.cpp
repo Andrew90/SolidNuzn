@@ -25,3 +25,10 @@ void UpdateRow(HWND h)
 		ListView_Update(h, z);
 	}
 }
+void UpdateRowAll(HWND h)
+{
+	for(int z = 0, count = ListView_GetItemCount(h); z < count; ++z)
+	{
+		ListView_Update(h, z);
+	}
+}

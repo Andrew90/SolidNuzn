@@ -14,6 +14,12 @@ template<int COUNT = 128>struct Holder
 	typedef wchar_t TBufer[COUNT];
 	static const int count = COUNT;
 	TBufer buffer;
+	Holder(){}
+	Holder(wchar_t *b)
+	{
+		wcsncpy(buffer, b, count - 1);
+		buffer[count - 1] = '\0';
+	}
 	Holder &operator=(wchar_t *b)
 	{
 		wcsncpy(buffer, b, count - 1);

@@ -164,11 +164,11 @@ namespace
 {
 	template<class T, class D>struct __select_id__
 	{
-		bool operator()(int, T &t, D &d)
+		bool operator()(T &t, D &d)
 		{
-			d.Add(
-				t.items.get<CommunicationTypeName>().value
-				, t.items.get<CommunicationTypeID>().value
+			d.LoadItem(
+				t.get<CommunicationTypeName>().value
+				, t.get<CommunicationTypeID>().value
 				);
 			return false;
 		}
@@ -193,9 +193,17 @@ bool ComputeSolidGroup::Load(wchar_t *name)
 		typeSizeName = name;
 		int id = Select<SolidParametersTable>(base).eq<NameParam>(nameParam.value).Execute(pt);
 
-		Select<CommunicationTypeTable>(base).eq<CurrentID>(id).ExecuteLoop<__select_id__>(communicationIDItems);
-
 		communicationIDItems.Clear();
+		//Select<CommunicationTypeTable>(base).eq<CurrentID>(id).ExecuteLoop<__select_id__>(communicationIDItems);
+		wchar_t *query =
+			L"SELECT CommunicationTypeID, CommunicationTypeName"\
+			L" FROM CommunicationTypeTable"\
+			L" WHERE CurrentID=?"\
+			L" ORDER BY CommunicationTypeName"
+			;
+		CMD(base).CommandText(query).Param(id)
+			.ExecuteLoop<TL::MkTlst<CommunicationTypeID, CommunicationTypeName>::Result, __select_id__>(communicationIDItems);
+
 		TL::foreach<SolidParametersTable::items_list, __parameters_table__>()(
 			pt.items
 			, *this

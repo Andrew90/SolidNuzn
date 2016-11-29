@@ -92,6 +92,22 @@ struct TresholdsTable
 	TItems items;
 	const wchar_t *name(){return L"TresholdsTable";}
 };
+//---------------------------------------------------------------
+DEFINE_PARAM(CommunicationTypeID, int, 0);
+STR_PARAM(CommunicationTypeName, 32, L"DeleteIt")
+struct CommunicationTypeTable
+{
+	typedef TL::MkTlst<
+		CurrentID
+		, CommunicationTypeID
+		, CommunicationTypeName
+	>::Result items_list;
+	typedef NullType unique_list;
+	typedef TL::Factory<items_list> TItems;
+	TItems items;
+	const wchar_t *name(){return L"CommunicationTypeTable";}
+};
+
 
 struct SolidBase
  {
@@ -100,6 +116,7 @@ struct SolidBase
 		 , GroupTable
 		 , TresholdsTable
 		 , SolidParametersTable
+		 , CommunicationTypeTable
 	 >::Result type_list;
 
 	 typedef TL::Factory<type_list> TTables;

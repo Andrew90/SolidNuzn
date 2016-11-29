@@ -1,7 +1,6 @@
 #pragma once
 #include "window_tool\GridItems.h"
 
-//class TableData;
 class GridWindow: public GridHandlers
 {
 public:

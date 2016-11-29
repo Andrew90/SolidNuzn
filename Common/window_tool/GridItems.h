@@ -13,6 +13,7 @@ template<class T>struct header_table;
 //-----------------------------------------------------------------
 void SetRow(HWND hWnd, int count);
 void UpdateRow(HWND h);
+void UpdateRowAll(HWND h);
 //-----------------------------------------------------------------
 struct GridHandlers
 {

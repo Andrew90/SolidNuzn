@@ -55,7 +55,7 @@ public:
 
 	bool changeTresholds;
 	std::wstring currentFile;
-	//std::wstring currentPathFile;
+
 	std::wstring currentGroupName;
 	int offset;
 	int start;

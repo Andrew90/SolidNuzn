@@ -148,21 +148,6 @@ struct DifferentOptionsTable
 	const wchar_t *name(){return L"DifferentOptionsTable";}
 };
 //---------------------------------------------------------------
-DEFINE_PARAM(CommunicationTypeID, int, 0);
-STR_PARAM(CommunicationTypeName, 32, L"DeleteIt")
-struct CommunicationTypeTable
-{
-	typedef TL::MkTlst<
-		CurrentID
-		, CommunicationTypeID
-		, CommunicationTypeName
-	>::Result items_list;
-	typedef NullType unique_list;
-	typedef TL::Factory<items_list> TItems;
-	TItems items;
-	const wchar_t *name(){return L"CommunicationTypeTable";}
-};
-//---------------------------------------------------------------
  struct ParametersBase
  {
 	 typedef TL::MkTlst<
@@ -171,7 +156,7 @@ struct CommunicationTypeTable
 		 , SolenoidParametersTable
 		 , TcpCommunications
 		 , DifferentOptionsTable
-		 , CommunicationTypeTable
+		// , CommunicationTypeTable
 	 >::Result one_row_table_list;
 
 	 typedef TL::MkTlst<		

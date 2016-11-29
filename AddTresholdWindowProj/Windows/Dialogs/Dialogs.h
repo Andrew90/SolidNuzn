@@ -40,6 +40,8 @@ DLG(TcpCommunicationsDlg)
 DLG(InputBitDlg)
 DLG(Descriptor1730Dlg)
 
+DLG(CommunicationIDWindow)
+
 struct IOportsDlg
 {
 	static bool Do();

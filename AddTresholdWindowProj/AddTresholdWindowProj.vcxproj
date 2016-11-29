@@ -173,6 +173,7 @@
     <ClInclude Include="Dates\SaveLoadDates.h" />
     <ClInclude Include="Dates\SolidData.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SolidGroupAlgoritm\CommunicationIDItems.h" />
     <ClInclude Include="SolidGroupAlgoritm\ComputeSolidGroup.h" />
     <ClInclude Include="SolidGroupAlgoritm\SolidBase.h" />
     <ClInclude Include="stdafx.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="Dates\CounterTubes.cpp" />
     <ClCompile Include="Dates\SaveLoadDates.cpp" />
     <ClCompile Include="Dates\SolidData.cpp" />
+    <ClCompile Include="SolidGroupAlgoritm\CommunicationIDItems.cpp" />
     <ClCompile Include="SolidGroupAlgoritm\ComputeSolidGroup.cpp" />
     <ClCompile Include="SolidGroupAlgoritm\SolidBase.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -245,6 +247,7 @@
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\ColorPanelDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\CommunicationIDWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\Descriptor1730Dlg.cpp" />
     <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />

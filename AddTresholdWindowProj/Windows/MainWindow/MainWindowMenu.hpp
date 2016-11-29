@@ -102,6 +102,8 @@ namespace MainWindowMenu
 		}
 	};
 
+	struct CommunicationIDMenu: CommunicationIDWindow{}; 
+
 	MENU_TEXT(L"Настройки", TopMenu<MainOptionUnits>)
 	MENU_ITEM(L"Настройка сетевого подключения", NetOptions)
 	MENU_ITEM(L"Настройки генератора"          , SolenoidParametersTable)
@@ -110,6 +112,8 @@ namespace MainWindowMenu
 	MENU_ITEM(L"Сохранить координаты окна", SaveWindowPosition)
 	MENU_ITEM(L"Панель сообщений", MessagePanel)
 	MENU_ITEM(L"Просмотр дискретных входов", IOportsDlg__)
+
+	MENU_ITEM(L"Идентификатор типоразмера для передачи по для сети", CommunicationIDMenu)
 
 	struct Descriptor1730__{};
 	template<>struct SubMenu<Descriptor1730__>
@@ -128,6 +132,7 @@ namespace MainWindowMenu
 			, MenuItem<SolenoidParametersTable>
 		//	, MenuItem<InputBit>
 			, SubMenu<Descriptor1730__>
+			, MenuItem<CommunicationIDMenu>
 			, Separator<1>			
 			, MenuItem<SaveWindowPosition>
 			, MenuItem<MessagePanel>
