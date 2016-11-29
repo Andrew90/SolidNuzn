@@ -214,9 +214,6 @@ namespace
 	PARAM_TITLE(SolidGroup, L"Группа прочности")
 	PARAM_TITLE(TcpID, L"Идентификатор типоразмера")
 
-	//DO_NOT_CHECK(TcpID)
-	//DO_NOT_CHECK(SolidGroup)
-
 	struct AddItemTable
 	{
 		typedef TL::MkTlst<	
@@ -227,17 +224,6 @@ namespace
 		typedef TL::Factory<items_list> TItems;
 		TItems items;
 	};
-
-
-	//template<class T>struct __ok_table_btn__<NullType, AddItemTable, T>
-	//{
-	//	template<class T>bool operator()(HWND h, T &t)
-	//	{
-	//		if(!TL::find<typename T::list, __test__>()(&t.items, &h))return false;
-	//		//TODO обработчик
-	//		return true;
-	//	}
-	//};
 
 	template<class O, class P>struct __ok_btn__
 	{
@@ -260,47 +246,17 @@ namespace
 		}
 	};
 
-
-
-//void AddItem_Do(HWND h)
-//{
-//	AddItemTable t;
-//	if(TemplDialog<NullType, AddItemTable
-//		, TL::MkTlst<OkBtnAI, CancelBtn>::Result
-//	>(t).Do(h, L"Добавить параметры типоразмера"))
-//	{
-//		/*
-//		if(!clientTreshold.Connect(
-//			Singleton<TcpCommunications>::Instance().items.get<PortTCP>().value
-//			, Singleton<TcpCommunications>::Instance().items.get<AddresTCP>().value
-//			))
-//		{
-//			MessageBox(0, L"Не могу подключится к рабочей станции", L"Ошибка !!!", MB_ICONERROR);
-//		}
-//		*/
-//	}
-//}
-
 	template<>struct Event<TopMenu<AddItem> >	 
 	{										 
 		static void Do(EventData *data)				 
 		{		
 			CommunicationWindow *o = (CommunicationWindow *)GetWindowLongPtr(GetParent(data->h), GWLP_USERDATA);
-			zprint("\n");
-			//solidGroup.communicationIDItems.GetStatus(data->row) = CommunicationIDItems::eAdd;
-			//AddItem_Do(data->h);
 			AddItemTable t;
-			//t.items.get<SolidGroup>().value = solidGroup.communicationIDItems.GetName();
 			if(TemplDialog<NullType, AddItemTable
 				, TL::MkTlst<OkBtnAI, CancelBtn>::Result
 			>(t).Do(data->h, L"Добавить параметры типоразмера"))
 			{
-				//solidGroup.communicationIDItems.Add(
-				//	  t.items.get<SolidGroup>().value
-				//	, t.items.get<TcpID>().value
-				//	);
 				CommunicationWindow::Item x;
-
 				x.name = t.items.get<SolidGroup>().value;
 				x.id = t.items.get<TcpID>().value;
 				x.status = CommunicationWindow::eAdd;
@@ -331,98 +287,74 @@ namespace
 	   PopupMenu<items_list>::Do(h, &EventData(h, i));
 	}
 
-//TODO Как делать смотри  D:\work\Application\AddTresholdWindowProj\Windows\AddThresholdsWindow\GridWindow.cpp(359):void GridWindow::RClick(LPNMITEMACTIVATE d)
 	void GridH::RClick(LPNMITEMACTIVATE d)
 	{
 		CommunicationWindow *o = (CommunicationWindow *)GetWindowLongPtr(GetParent(d->hdr.hwndFrom), GWLP_USERDATA);
 		AddDel(d->hdr.hwndFrom, d->iItem);
-		//unsigned i = d->iItem;
-		//if(i < o->items.size())
-		//{
-		//	switch(d->iSubItem)
-		//	{
-		//	case 0:
-		//		
-		//		break;
-		//	//case 2:
-		//	//	ColorCell(d->hdr.hwndFrom, i);
-		//	//	break;
-		//	//case 3:
-		//	//	ChangeGroupDlg(d->hdr.hwndFrom, i);
-		//	//	break;
-		//	}
-		//}
 	}
-	/*
-	SolidBase sb;
-	CBase base(
-		sb.name()
-		, CreateDataBase<SolidBase::type_list, SetDefault<SolidBase::type_list> >()
-		, sb.tables
-		);
-	if(base.IsOpen())
-	{
-	*/
 	
 	void Comm_OkBtn::Do(TCommand &l)
 	{
-		CommunicationWindow *o = (CommunicationWindow *)GetWindowLongPtr(l.hwnd, GWLP_USERDATA);
-		CBase base(SolidBase().name());
-		if(base.IsOpen())
+		if(TypesizePasswordDlg().Do(l.hwnd))
 		{
-			int currentID = Singleton<CurrentParametersTable>::Instance().items.get<CurrentID>().value;
-			for(auto i = o->items.rbegin(); i != o->items.rend(); ++i)
+			CommunicationWindow *o = (CommunicationWindow *)GetWindowLongPtr(l.hwnd, GWLP_USERDATA);
+			CBase base(SolidBase().name());
+			if(base.IsOpen())
 			{
-				switch(i->status)
+				int currentID = Singleton<CurrentParametersTable>::Instance().items.get<CurrentID>().value;
+				for(auto i = o->items.rbegin(); i != o->items.rend(); ++i)
 				{
-				case CommunicationWindow::eCancel:
+					switch(i->status)
 					{
-						Delete<CommunicationTypeTable>(base)
-							.eq<CurrentID>(currentID)
-							.eq<CommunicationTypeName>((wchar_t *)i->hiddenName.c_str())
-							.Execute();
-
-						solidGroupX.communicationIDItems.Del((wchar_t *)i->hiddenName.c_str());
-					}
-					break;
-				case CommunicationWindow::eAdd: 
-					{
-						if(i->isNew)
+					case CommunicationWindow::eCancel:
 						{
-							CommunicationTypeTable t;
-							t.items.get<CurrentID>().value = currentID;
-							t.items.get<CommunicationTypeID>().value = i->id;
-							t.items.get<CommunicationTypeName>().value = (wchar_t *)i->name.c_str();
-							int id = Select<CommunicationTypeTable>(base)
+							Delete<CommunicationTypeTable>(base)
 								.eq<CurrentID>(currentID)
-								.eq<CommunicationTypeName>(t.items.get<CommunicationTypeName>().value)
+								.eq<CommunicationTypeName>((wchar_t *)i->hiddenName.c_str())
 								.Execute();
-							if(0 == id)
+
+							solidGroupX.communicationIDItems.Del((wchar_t *)i->hiddenName.c_str());
+						}
+						break;
+					case CommunicationWindow::eAdd: 
+						{
+							if(i->isNew)
 							{
-								Insert_Into<CommunicationTypeTable>(t, base).Execute();
+								CommunicationTypeTable t;
+								t.items.get<CurrentID>().value = currentID;
+								t.items.get<CommunicationTypeID>().value = i->id;
+								t.items.get<CommunicationTypeName>().value = (wchar_t *)i->name.c_str();
+								int id = Select<CommunicationTypeTable>(base)
+									.eq<CurrentID>(currentID)
+									.eq<CommunicationTypeName>(t.items.get<CommunicationTypeName>().value)
+									.Execute();
+								if(0 == id)
+								{
+									Insert_Into<CommunicationTypeTable>(t, base).Execute();
+								}
+								else
+								{
+									CommunicationTypeName::type_value name = (wchar_t *)i->name.c_str(); 
+									Update<CommunicationTypeTable>(base)
+										.set<CommunicationTypeID>(i->id)
+										.set<CommunicationTypeName>(name)
+										.set<CurrentID>(currentID)
+										.Where().ID(id).Execute();
+								}
+								solidGroupX.communicationIDItems.Add((wchar_t *)i->name.c_str(), i->id);
 							}
 							else
 							{
-								CommunicationTypeName::type_value name = (wchar_t *)i->name.c_str(); 
+								CommunicationTypeName::type_value name = (wchar_t *)i->name.c_str();
 								Update<CommunicationTypeTable>(base)
-								.set<CommunicationTypeID>(i->id)
-								.set<CommunicationTypeName>(name)
-								.set<CurrentID>(currentID)
-								.Where().ID(id).Execute();
-							}
-							solidGroupX.communicationIDItems.Add((wchar_t *)i->name.c_str(), i->id);
+									.set<CommunicationTypeID>(i->id)
+									.set<CommunicationTypeName>(name)
+									.Where().ID(currentID).Execute();
+								solidGroupX.communicationIDItems.Update((wchar_t *)i->hiddenName.c_str(), (wchar_t *)i->name.c_str(), i->id);
+							}						
 						}
-						else
-						{
-							CommunicationTypeName::type_value name = (wchar_t *)i->name.c_str();
-							Update<CommunicationTypeTable>(base)
-								.set<CommunicationTypeID>(i->id)
-								.set<CommunicationTypeName>(name)
-								.Where().ID(currentID).Execute();
-							solidGroupX.communicationIDItems.Update((wchar_t *)i->hiddenName.c_str(), (wchar_t *)i->name.c_str(), i->id);
-						}						
+						break;
 					}
-					break;
 				}
 			}
 		}
@@ -492,7 +424,6 @@ namespace
 		EventDo(l);
 	}
 }
-
 //------------------------------------------------------------------------------------------------
 void CommunicationIDWindow::Do(HWND)
 {
