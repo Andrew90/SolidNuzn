@@ -9,7 +9,8 @@ static wchar_t *const mdb = L".mdb;Mode=ReadWrite;Persist Security Info=False";
 static wchar_t *const mdbRead = L".mdb;Mode=Read;Persist Security Info=False";
 }
 //------------------------------------------------------------------------------------------
-class Initialize
+class InitializeD:\projects\test0
+
 {
 public:
 	Initialize(){CoInitializeEx(NULL,COINIT_MULTITHREADED);}
