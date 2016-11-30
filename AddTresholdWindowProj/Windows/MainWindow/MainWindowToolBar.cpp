@@ -26,6 +26,7 @@ namespace
 	static void Click(HWND);\
 	static wchar_t *Text(){return text;}\
 	};
+
 	KEY(IDB_CycleBtn   , L"F4 Цикл")
 	KEY(IDB_Reset      , L"F9 Стоп")
 	KEY(IDB_QueryBtn   , L"Тест")
@@ -40,7 +41,6 @@ namespace
 		typedef TL::MkTlst<
 		SeparatorToolbar<0>
 		, BUTTON_KEY(IDB_CycleBtn)
-		, BUTTON_KEY(IDB_Reset)
 		, BUTTON_KEY(IDB_OptionsBtn) 		
 		, SeparatorToolbar<1>
 #ifdef DEBUG_ITEMS

@@ -2,14 +2,11 @@
 #include "L502SolidGroup.h"
 #include "App/AppBase.h"
 #include "App/Config.h"
+#include "tools_debug/DebugMess.h"
 #ifndef DEBUG_ITEMS
 #include "L502/l502api.h"
-#pragma comment(lib, "l502api")
-
+#pragma comment(lib, "../Common/L502/l502api.lib")
 #include <stdio.h>
-
-int xprint(...);
-#define dprint sizeof xprint
 
 L502SolidGroup::L502SolidGroup()
 	: ADC_FREQ(Singleton<SolenoidParametersTable>::Instance().items.get<Frequency502>().value)
