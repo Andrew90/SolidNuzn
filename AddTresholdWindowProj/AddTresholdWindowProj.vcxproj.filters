@@ -629,7 +629,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\Defectoscope\rc.rc">
+    <ResourceCompile Include="..\Common\Resource\rc.rc">
       <Filter>Common\Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
