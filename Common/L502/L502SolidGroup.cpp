@@ -3,7 +3,7 @@
 #include "App/AppBase.h"
 #include "App/Config.h"
 #ifndef DEBUG_ITEMS
-#include "l502api.h"
+#include "L502/l502api.h"
 #pragma comment(lib, "l502api")
 
 #include <stdio.h>
