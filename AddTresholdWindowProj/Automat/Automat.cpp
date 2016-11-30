@@ -20,7 +20,7 @@ namespace Automat
 	bool &paintMarker = Singleton<DifferentOptionsTable>::Instance().items.get<PaintMarker>().value;
 	TcpCommunications &tcpCommunications = Singleton<TcpCommunications>::Instance(); 
 	ClientTreshold &clientTreshold = Singleton<ClientTreshold>::Instance();
-	Device1730 &device1730 = Singleton<Device1730>::Instance();
+	//Device1730 &device1730 = Singleton<Device1730>::Instance();
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 	SolidData &solidData = Singleton<SolidData>::Instance();
 	ComputeSolidGroup &computeSolidGroup = Singleton<ComputeSolidGroup>::Instance();
@@ -79,7 +79,7 @@ namespace Automat
 				do	 
 				{
 					Sleep(5);
-					input = device1730.Read();
+					input = Device1730::Read();
 					///< Если бит "Устоновка включена" = 0 то выход из цикла
 					if(!(unitOn & input))
 					{
@@ -92,7 +92,7 @@ namespace Automat
 				CommunicationTCP::Result = 0;
 				if(paintMarker)
 				{
-					device1730.Write(0);
+					Device1730::Write(0);
 				}
 
 				App::PrintTopLabel(L"<ff00>Сбор данных");
@@ -106,7 +106,7 @@ namespace Automat
 				do
 				{
 					Sleep(10);
-					input = device1730.Read();
+					input = Device1730::Read();
 					if(!(unitOn & input))
 					{
 						App::PrintTopLabel(L"<ff0000>Установка отключена");
@@ -164,7 +164,7 @@ namespace Automat
 					CommunicationTCP::Result = communicationID;
 					if(paintMarker && communicationID >= 10 && communicationID <= 15)
 					{
-						device1730.Write( 1 << communicationID);
+						Device1730::Write( 1 << communicationID);
 					}
 				}
 
@@ -214,7 +214,7 @@ namespace Automat
 
 	bool Init1730()
 	{
-		if(!device1730.Init(Singleton<DifferentOptionsTable>::Instance().items.get<DeviceDescription1730>().value))
+		if(!Device1730::Init(Singleton<DifferentOptionsTable>::Instance().items.get<DeviceDescription1730>().value))
 		{
 			const wchar_t *mess = L"<ff0000>Не могу инициализировать плату 1730";
 			MessageBox(0, &mess[8], L"Ошибка !!!", MB_ICONERROR);

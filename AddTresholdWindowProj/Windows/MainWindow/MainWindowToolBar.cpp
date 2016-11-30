@@ -74,6 +74,7 @@ namespace
 		ShowWindow(hh, SW_SHOWNORMAL);
 	}
 //------------------------------------------------------------------------------
+#ifdef DEBUG_ITEMS
 	void Key<IDB_arrow_down>::Click(HWND h)
 	{
 		App::CheckMenuItem();
@@ -102,6 +103,7 @@ namespace
 		CounterTubes::Inc(L"F");
 		 App::UpdateMainWindow();
 	}
+#endif
 }
 //--------------------------------------------------------------------------------------------
 HWND MainWindowToolBar::Init(HWND h)

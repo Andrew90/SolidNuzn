@@ -69,7 +69,7 @@ template<class O, class P>struct __update__
 	}
 };
 
-Device1730 &device1730 = Singleton<Device1730>::Instance();
+//Device1730 &device1730 = Singleton<Device1730>::Instance();
 
 VOID CALLBACK __Update__(PVOID oo, BOOLEAN)
 {	
@@ -84,7 +84,7 @@ VOID CALLBACK __Update__(PVOID oo, BOOLEAN)
 	//	SetWindowText(o->hWnd, title);
 	//}
 	HDCGraphics g(o->hWnd, o->backScreen);
-    unsigned input = device1730.Read();
+    unsigned input = Device1730::Read();
 //	unsigned output = device1730.ReadOutput(); 
 	TL::foreach<InputBitTable::items_list, __update__>()(&Singleton<InputBitTable>::Instance().items, &__io_update_data__(40, g, 0xff0000ff, input));
 	//TL::foreach<OutputBitTable::items_list, __update__>()(&Singleton<OutputBitTable>::Instance().items, &__io_update_data__(230, g, 0xffff0000, output));
@@ -101,7 +101,7 @@ IOportsViewer::IOportsViewer(HWND &h, Bitmap *&bs)
 void IOportsViewer::Size(Graphics &g, int width, int height)
 {
 	g.FillRectangle(&SolidBrush(Color(0xffaaaaaa)), 0, 0, width, height);
-	unsigned input = device1730.Read();
+	unsigned input = Device1730::Read();
 	//unsigned output = device1730.ReadOutput(); 
 	TL::foreach<InputBitTable::items_list, __draw__>()(&Singleton<InputBitTable>::Instance().items, &__draw_data__(40, g, 0xff0000ff, input));
 	//TL::foreach<OutputBitTable::items_list, __draw__>()(&Singleton<OutputBitTable>::Instance().items, &__draw_data__(230, g, 0xffff0000, output));
