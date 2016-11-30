@@ -7,19 +7,23 @@
 #include "Dates\SolidData.h"
 #include "Dates\Compute.h"
 #include "Dates\CounterTubes.h"
+#include "App/AppBase.h"
+#include "SolidGroupAlgoritm\ComputeSolidGroup.h"
+#include "Dates\SaveLoadDates.h"
 
 namespace Automat
 {
 	HANDLE hStart = NULL;
 	HANDLE hThread = NULL;
 	bool &communicationRemoveUnit = Singleton<DifferentOptionsTable>::Instance().items.get<CommunicationRemoveUnit>().value;
+	bool &tubesStored = Singleton<DifferentOptionsTable>::Instance().items.get<TubesStored>().value;
+	bool &paintMarker = Singleton<DifferentOptionsTable>::Instance().items.get<PaintMarker>().value;
 	TcpCommunications &tcpCommunications = Singleton<TcpCommunications>::Instance(); 
 	ClientTreshold &clientTreshold = Singleton<ClientTreshold>::Instance();
 	Device1730 &device1730 = Singleton<Device1730>::Instance();
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 	SolidData &solidData = Singleton<SolidData>::Instance();
-	//Compute &compute = Singleton<Compute>::Instance();
-
+	ComputeSolidGroup &computeSolidGroup = Singleton<ComputeSolidGroup>::Instance();
 	const unsigned &tubeInUnit = Singleton<InputBitTable>::Instance().items.get<TubeInUnit>().value;
 	const unsigned &unitOn = Singleton<InputBitTable>::Instance().items.get<UnitOn>().value;
 
@@ -37,22 +41,6 @@ namespace Automat
 	   App::PrintTopLabel(L"<ff0000>ќператор вышел из цикла измерений");
 	   throw ResetException();
 	}
-																  
-	//void WaitBit(bool b)
-	//{
-	//	unsigned input;
-	//	do
-	//	{
-	//		Sleep(5);
-	//		input = device1730.Read();
-	//		if(!(unitOn & input))
-	//		{
-	//			App::PrintTopLabel(L"<ff0000>”становка отключена");
-	//			throw ResetException();
-	//		}
-	//	}
-	//	while(b == (0 != (tubeInUnit & input)));
-	//}
 
 	void Init()
 	{
@@ -61,14 +49,16 @@ namespace Automat
 
 	DWORD WINAPI  __Run__(LPVOID)
 	{
+		bool initTcp = true;
 		while(true)
 		{
 			try
 			{
 				WaitForSingleObject(hStart, INFINITE);
 
-				if(communicationRemoveUnit)
+				if(initTcp && communicationRemoveUnit)
 				{
+					initTcp = false;
 					if(!clientTreshold.Connect(
 						tcpCommunications.items.get<PortTCP>().value
 						,tcpCommunications.items.get<AddresTCP>().value
@@ -77,6 +67,7 @@ namespace Automat
 						MessageBox(0, &workStationDontWork[8], L"ќшибка", MB_ICONERROR);
 						App::PrintTopLabel((wchar_t *)workStationDontWork);
 						ResetEvent(hStart);
+						initTcp = true;
 						continue;
 					}
 				}
@@ -97,6 +88,12 @@ namespace Automat
 					}
 				}
 				while(0 == (tubeInUnit & input));
+
+				CommunicationTCP::Result = 0;
+				if(paintMarker)
+				{
+					device1730.Write(0);
+				}
 
 				App::PrintTopLabel(L"<ff00>—бор данных");
 
@@ -131,8 +128,48 @@ namespace Automat
 
 				l502SolidGroup.Stop();
 
-				//compute.Recalculation();
-				Compute::Recalculation();
+				double result; 
+				wchar_t *groupName = NULL; 
+				unsigned color;
+				Compute::Recalculation(result, groupName, color);
+
+				if(tubesStored)
+				{
+					wchar_t path[1024];
+					computeSolidGroup.currentFile = CreateNameFile(
+						L"..\\Stored"
+						, (wchar_t *)computeSolidGroup.typeSizeName.c_str()
+						, groupName
+						, path
+						);
+					StoreDataFile(path);
+				}
+				else
+				{
+					computeSolidGroup.currentFile = L"";
+				}
+
+				wchar_t buf[1024];
+
+				wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
+					, computeSolidGroup.currentFile.c_str()
+					, color
+					, groupName
+					, Wchar_from<double>(result)()
+					);
+
+				unsigned communicationID = computeSolidGroup.communicationIDItems.GetID(groupName);
+				if(-1 == communicationID)
+				{
+					CommunicationTCP::Result = communicationID;
+					if(paintMarker && communicationID >= 10 && communicationID <= 15)
+					{
+						device1730.Write( 1 << communicationID);
+					}
+				}
+
+				App::UpdateMainWindow();
+
 				App::UpdateGroupCounter();
 
 			}
@@ -140,6 +177,11 @@ namespace Automat
 			{
 				ResetEvent(hStart);
 				l502SolidGroup.Stop();
+				if(!initTcp && communicationRemoveUnit)
+				{
+					clientTreshold.Close();
+				}
+				initTcp = true;
 			}
 		}
 		return 0;

@@ -1,12 +1,6 @@
 #pragma once
-//template<class>struct Singleton;
 namespace Compute
 {
-//	friend Singleton<Compute>;
-//	Compute(){}
-//	Compute &operator =(const Compute &);
-//public:
-	//bool SubCompute(int(&tresholds)[8], int start, int stop, double *signal, double *reference);
-	//void Do();
 	void Recalculation();
+	void Recalculation(double &result, wchar_t *groupName, unsigned &color);
 }

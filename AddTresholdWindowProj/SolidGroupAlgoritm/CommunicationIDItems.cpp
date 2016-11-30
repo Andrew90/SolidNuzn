@@ -58,3 +58,15 @@ void CommunicationIDItems::Update(wchar_t *pred, wchar_t *current, int id)
 		}
 	}
 }
+
+unsigned CommunicationIDItems::GetID(wchar_t *name)
+{
+	for(auto i = items.begin(); i != items.end(); ++i)
+	{
+		if(0 == wcscmp(i->name.c_str(), name))
+		{
+			return i->id;
+		}
+	}
+	return -1;
+}

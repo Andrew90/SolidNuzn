@@ -51,6 +51,7 @@ namespace
 					Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
 					Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
 
+					SelectHandler::Do(h, buf);
 					App::AddMenuItem(buf);
 
 					EndDialog(h, TRUE);
@@ -110,6 +111,7 @@ namespace
 					SelectHandler::Do(h, buf);
 					App::SelMenuItem(buf);
 					EndDialog(h, TRUE);
+
 				}
 			}
 		}

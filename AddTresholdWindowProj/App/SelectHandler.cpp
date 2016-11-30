@@ -54,12 +54,12 @@ namespace SelectHandler
 				CurrentParametersTable t;
 				t.items.get<CurrentID>().value = id;
 				UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
-		
 				AppBase::InitTypeSizeTables(base);
 				Singleton<ComputeSolidGroup>::Instance().Load(buf);
+				Singleton<ComputeSolidGroup>::Instance().typeSizeName = buf;
 				bool x = Singleton<DifferentOptionsTable>::Instance().items.get<MessagePanelVisible>().value;
 				CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
-				CounterTubes::Load(name);
+				CounterTubes::Load(buf);
 				Singleton<MainWindow>::Instance().gridCounterViewer.Update();
 			}
 		}

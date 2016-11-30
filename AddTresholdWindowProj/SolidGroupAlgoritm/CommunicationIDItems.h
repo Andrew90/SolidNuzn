@@ -10,10 +10,11 @@ public:
 	   int id;
 	   Status status;
 	};
+	std::vector<type_value> items;
 	void LoadItem(wchar_t *, int);
 	void Add(wchar_t *, int);
 	void Clear();
 	void Del(wchar_t *);
 	void Update(wchar_t *pred, wchar_t *current, int id);
-	std::vector<type_value> items;
+	unsigned GetID(wchar_t *);	
 };

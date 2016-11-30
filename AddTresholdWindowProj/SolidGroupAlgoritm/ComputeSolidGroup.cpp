@@ -191,10 +191,17 @@ bool ComputeSolidGroup::Load(wchar_t *name)
 		NameParam nameParam;
 		nameParam.value = name;
 		typeSizeName = name;
+		typeSizeName = name;
 		int id = Select<SolidParametersTable>(base).eq<NameParam>(nameParam.value).Execute(pt);
 
 		communicationIDItems.Clear();
 		//Select<CommunicationTypeTable>(base).eq<CurrentID>(id).ExecuteLoop<__select_id__>(communicationIDItems);
+		if(0 == id)
+		{
+			pt.items.get<NameParam>().value = name;
+			Insert_Into<SolidParametersTable>(pt, base).Execute();
+			id = Select<SolidParametersTable>(base).eq<NameParam>(nameParam.value).Execute();
+		}
 		wchar_t *query =
 			L"SELECT CommunicationTypeID, CommunicationTypeName"\
 			L" FROM CommunicationTypeTable"\

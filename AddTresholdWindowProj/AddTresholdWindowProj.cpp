@@ -8,6 +8,7 @@
 #include "Base\Base.hpp"
 #include "window_tool\Emptywindow.h"
 #include "MainWindow\MainWindow.h"
+#include "TCP\CommonTcp.h"
 
 #if defined _M_IX86
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -46,7 +47,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 	Initialize initialize;
-
+	CommonTcp commonTcp;
 	App::Init();
 
 	while (GetMessage(&msg, NULL, 0, 0))

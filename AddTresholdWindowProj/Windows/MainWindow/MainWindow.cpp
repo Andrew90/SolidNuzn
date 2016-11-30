@@ -32,7 +32,9 @@ protected:
 	}
 };
 
-CheckBoxWidget<CommunicationCheckBox<CommunicationRemoveUnit>> __communicationCheckBox__;
+CheckBoxWidget<CommunicationCheckBox<CommunicationRemoveUnit>> __communicationRemoveUnit__;
+CheckBoxWidget<CommunicationCheckBox<TubesStored>> __counterTubesStored__;
+CheckBoxWidget<CommunicationCheckBox<PaintMarker>> __paintMarker__;
 
 MainWindow::MainWindow()
 {}
@@ -42,7 +44,9 @@ LRESULT MainWindow::operator()(TCreate &l)
 	Menu<MainWindowMenu::items_list>().Init(l.hwnd);
 	toolBar.Init(l.hwnd);
 
-	__communicationCheckBox__.Init(toolBar.hWnd, L"Работа со станцией");
+	__communicationRemoveUnit__.Init(toolBar.hWnd, L"Работа со станцией");
+	__counterTubesStored__.Init(toolBar.hWnd, L"Сохранение первичного сигнала");
+	__paintMarker__.Init(toolBar.hWnd, L"Краскоотметчик");
 
 	hStatusWindow = CreateStatusWindow(WS_CHILD | WS_VISIBLE, NULL, l.hwnd, 0);
 	int pParts[] = {550,900, 3000};
@@ -80,7 +84,9 @@ void MainWindow::operator()(TSize &l)
 
 	MoveWindow(gridCounterViewer.grid.hWnd, width + 400 + 30,  2, 145, rt.bottom - rt.top - 2 - 2, TRUE);
 
-	__communicationCheckBox__.Size(width, 52, 250, 20);
+	__communicationRemoveUnit__.Size(width, 52, 250, 20);
+	__counterTubesStored__.Size(width, 69, 250, 20);
+	__paintMarker__.Size(width + 250, 52, 150, 20);
 
 	static const int topLabelHeight = 28;
 

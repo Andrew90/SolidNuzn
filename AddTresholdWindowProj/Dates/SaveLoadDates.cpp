@@ -23,21 +23,23 @@ struct close_file
 	~close_file(){if(NULL != f)fclose(f);}
 };
 #pragma warning(disable : 4996)
+
 void SaveDateFile::Do(HWND h)
 {
 	SaveData o(h);
 	bool b = false;
 	if(solidData.currentOffset > 0 && o())
 	{
-		FILE *f= _wfopen(o.sFile, L"wb+");
-		close_file c_f(f);
-		if(NULL != f)
-		{
-			b = fwrite(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f)
-		     && fwrite(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
-			 && fwrite(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
-			 ;
-		}
+		//FILE *f= _wfopen(o.sFile, L"wb+");
+		//close_file c_f(f);
+		//if(NULL != f)
+		//{
+		//	b = fwrite(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f)
+		//     && fwrite(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
+		//	 && fwrite(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
+		//	 ;
+		//}
+		StoreDataFile(o.sFile);
 	}
 	if(!b)
 	{

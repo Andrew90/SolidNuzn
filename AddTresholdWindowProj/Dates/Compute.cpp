@@ -30,6 +30,7 @@ namespace Compute
 			, color
 			);
 		wchar_t buf[1024];
+
 		wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
 			, computeSolidGroup.currentFile.c_str()
 			, color
@@ -47,5 +48,25 @@ namespace Compute
 		App::UpdateMainWindow();
 
 		ColorPanel::SetText(groupName, color);
+	}
+
+	void Recalculation(double &result, wchar_t *groupName, unsigned &color)
+	{
+		solidData.start = int(0.1 * solidData.currentOffset);
+		solidData.stop = solidData.currentOffset - solidData.start;
+
+		result = 0;
+		groupName = L"";
+		color = 0;
+
+		computeSolidGroup.Frames(
+			solidData.signal
+			, solidData.reference
+			, solidData.start
+			, solidData.stop
+			, result
+			, groupName
+			, color
+			);
 	}
 }

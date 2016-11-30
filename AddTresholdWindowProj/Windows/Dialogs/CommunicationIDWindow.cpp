@@ -301,7 +301,8 @@ namespace
 			CBase base(SolidBase().name());
 			if(base.IsOpen())
 			{
-				int currentID = Singleton<CurrentParametersTable>::Instance().items.get<CurrentID>().value;
+				int currentID = 
+					Select<SolidParametersTable>(base).eq<NameParam>((wchar_t *)solidGroupX.typeSizeName.c_str()).Execute();
 				for(auto i = o->items.rbegin(); i != o->items.rend(); ++i)
 				{
 					switch(i->status)

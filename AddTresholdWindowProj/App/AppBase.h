@@ -129,7 +129,8 @@ struct TcpCommunications
 };
 //---------------------------------------------------------------
 DEFINE_PARAM(CommunicationRemoveUnit, bool, false)
-DEFINE_PARAM(CounterTubesStored, bool, false)
+DEFINE_PARAM(TubesStored, bool, false)
+DEFINE_PARAM(PaintMarker, bool, false)
 DEFINE_PARAM(MessagePanelVisible  , bool, false)
 DEFINE_PARAM(IOPortsVisible, bool, false)
 DEFINE_PARAM(DeviceDescription1730, int, 1)
@@ -137,10 +138,11 @@ struct DifferentOptionsTable
 {
 	typedef TL::MkTlst<
 		CommunicationRemoveUnit
-		, CounterTubesStored
-		 , MessagePanelVisible
-		 , IOPortsVisible
-		 , DeviceDescription1730
+		, TubesStored
+		, PaintMarker
+		, MessagePanelVisible
+		, IOPortsVisible
+		, DeviceDescription1730
 	>::Result items_list;
 	typedef NullType unique_list;
 	typedef TL::Factory<items_list> TItems;
