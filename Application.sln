@@ -1,21 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestStatusZoneResult", "TestResult\TestResult.vcxproj", "{54B7B8B5-7590-48CF-B889-AD127BF1D8DC}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Defectoscope", "Defectoscope\Defectoscope.vcxproj", "{112AA2BD-28DC-440B-AC96-A4B7D67FD2A7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestNet", "TestNet\TestNet.vcxproj", "{A3AB664F-BCA0-4415-9268-EE2C6684666E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{70602D5A-91C2-4FA8-B9D8-96883F99A55A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "debug_panel_new", "panel_debug\debug_panel_new.vcxproj", "{2BE3A027-9834-461B-8268-D69DA3747AC9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestSolidGroupAlgoritm", "TestSolidGroupAlgoritm\TestSolidGroupAlgoritm.vcxproj", "{C2B83785-1F98-44CF-8CD0-87EE0AB590D5}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AddTresholdWindowProj", "AddTresholdWindowProj\AddTresholdWindowProj.vcxproj", "{6F97A1DE-A028-4589-B197-B3578B591921}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestTypeCounter", "TestTypeCounter\TestTypeCounter.vcxproj", "{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solid", "AddTresholdWindowProj\AddTresholdWindowProj.vcxproj", "{6F97A1DE-A028-4589-B197-B3578B591921}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,43 +13,19 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{54B7B8B5-7590-48CF-B889-AD127BF1D8DC}.Debug|Win32.ActiveCfg = Debug|Win32
-		{54B7B8B5-7590-48CF-B889-AD127BF1D8DC}.Debug|Win32.Build.0 = Debug|Win32
-		{54B7B8B5-7590-48CF-B889-AD127BF1D8DC}.Release|Win32.ActiveCfg = Release|Win32
-		{54B7B8B5-7590-48CF-B889-AD127BF1D8DC}.Release|Win32.Build.0 = Release|Win32
-		{112AA2BD-28DC-440B-AC96-A4B7D67FD2A7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{112AA2BD-28DC-440B-AC96-A4B7D67FD2A7}.Debug|Win32.Build.0 = Debug|Win32
-		{112AA2BD-28DC-440B-AC96-A4B7D67FD2A7}.Release|Win32.ActiveCfg = Release|Win32
-		{112AA2BD-28DC-440B-AC96-A4B7D67FD2A7}.Release|Win32.Build.0 = Release|Win32
-		{A3AB664F-BCA0-4415-9268-EE2C6684666E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A3AB664F-BCA0-4415-9268-EE2C6684666E}.Debug|Win32.Build.0 = Debug|Win32
-		{A3AB664F-BCA0-4415-9268-EE2C6684666E}.Release|Win32.ActiveCfg = Release|Win32
-		{A3AB664F-BCA0-4415-9268-EE2C6684666E}.Release|Win32.Build.0 = Release|Win32
 		{2BE3A027-9834-461B-8268-D69DA3747AC9}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2BE3A027-9834-461B-8268-D69DA3747AC9}.Debug|Win32.Build.0 = Debug|Win32
 		{2BE3A027-9834-461B-8268-D69DA3747AC9}.Release|Win32.ActiveCfg = Release|Win32
 		{2BE3A027-9834-461B-8268-D69DA3747AC9}.Release|Win32.Build.0 = Release|Win32
-		{C2B83785-1F98-44CF-8CD0-87EE0AB590D5}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C2B83785-1F98-44CF-8CD0-87EE0AB590D5}.Debug|Win32.Build.0 = Debug|Win32
-		{C2B83785-1F98-44CF-8CD0-87EE0AB590D5}.Release|Win32.ActiveCfg = Release|Win32
-		{C2B83785-1F98-44CF-8CD0-87EE0AB590D5}.Release|Win32.Build.0 = Release|Win32
 		{6F97A1DE-A028-4589-B197-B3578B591921}.Debug|Win32.ActiveCfg = Debug|Win32
 		{6F97A1DE-A028-4589-B197-B3578B591921}.Debug|Win32.Build.0 = Debug|Win32
 		{6F97A1DE-A028-4589-B197-B3578B591921}.Release|Win32.ActiveCfg = Release|Win32
 		{6F97A1DE-A028-4589-B197-B3578B591921}.Release|Win32.Build.0 = Release|Win32
-		{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0}.Debug|Win32.Build.0 = Debug|Win32
-		{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0}.Release|Win32.ActiveCfg = Release|Win32
-		{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A3AB664F-BCA0-4415-9268-EE2C6684666E} = {70602D5A-91C2-4FA8-B9D8-96883F99A55A}
-		{54B7B8B5-7590-48CF-B889-AD127BF1D8DC} = {70602D5A-91C2-4FA8-B9D8-96883F99A55A}
 		{2BE3A027-9834-461B-8268-D69DA3747AC9} = {70602D5A-91C2-4FA8-B9D8-96883F99A55A}
-		{C2B83785-1F98-44CF-8CD0-87EE0AB590D5} = {70602D5A-91C2-4FA8-B9D8-96883F99A55A}
-		{6C347B5B-68C2-4D75-BF2F-B8330B34E7B0} = {70602D5A-91C2-4FA8-B9D8-96883F99A55A}
 	EndGlobalSection
 EndGlobal

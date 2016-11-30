@@ -14,6 +14,7 @@
     <ProjectGuid>{6F97A1DE-A028-4589-B197-B3578B591921}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>AddTresholdWindowProj</RootNamespace>
+    <ProjectName>Solid</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -116,7 +117,6 @@
       <FileType>Document</FileType>
     </None>
     <None Include="..\Common\Resource\upload.ico" />
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common\1730\Device1730.h" />

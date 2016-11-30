@@ -92,7 +92,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="..\Common\Resource\arrow_down.bmp">
       <Filter>Common\Resource</Filter>
     </None>
