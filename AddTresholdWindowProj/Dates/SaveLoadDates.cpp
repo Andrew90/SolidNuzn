@@ -30,15 +30,6 @@ void SaveDateFile::Do(HWND h)
 	bool b = false;
 	if(solidData.currentOffset > 0 && o())
 	{
-		//FILE *f= _wfopen(o.sFile, L"wb+");
-		//close_file c_f(f);
-		//if(NULL != f)
-		//{
-		//	b = fwrite(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f)
-		//     && fwrite(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
-		//	 && fwrite(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
-		//	 ;
-		//}
 		StoreDataFile(o.sFile);
 	}
 	if(!b)

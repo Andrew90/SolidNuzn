@@ -1,10 +1,8 @@
 #pragma once
 #include "templates/typelist.hpp"
 #include "Base/Base.hpp"
-//#include "AppBase.h"
 #include "window_tool/message.h"
 #include "DlgTemplates/ParamDlg.hpp"
-//#include "Pass.h"
 #include "tools_debug/DebugMess.h"
 #include "App\PasswordDlg.hpp"
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -135,8 +133,6 @@ public:
 	}
 };
 
-//template<class Base, class Table>struct TestPassword;
-
 struct OkBtn
 {
 	static const int width = 120;
@@ -169,19 +165,6 @@ struct CancelBtn
 	    EndDialog(h, FALSE);
 	}
 };
-
-//template<class Base, class Table>struct TestPassword{bool operator()(HWND){return true;}};
-
-//template<class Table>struct TestPassword<ParametersBase, Table>
-//{
-//	bool operator()(HWND h)
-//	{
-//		static const int t = TL::TypeInMultyList<ParametersBase::multy_type_list, Table>::Result::value;
-//		return (0 == t)
-//			? TypesizePasswordDlg().Do(h)
-//			: OptionPasswordDlg().Do(h);
-//	}
-//};
 //-------------------------------------------------------------------
 template<class BaseParam, class TableParam, class List, class ButtonsList = TL::MkTlst<OkBtn, CancelBtn>::Result>class TemplDialogList
 {
