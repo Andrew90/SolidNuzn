@@ -11,7 +11,7 @@
 
 L502SolidGroup::L502SolidGroup()
 	: ADC_FREQ(Singleton<SolenoidParametersTable>::Instance().items.get<Frequency502>().value)
-	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<RangeReferenceSignal>().value)
+	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<ReferenceRangeSignal>().value)
 	, dataV(Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value)
 	, READ_TIMEOUT(100)
 {}
@@ -46,7 +46,7 @@ void L502SolidGroup::Destroy()
 
 bool L502SolidGroup::SetupParams()
 {
-	ADCInputsParametersTable::TItems &adcParam = Singleton<ADCInputsParametersTable>::Instance().items;
+	SolenoidParametersTable::TItems &adcParam = Singleton<SolenoidParametersTable>::Instance().items;
 	int f_channels[] = {
 		adcParam.get<InputSignal>().value
 		, adcParam.get<ReferenceSignal>().value

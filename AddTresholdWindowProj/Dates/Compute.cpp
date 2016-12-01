@@ -17,7 +17,7 @@ namespace Compute
 		solidData.stop = solidData.currentOffset - solidData.start;
 
 		double result = 0;
-		wchar_t *groupName = NULL;
+		wchar_t *groupName = L"";
 		unsigned color = 0;
 
 		computeSolidGroup.Frames(
