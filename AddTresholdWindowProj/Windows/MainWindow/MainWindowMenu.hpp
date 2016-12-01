@@ -118,11 +118,19 @@ namespace MainWindowMenu
 	MENU_ITEM(L"Идентификатор типоразмера для передачи по для сети", CommunicationIDMenu)
 
 	struct Descriptor1730__{};
+	//template<>struct SubMenu<Descriptor1730__>
+	//{
+	//	typedef TL::TypeToTypeLst<
+	//		typename TL::MkTlst<InputBit, Descriptor1730Item>::Result
+	//		, MenuItem
+	//	>::Result list;
+	//};
 	template<>struct SubMenu<Descriptor1730__>
 	{
-		typedef TL::TypeToTypeLst<
-			typename TL::MkTlst<InputBit, Descriptor1730Item>::Result
-			, MenuItem
+		typedef TL::MkTlst<
+			MenuItem<InputBit>
+			, Separator<1>
+			, MenuItem<Descriptor1730Item>
 		>::Result list;
 	};
 	MENU_TEXT(L"Плата 1730" , SubMenu<Descriptor1730__>)

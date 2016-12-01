@@ -78,7 +78,7 @@ namespace Device1730
 	//----------------------------------------------------------------------------
 #else
 	//------------------------------------------------------------------------------
-	bool Init(int deviceDescription)
+	bool Init(wchar_t *deviceDescription)
 	{
 		return true;
 	}

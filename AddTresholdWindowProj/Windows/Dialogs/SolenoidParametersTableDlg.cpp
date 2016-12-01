@@ -31,10 +31,19 @@ MAX_EQUAL_VALUE(Frequency502, 40000)
 
 DO_NOT_CHECK(FrequencyGenerator)
 
-PARAM_TITLE(InputRangeSignal, L"Диапазон входного сигнала В.(устанавливается при пусконаладке)")
-PARAM_TITLE(RangeReferenceSignal, L"Диапазон опорного сигнала В.(устанавливается при пусконаладке)")
+PARAM_TITLE(InputRangeSignal, L"Диапазон сигнала В.(устанавливается при пусконаладке)")
+PARAM_TITLE(ReferenceRangeSignal, L"Диапазон опорного сигнала В.(устанавливается при пусконаладке)")
 DO_NOT_CHECK(InputRangeSignal)
-DO_NOT_CHECK(RangeReferenceSignal)
+DO_NOT_CHECK(ReferenceRangeSignal)
+
+PARAM_TITLE(InputSignal, L"Номер входа сигнала")
+PARAM_TITLE(ReferenceSignal, L"Номер входа опорного сигнала")
+
+DO_NOT_CHECK(InputSignal)
+DO_NOT_CHECK(ReferenceSignal)
+
+template<>struct DlgSubItems<InputSignal, int >: UpDownSubItem<InputSignal>{};
+template<>struct DlgSubItems<ReferenceSignal, int >: UpDownSubItem<ReferenceSignal>{};
 
 const wchar_t *SyncGainData[] ={L"10", L"5", L"2", L"1", L"0.5", L"0.2"};
 
@@ -55,9 +64,9 @@ template<>struct CurrentValue<InputRangeSignal>
 		ComboBox_SetCurSel(h, Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value);
 	}
 };
-template<>struct FillComboboxList<RangeReferenceSignal>
+template<>struct FillComboboxList<ReferenceRangeSignal>
 {
-	void operator()(HWND h, RangeReferenceSignal &t)
+	void operator()(HWND h, ReferenceRangeSignal &t)
 	{
 		for(int i = 0; i < dimention_of(SyncGainData); ++i)
 		{
@@ -65,20 +74,20 @@ template<>struct FillComboboxList<RangeReferenceSignal>
 		}
 	}
 };
-template<>struct CurrentValue<RangeReferenceSignal>
+template<>struct CurrentValue<ReferenceRangeSignal>
 {
-	void operator()(HWND h, RangeReferenceSignal &t)
+	void operator()(HWND h, ReferenceRangeSignal &t)
 	{
-		ComboBox_SetCurSel(h, Singleton<SolenoidParametersTable>::Instance().items.get<RangeReferenceSignal>().value);
+		ComboBox_SetCurSel(h, Singleton<SolenoidParametersTable>::Instance().items.get<ReferenceRangeSignal>().value);
 	}
 };
 
 template<>struct DlgSubItems<InputRangeSignal, int>: ComboBoxSubItem<InputRangeSignal>{};
-template<>struct DlgSubItems<RangeReferenceSignal, int>: ComboBoxSubItem<RangeReferenceSignal>{};
+template<>struct DlgSubItems<ReferenceRangeSignal, int>: ComboBoxSubItem<ReferenceRangeSignal>{};
 
-template<class P>struct __ok_btn__<DlgItem<RangeReferenceSignal>, P>
+template<class P>struct __ok_btn__<DlgItem<ReferenceRangeSignal>, P>
 {
-	typedef DlgItem<RangeReferenceSignal> O;
+	typedef DlgItem<ReferenceRangeSignal> O;
 	void operator()(O *o, P *p)
 	{
 		dprint("%s", __FUNCTION__);

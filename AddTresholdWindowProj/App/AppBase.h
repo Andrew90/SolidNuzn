@@ -99,14 +99,18 @@ struct GraphAxesTable
 DEFINE_PARAM(Frequency502, int, 4000)
 DEFINE_PARAM(FrequencyGenerator, int, 6)
 DEFINE_PARAM(InputRangeSignal, int, 0)
-DEFINE_PARAM(RangeReferenceSignal, int, 0)
+DEFINE_PARAM(ReferenceRangeSignal, int, 0)
+DEFINE_PARAM(InputSignal, int, 0)
+DEFINE_PARAM(ReferenceSignal, int, 1)
 struct SolenoidParametersTable
 {
 	typedef TL::MkTlst<
 		Frequency502
 		, FrequencyGenerator
 		, InputRangeSignal
-		, RangeReferenceSignal
+		, ReferenceRangeSignal
+		, InputSignal
+		, ReferenceSignal
 	>::Result items_list;
 	typedef NullType unique_list;
 	typedef TL::Factory<items_list> TItems;
@@ -150,33 +154,32 @@ struct DifferentOptionsTable
 	const wchar_t *name(){return L"DifferentOptionsTable";}
 };
 //---------------------------------------------------------------
- struct ParametersBase
- {
-	 typedef TL::MkTlst<
-		 InputBitTable
-		 , GraphAxesTable
-		 , SolenoidParametersTable
-		 , TcpCommunications
-		 , DifferentOptionsTable
-		// , CommunicationTypeTable
-	 >::Result one_row_table_list;
+struct ParametersBase
+{
+	typedef TL::MkTlst<
+		InputBitTable
+		, GraphAxesTable
+		, SolenoidParametersTable
+		, TcpCommunications
+		, DifferentOptionsTable
+	>::Result one_row_table_list;
 
-	 typedef TL::MkTlst<		
-		  CurrentParametersTable
-		 , ParametersTable		
-	 >::Result multy_row_table_list;
+	typedef TL::MkTlst<		
+		CurrentParametersTable
+		, ParametersTable		
+	>::Result multy_row_table_list;
 
-	 typedef TL::MkTlst<
-		  multy_row_table_list
-		 , one_row_table_list
-	 >::Result multy_type_list; 
+	typedef TL::MkTlst<
+		multy_row_table_list
+		, one_row_table_list
+	>::Result multy_type_list; 
 
-	 typedef TL::MultyListToList<multy_type_list>::Result type_list;
-	 typedef TL::Factory<type_list> TTables;
-	 TTables tables;
-	 wchar_t path[512];
-	 const wchar_t *name();
- };
+	typedef TL::MultyListToList<multy_type_list>::Result type_list;
+	typedef TL::Factory<type_list> TTables;
+	TTables tables;
+	wchar_t path[512];
+	const wchar_t *name();
+};
 
 struct AppBase
 {

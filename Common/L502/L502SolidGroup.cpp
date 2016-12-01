@@ -7,6 +7,7 @@
 #include "L502/l502api.h"
 #pragma comment(lib, "../Common/L502/l502api.lib")
 #include <stdio.h>
+#include "App/AppBase.h"
 
 L502SolidGroup::L502SolidGroup()
 	: ADC_FREQ(Singleton<SolenoidParametersTable>::Instance().items.get<Frequency502>().value)
@@ -45,7 +46,11 @@ void L502SolidGroup::Destroy()
 
 bool L502SolidGroup::SetupParams()
 {
-	int f_channels[] = {0, 1};
+	ADCInputsParametersTable::TItems &adcParam = Singleton<ADCInputsParametersTable>::Instance().items;
+	int f_channels[] = {
+		adcParam.get<InputSignal>().value
+		, adcParam.get<ReferenceSignal>().value
+	};
 	int f_ch_modes[] = {L502_LCH_MODE_COMM, L502_LCH_MODE_COMM};
 	int f_ch_ranges[] = {referenceV, dataV};
 
@@ -115,13 +120,13 @@ int L502SolidGroup::Read(unsigned &startChennel, double *data, unsigned &count)
 #else
 L502SolidGroup::L502SolidGroup()
 	: ADC_FREQ(Singleton<SolenoidParametersTable>::Instance().items.get<Frequency502>().value)
-	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<RangeReferenceSignal>().value)
+	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<ReferenceRangeSignal>().value)
 	, dataV(Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value)
 	, READ_TIMEOUT(1500)
 {}
 bool  L502SolidGroup::Init(){return 0;}
 void  L502SolidGroup::Destroy(){}
-int   L502SolidGroup::SetupParams(){return 0;}
+bool   L502SolidGroup::SetupParams(){return 0;}
 int   L502SolidGroup::Start(){return 0;}
 int   L502SolidGroup::Stop(){return 0;}
 int L502SolidGroup::Read(unsigned &startChennel, double *data, unsigned &count){return 0;}
