@@ -10,13 +10,13 @@ using namespace Automation::BDaq;
 
 namespace Device1730
 {
+	unsigned __input;
+	unsigned __output;
 #ifndef DEBUG_ITEMS
 	//------------------------------------------------------------------------------
 	static const int startPoint = 0;
 	Automation::BDaq::BDaqDevice *device = NULL;
-	Automation::BDaq::BDaqDio    *dio = NULL;
-	unsigned __input;
-	unsigned __output;
+	Automation::BDaq::BDaqDio    *dio = NULL;	
 	const unsigned &input = __input;
 	const unsigned &output = __output;
 
@@ -93,16 +93,16 @@ namespace Device1730
 	//--------------------------------------------------------------------------
 	unsigned Read()
 	{
-		return input = rand() % 0xffff;
+		return __input = rand() % 0xffff;
 	}
 	//--------------------------------------------------------------------------
 	void Write()
 	{
-		output = rand() % 0xffff;
+		__output = rand() % 0xffff;
 	}
 	void Write(unsigned out)
 	{
-		output = out;
+		__output = out;
 	}
 	//--------------------------------------------------------------------------
 	unsigned ReadOutput()

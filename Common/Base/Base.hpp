@@ -1,9 +1,9 @@
 #pragma once
 #pragma warning( disable : 4146 )
-//#import "c:\program files\common files\system\ado\msado15.dll" rename("EOF", "EndOfFile")
-//#import "c:\program files\common files\system\ado\msadox.dll" 
-#import "Base\msado15.dll" rename("EOF", "EndOfFile")
-#import "Base\msadox.dll" 
+//#import "d:\program files\common files\system\ado\msado15.dll" rename("EOF", "EndOfFile")
+//#import "d:\program files\common files\system\ado\msadox.dll" 
+#import "Base/msado15.dll" rename("EOF", "EndOfFile")
+#import "Base/msadox.dll" 
 namespace
 {
 static wchar_t *const udl = L"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=";

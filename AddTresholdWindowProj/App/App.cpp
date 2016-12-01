@@ -27,7 +27,6 @@ void App::Init()
 {
 	AppBase().Init();
 	NameParam::type_value &nameParam = Singleton<ParametersTable>::Instance().items.get<NameParam>().value;
-	//SolidBase().Change(Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
 	computeSolidGroup.Load(nameParam);
 	CounterTubes::Load(nameParam);
 
@@ -49,7 +48,6 @@ void App::Init()
 	{
 		Automat::Run();
 	}
-	//UpdateMainWindow();
 #else
 #if 1
  //  ComputeSolidGroup &sg = Singleton<ComputeSolidGroup>::Instance();
