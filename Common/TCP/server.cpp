@@ -40,10 +40,7 @@ void Server::Do(Server *self)
 			}
 		}
 		while(res > 0);
-		//		 else if(res == 0)
-		//	 {
 		shutdown(ClientSocket, SD_SEND);
-		//	 }
 	}
 }
 

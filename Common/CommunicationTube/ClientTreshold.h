@@ -8,7 +8,7 @@ class ClientTreshold
 	static void Do(ClientTreshold *);
 public:
 	void(*receiveHandler)(char *inputData, int inputCount, char *outputData, int &outputCount);
-  ClientTreshold();
-  bool Connect(int , wchar_t *);
-  void Close();
+	ClientTreshold();
+	bool Connect(int , wchar_t *);
+	void Close();
 };
