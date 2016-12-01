@@ -20,7 +20,6 @@ void Descriptor1730Dlg::Do(HWND h)
 	{
 		if(last != val)
 		{
-			//TODO Сделать инициализацию 1730
 			if(Automat::Suspend())
 			{
 				Sleep(100);

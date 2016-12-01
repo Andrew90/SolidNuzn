@@ -20,23 +20,23 @@ namespace Device1730
 	const unsigned &input = __input;
 	const unsigned &output = __output;
 
-	bool Init(int deviceDescription)
+	bool Init(wchar_t *deviceDescription)
 	{
 		Destroy();
 		long errorCode = BDaqDevice::Open( deviceDescription, ModeWrite, device);
-		//if(BioFailed(errorCode))
-		//{
-		//	Mess(DeviceOpenError)
-		//	return isOpen = false;
-		//}
-		//errorCode = device->GetModule(0,dio);
-		//if(BioFailed(errorCode)) 
-		//{
-		//	//Mess(GetModuleError)
-		//	return isOpen = false;
-		//}
-		//Mess(AllOk)	
-		return NULL != device;
+		if(BioFailed(errorCode))
+		{
+			device = NULL;
+			return false;
+		}
+		errorCode = device->GetModule(0,dio);
+		if(BioFailed(errorCode)) 
+		{
+			device->Close();
+			device = NULL;
+			return false;
+		}
+		return true;
 	}
 	//-------------------------------------------------------------------------
 	void Destroy()
@@ -44,12 +44,13 @@ namespace Device1730
 		if(device != NULL)
 		{
 			device->Close();
+			device = NULL;
 		}
 	}
 	//--------------------------------------------------------------------------
 	bool IsOpen()
 	{
-		return true;
+		return device != NULL;
 	}
 	//--------------------------------------------------------------------------
 	unsigned Read()

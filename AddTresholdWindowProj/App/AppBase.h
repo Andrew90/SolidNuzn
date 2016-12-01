@@ -133,7 +133,7 @@ DEFINE_PARAM(TubesStored, bool, false)
 DEFINE_PARAM(PaintMarker, bool, false)
 DEFINE_PARAM(MessagePanelVisible  , bool, false)
 DEFINE_PARAM(IOPortsVisible, bool, false)
-DEFINE_PARAM(DeviceDescription1730, int, 1)
+STR_PARAM(DeviceDescription1730, 64, L"PCI-1730,BID#15")
 struct DifferentOptionsTable
 {
 	typedef TL::MkTlst<

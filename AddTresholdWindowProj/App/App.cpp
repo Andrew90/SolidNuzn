@@ -14,7 +14,6 @@
 #include "MainWindow\MainWindowMenu.hpp"
 #include "ColorPanel\ColorPanel.h"
 #include "App/config.h"
-
 #include "Automat\Automat.h"
 
 namespace

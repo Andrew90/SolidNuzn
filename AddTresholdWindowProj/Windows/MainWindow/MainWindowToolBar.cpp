@@ -7,8 +7,7 @@
 #include "FrameWindow\FrameWindow.h"
 #include "window_tool\WindowsPosition.h"
 #include "window_tool\Emptywindow.h"
-//#include "MainWindow\MainWindowMenu.hpp"
-
+#include "Automat\Automat.h"
 #include "tools_debug\DebugMess.h"
 
 #ifdef DEBUG_ITEMS
@@ -42,6 +41,7 @@ namespace
 		SeparatorToolbar<0>
 		, BUTTON_KEY(IDB_CycleBtn)
 		, BUTTON_KEY(IDB_OptionsBtn) 		
+		, BUTTON_KEY(IDB_Reset)
 		, SeparatorToolbar<1>
 #ifdef DEBUG_ITEMS
 		, BUTTON_KEY(IDB_arrow_down) 
@@ -58,12 +58,13 @@ namespace
 	static bool run_once_per_sycle = false;
 	void Key<IDB_CycleBtn>::Click(HWND h)
 	{
-		zprint("\n");	
+		Automat::Start();
 	}
-	//void Key<IDB_Continue>::Click(HWND h)
-	//{
-	//	zprint("\n");	
-	//}
+//-----------------------------------------------------------------------------
+	void Key<IDB_Reset>::Click(HWND h)
+	{
+		Automat::Stop();	
+	}
 //-------------------------------------------------------------------------------
 	void Key<IDB_OptionsBtn>::Click(HWND h)
 	{
