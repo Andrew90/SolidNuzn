@@ -129,7 +129,7 @@ namespace Automat
 				l502SolidGroup.Stop();
 
 				double result; 
-				wchar_t *groupName = NULL; 
+				wchar_t *groupName = L""; 
 				unsigned color;
 				Compute::Recalculation(result, groupName, color);
 

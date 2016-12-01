@@ -13,16 +13,7 @@ L502SolidGroup::L502SolidGroup()
 	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<RangeReferenceSignal>().value)
 	, dataV(Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value)
 	, READ_TIMEOUT(1500)
-{
-	/*
-	for(int i = 0; i < count_inputs; ++i)
-	{
-		f_channels[i] = i;
-		f_ch_modes[i] = L502_LCH_MODE_COMM;
-		f_ch_ranges[i] = L502_ADC_RANGE_10;
-	}
-	*/
-}
+{}
 
 bool L502SolidGroup::Init()
 {

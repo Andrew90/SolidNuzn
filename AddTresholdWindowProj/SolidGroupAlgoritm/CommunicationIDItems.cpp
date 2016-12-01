@@ -7,7 +7,6 @@ void CommunicationIDItems::LoadItem(wchar_t *name, int ind)
 	type_value p;
 	p.name = name;
 	p.id = ind;
-	p.status = eOk;
 	items.push_back(p);
 }
 
@@ -18,14 +17,12 @@ void CommunicationIDItems::Add(wchar_t *name, int ind)
 		if(0 == wcscmp(k->name.c_str(), name))
 		{
 			k->id = ind;
-			k->status = eAdd;
 			return;
 		}
 	}
 	type_value p;
 	p.name = name;
 	p.id = ind;
-	p.status = eAdd;
 	items.insert(items.begin(), p);
 }
 

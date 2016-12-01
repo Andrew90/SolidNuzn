@@ -8,7 +8,6 @@ public:
 	{
 	   std::wstring name;
 	   int id;
-	   Status status;
 	};
 	std::vector<type_value> items;
 	void LoadItem(wchar_t *, int);
