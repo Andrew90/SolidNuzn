@@ -33,9 +33,6 @@
     <Filter Include="Common\DlgTemplates">
       <UniqueIdentifier>{7ac7914d-5df9-4fd4-939a-7ba0ebb2893b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Base">
-      <UniqueIdentifier>{a0bac03e-abab-4f04-b8db-323997cbface}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Resource">
       <UniqueIdentifier>{4ff6588a-2817-4ec7-aa6b-00cb0207098d}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,9 @@
     </Filter>
     <Filter Include="Automat">
       <UniqueIdentifier>{88581982-7a7d-4285-80a7-d2541ae023bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Base">
+      <UniqueIdentifier>{5cd160d0-6525-483a-998d-7435486a760f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,18 +258,6 @@
     </ClInclude>
     <ClInclude Include="..\Common\window_tool\GridItems.h">
       <Filter>Common\window_tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Base\Base.hpp">
-      <Filter>Common\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Base\ExpressBase.hpp">
-      <Filter>Common\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Base\tables.hpp">
-      <Filter>Common\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\Base\TablesDefine.h">
-      <Filter>Common\Base</Filter>
     </ClInclude>
     <ClInclude Include="App\App.h">
       <Filter>App</Filter>
@@ -441,6 +429,18 @@
     </ClInclude>
     <ClInclude Include="Dates\StoreResultBase.h">
       <Filter>Dates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\Base.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\ExpressBase.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\tables.hpp">
+      <Filter>Common\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Base\TablesDefine.h">
+      <Filter>Common\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

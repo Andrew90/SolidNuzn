@@ -47,7 +47,7 @@ struct StoredDataBase
 	{
 		GetModuleFileName(0, path, dimention_of(path));
 		PathRemoveFileSpec(path);
-		wcscat(path, L"..\\Data");
+		wcscat(path, L"\\..\\Data");
 		CreateDirectory(path, NULL);
 		time_t t = time(0);
 		struct tm *now = localtime( & t );
