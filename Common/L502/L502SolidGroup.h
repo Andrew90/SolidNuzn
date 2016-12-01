@@ -18,4 +18,3 @@ public:
 	int Stop();
 	int Read(unsigned &startChennel, double *data, unsigned &count);
 };
-extern L502SolidGroup l502SolidGroup;

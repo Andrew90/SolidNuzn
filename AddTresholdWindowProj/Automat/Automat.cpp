@@ -11,6 +11,7 @@
 #include "SolidGroupAlgoritm\ComputeSolidGroup.h"
 #include "Dates\SaveLoadDates.h"
 #include "Dates\StoreResultBase.h"
+#include "tools_debug/DebugMess.h"
 
 namespace Automat
 {
@@ -103,6 +104,7 @@ namespace Automat
 				int numberCycles = 0;
 				double data[8 * 1024];
 				///< Цикл сбора данных
+				unsigned tme = GetTickCount();
 				do
 				{
 					Sleep(10);
@@ -117,11 +119,13 @@ namespace Automat
 					unsigned res = dimention_of(data);
 					l502SolidGroup.Read(first, data, res);
 					solidData.SetData(&data[first], res - first);
-					if(++numberCycles > 500)
+					unsigned t = GetTickCount();
+					if(t - tme > 3000)
 					{
-						numberCycles = 0;
-						///< обновление экрана через ~5 сек
+						///< обновление экрана через ~3 сек
 						App::UpdateMainWindow();
+						dprint("count %d\n", res - first);
+						tme = t;
 					}
 				}
 				while(tubeInUnit & input);

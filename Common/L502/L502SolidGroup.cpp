@@ -12,7 +12,7 @@ L502SolidGroup::L502SolidGroup()
 	: ADC_FREQ(Singleton<SolenoidParametersTable>::Instance().items.get<Frequency502>().value)
 	, referenceV(Singleton<SolenoidParametersTable>::Instance().items.get<RangeReferenceSignal>().value)
 	, dataV(Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value)
-	, READ_TIMEOUT(1500)
+	, READ_TIMEOUT(100)
 {}
 
 bool L502SolidGroup::Init()
