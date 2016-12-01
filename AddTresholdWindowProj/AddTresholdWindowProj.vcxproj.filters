@@ -439,6 +439,9 @@
     <ClInclude Include="SolidGroupAlgoritm\CommunicationIDItems.h">
       <Filter>SolidGroupAlgoritm</Filter>
     </ClInclude>
+    <ClInclude Include="Dates\StoreResultBase.h">
+      <Filter>Dates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -626,6 +629,9 @@
     </ClCompile>
     <ClCompile Include="SolidGroupAlgoritm\CommunicationIDItems.cpp">
       <Filter>SolidGroupAlgoritm</Filter>
+    </ClCompile>
+    <ClCompile Include="Dates\StoreResultBase.cpp">
+      <Filter>Dates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

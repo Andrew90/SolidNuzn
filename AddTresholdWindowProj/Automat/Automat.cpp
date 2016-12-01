@@ -10,6 +10,7 @@
 #include "App/AppBase.h"
 #include "SolidGroupAlgoritm\ComputeSolidGroup.h"
 #include "Dates\SaveLoadDates.h"
+#include "Dates\StoreResultBase.h"
 
 namespace Automat
 {
@@ -20,7 +21,6 @@ namespace Automat
 	bool &paintMarker = Singleton<DifferentOptionsTable>::Instance().items.get<PaintMarker>().value;
 	TcpCommunications &tcpCommunications = Singleton<TcpCommunications>::Instance(); 
 	ClientTreshold &clientTreshold = Singleton<ClientTreshold>::Instance();
-	//Device1730 &device1730 = Singleton<Device1730>::Instance();
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 	SolidData &solidData = Singleton<SolidData>::Instance();
 	ComputeSolidGroup &computeSolidGroup = Singleton<ComputeSolidGroup>::Instance();
@@ -171,6 +171,12 @@ namespace Automat
 				App::UpdateMainWindow();
 
 				App::UpdateGroupCounter();
+
+				StoreResultBase(
+					CounterTubes::CountTypeAll()
+					, (wchar_t *)computeSolidGroup.currentGroupName.c_str()
+					, groupName
+					);
 
 			}
 			catch(ResetException)
