@@ -15,11 +15,13 @@
 #include "ColorPanel\ColorPanel.h"
 #include "App/config.h"
 #include "Automat\Automat.h"
+#include "L502\L502SolidGroup.h"
 
 namespace
 {
 	MainWindow &mainWindow = Singleton<MainWindow>::Instance();
 	ComputeSolidGroup &computeSolidGroup = Singleton<ComputeSolidGroup>::Instance();
+	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 }
 
 void App::Init()
@@ -30,6 +32,14 @@ void App::Init()
 	CounterTubes::Load(nameParam);
 
 	bool run = Automat::Init1730();
+
+	Device1730::Write(0);
+
+	if(!(l502SolidGroup.Init() && l502SolidGroup.SetupParams()))
+	{
+		MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка !!!", MB_ICONERROR);
+		run = false;
+	}
 	
 #if 1
 	RECT r;

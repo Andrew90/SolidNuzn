@@ -13,7 +13,7 @@ public:
 	L502SolidGroup();
 	bool Init();
 	void Destroy();
-	int SetupParams();
+	bool SetupParams();
 	int Start();
 	int Stop();
 	int Read(unsigned &startChennel, double *data, unsigned &count);

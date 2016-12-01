@@ -43,7 +43,7 @@ void L502SolidGroup::Destroy()
         L502_Free((t_l502_hnd)hnd);
 }
 
-int L502SolidGroup::SetupParams()
+bool L502SolidGroup::SetupParams()
 {
 	int f_channels[] = {0, 1};
 	int f_ch_modes[] = {L502_LCH_MODE_COMM, L502_LCH_MODE_COMM};
@@ -74,7 +74,7 @@ int L502SolidGroup::SetupParams()
         err = L502_StreamsEnable((t_l502_hnd)hnd, L502_STREAM_ADC);
     }
 
-    return err;
+    return 0 == err;
 }
 int L502SolidGroup::Start()
 {
