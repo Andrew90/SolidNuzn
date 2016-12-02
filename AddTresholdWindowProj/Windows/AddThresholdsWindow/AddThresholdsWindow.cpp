@@ -94,7 +94,7 @@ namespace
 	void SaveOptions(HWND h)
 	{
 		ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
-		if(solidGroup.changeTresholds) 
+		if(solidGroup.changeTresholds && TypesizePasswordDlg().Do(h)) 
 		{
 			solidGroup.Save();
 			MessageBox(h, L"Данные cохранены?", L"Cообщение", MB_ICONHAND | MB_OK);
@@ -178,12 +178,19 @@ void AddThresholdWindow::operator()(TClose &l)
 		int res = MessageBox(l.hwnd, L"Данные изменены!\nСохранить?", L"Cообщение", MB_ICONQUESTION | MB_YESNOCANCEL);
 		if(IDYES == res)
 		{
-			solidGroup.Save();
+			if(TypesizePasswordDlg().Do(l.hwnd))
+			{
+				solidGroup.Save();
+			}
+			else
+			{
+				return;
+			}
 		}
 		else if(IDNO == res)
 		{
-			solidGroup.Clear();
-			solidGroup.Load();
+			//solidGroup.Clear();
+			//solidGroup.Load();
 		}
 		else if(IDCANCEL == res)
 		{
