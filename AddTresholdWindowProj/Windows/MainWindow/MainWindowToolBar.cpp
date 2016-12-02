@@ -9,6 +9,7 @@
 #include "window_tool\Emptywindow.h"
 #include "Automat\Automat.h"
 #include "tools_debug\DebugMess.h"
+#include "App\AppKeyHandler.h"
 
 #ifdef DEBUG_ITEMS
 #include "Dates\CounterTubes.h"
@@ -59,6 +60,7 @@ namespace
 	void Key<IDB_CycleBtn>::Click(HWND h)
 	{
 		Automat::Start();
+		AppKeyHandler::Run();
 	}
 //-----------------------------------------------------------------------------
 	void Key<IDB_Reset>::Click(HWND h)

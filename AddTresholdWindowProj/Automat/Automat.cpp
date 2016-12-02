@@ -12,6 +12,7 @@
 #include "Dates\SaveLoadDates.h"
 #include "Dates\StoreResultBase.h"
 #include "tools_debug/DebugMess.h"
+#include "App\AppKeyHandler.h"
 
 namespace Automat
 {
@@ -196,6 +197,7 @@ namespace Automat
 					clientTreshold.Close();
 				}
 				initTcp = true;
+				AppKeyHandler::Stop();
 			}
 		}
 		return 0;

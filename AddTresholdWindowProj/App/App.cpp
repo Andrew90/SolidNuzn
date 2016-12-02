@@ -17,6 +17,7 @@
 #include "Automat\Automat.h"
 #include "L502\L502SolidGroup.h"
 #include "App\UpdateMainChart.h"
+#include "App\AppKeyHandler.h"
 
 namespace
 {
@@ -49,6 +50,8 @@ void App::Init()
 	ShowWindow(h, SW_SHOWNORMAL);
 	SelectHandler::Init(mainWindow.select.hWnd);
 	mainWindow.select.ptr = SelectHandler::Do;
+
+	AppKeyHandler::Init();
 
 	IOportsDlg_Start();
 	ColorPanel::Open();
@@ -134,5 +137,14 @@ void App::CheckMenuItem()
 	x ^= true;
    CheckMenu<TopMenu<MainWindowMenu::MainOptionUnits>>(mainWindow.hWnd, x);
 	//EnableMenu<Event<MainWindowMenu::L502ParamDlg>>(mainWindow.hWnd, x);
+}
+HWND  App::MainWindowHWND()
+{
+	return mainWindow.hWnd;
+}
+
+HWND App::MainWindowToolBarHWND()
+{
+	return mainWindow.toolBar.hWnd;
 }
 

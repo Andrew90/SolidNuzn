@@ -445,6 +445,9 @@
     <ClInclude Include="App\UpdateMainChart.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="App\AppKeyHandler.h">
+      <Filter>App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -637,6 +640,9 @@
       <Filter>Dates</Filter>
     </ClCompile>
     <ClCompile Include="App\UpdateMainChart.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App\AppKeyHandler.cpp">
       <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>

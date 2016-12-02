@@ -18,6 +18,9 @@ public:
 	static void ClearCounter();
 	static void CheckMenuItem();
 	static void UpdateGroupCounter();
+
+	static HWND MainWindowHWND();
+	static HWND MainWindowToolBarHWND();
 };
 
 template<class>struct Singleton;
