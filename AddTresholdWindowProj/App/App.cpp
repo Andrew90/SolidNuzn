@@ -18,6 +18,7 @@
 #include "L502\L502SolidGroup.h"
 #include "App\UpdateMainChart.h"
 #include "App\AppKeyHandler.h"
+#include "window_tool\HookKey.h"
 
 namespace
 {
@@ -51,7 +52,10 @@ void App::Init()
 	SelectHandler::Init(mainWindow.select.hWnd);
 	mainWindow.select.ptr = SelectHandler::Do;
 
+	StartKeyHook(h);
+
 	AppKeyHandler::Init();
+
 
 	IOportsDlg_Start();
 	ColorPanel::Open();

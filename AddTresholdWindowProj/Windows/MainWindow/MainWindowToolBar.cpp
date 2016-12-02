@@ -61,16 +61,18 @@ namespace
 	{
 		Automat::Start();
 		AppKeyHandler::Run();
+		dprint("IDB_CycleBtn\n");
 	}
 //-----------------------------------------------------------------------------
 	void Key<IDB_Reset>::Click(HWND h)
 	{
 		Automat::Stop();	
+		dprint("IDB_Reset\n");
 	}
 //-------------------------------------------------------------------------------
 	void Key<IDB_OptionsBtn>::Click(HWND h)
 	{
-		zprint("\n");
+		zprint("IDB_OptionsBtn\n");
 		RECT r;
 		WindowPosition::Get<FrameWindow>(r);
 		HWND hh = WindowTemplate(&Singleton<FrameWindow>::Instance(), L"", r.left, r.top, r.right, r.bottom);
