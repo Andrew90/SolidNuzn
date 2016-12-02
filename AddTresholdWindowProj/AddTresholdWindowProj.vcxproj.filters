@@ -442,6 +442,9 @@
     <ClInclude Include="..\Common\Base\TablesDefine.h">
       <Filter>Common\Base</Filter>
     </ClInclude>
+    <ClInclude Include="App\UpdateMainChart.h">
+      <Filter>App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -632,6 +635,9 @@
     </ClCompile>
     <ClCompile Include="Dates\StoreResultBase.cpp">
       <Filter>Dates</Filter>
+    </ClCompile>
+    <ClCompile Include="App\UpdateMainChart.cpp">
+      <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

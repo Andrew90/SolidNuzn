@@ -17,6 +17,7 @@ class MainWindow
 	MainWindowToolBar toolBar;
 	SelectTypeSizeList select;
 	TopLabelViewer topLabelViewer;
+public:
 	SignalViewer signalViewer;
 public:
 	GridCounterViewer gridCounterViewer;

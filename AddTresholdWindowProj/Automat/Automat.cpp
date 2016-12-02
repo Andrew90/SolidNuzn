@@ -119,14 +119,15 @@ namespace Automat
 					unsigned res = dimention_of(data);
 					l502SolidGroup.Read(first, data, res);
 					solidData.SetData(&data[first], res - first);
-					unsigned t = GetTickCount();
-					if(t - tme > 3000)
-					{
-						///< обновление экрана через ~3 сек
-						App::UpdateMainWindow();
-						dprint("count %d\n", res - first);
-						tme = t;
-					}
+					//unsigned t = GetTickCount();
+					//if(t - tme > 5000)
+					//{
+					//	///< обновление экрана через ~5 сек
+						//App::UpdateMainWindow();
+					//	dprint("count %d\n", res - first);
+					//	tme = t;
+					//}
+					App::UpdateLoopMainWindow(5000);
 				}
 				while(tubeInUnit & input);
 
@@ -172,9 +173,8 @@ namespace Automat
 					}
 				}
 
-				App::UpdateMainWindow();
-
 				App::UpdateGroupCounter();
+				App::UpdateMainWindow();				
 
 				StoreResultBase(
 					CounterTubes::CountTypeAll()

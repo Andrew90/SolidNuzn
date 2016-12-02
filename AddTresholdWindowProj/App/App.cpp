@@ -16,6 +16,7 @@
 #include "App/config.h"
 #include "Automat\Automat.h"
 #include "L502\L502SolidGroup.h"
+#include "App\UpdateMainChart.h"
 
 namespace
 {
@@ -89,6 +90,18 @@ void App::UpdateMainWindow()
 	RepaintWindow(mainWindow.signalViewer.hWnd);
 	RepaintWindow(mainWindow.topLabelViewer.hWnd);
 	mainWindow.gridCounterViewer.Update();
+}
+
+void App::UpdateLoopMainWindow(int delay)
+{
+	//static unsigned lastTime = 0;
+	//unsigned t = GetTickCount();
+	//if(lastTime + delay < t)
+	//{
+	//	lastTime = t;
+	//	QueueUserWorkItem(Updata, NULL, WT_EXECUTEDEFAULT);
+	//}
+	UpdateMainChart(delay, mainWindow.hWnd);
 }
 
 void App::AddMenuItem(wchar_t *n)

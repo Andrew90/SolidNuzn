@@ -166,6 +166,7 @@
     <ClInclude Include="App\config.h" />
     <ClInclude Include="App\SelectHandler.h" />
     <ClInclude Include="App\PasswordDlg.hpp" />
+    <ClInclude Include="App\UpdateMainChart.h" />
     <ClInclude Include="Automat\Automat.h" />
     <ClInclude Include="Dates\ChartData.h" />
     <ClInclude Include="Dates\Compute.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="App\AppBase.cpp" />
     <ClCompile Include="App\SelectHandler.cpp" />
+    <ClCompile Include="App\UpdateMainChart.cpp" />
     <ClCompile Include="Automat\Automat.cpp" />
     <ClCompile Include="Dates\ChartData.cpp" />
     <ClCompile Include="Dates\Compute.cpp" />
