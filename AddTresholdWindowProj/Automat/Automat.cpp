@@ -51,6 +51,8 @@ namespace Automat
 	DWORD WINAPI  __Run__(LPVOID)
 	{
 		bool initTcp = true;
+		wchar_t buf[1024];
+		wchar_t *mess = L"<ff>ќжидание трубы";
 		while(true)
 		{
 			try
@@ -73,7 +75,7 @@ namespace Automat
 					}
 				}
 
-				App::PrintTopLabel(L"<ff>ќжидание трубы");
+				App::PrintTopLabel(mess);
 
 				unsigned input;
 				///< ќжидание бита "“руба в модуле"
@@ -137,6 +139,8 @@ namespace Automat
 				wchar_t *groupName = L""; 
 				unsigned color;
 				Compute::Recalculation(result, groupName, color);
+				computeSolidGroup.currentGroupName = groupName;
+				App::UpdateGroupCounter();
 
 				if(tubesStored)
 				{
@@ -154,7 +158,7 @@ namespace Automat
 					computeSolidGroup.currentFile = L"";
 				}
 
-				wchar_t buf[1024];
+				mess = buf;
 
 				wsprintf(buf, L"<ff00>%s<ff>√руппа прочности <%6x>%s <ff>коррел€ци€ <ffffff>%s"
 					, computeSolidGroup.currentFile.c_str()
@@ -173,7 +177,7 @@ namespace Automat
 					}
 				}
 
-				App::UpdateGroupCounter();
+				
 				App::UpdateMainWindow();				
 
 				StoreResultBase(

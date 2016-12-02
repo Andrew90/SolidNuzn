@@ -87,20 +87,13 @@ void App::PrintTopLabel(wchar_t *txt)
 
 void App::UpdateMainWindow()
 {
-	RepaintWindow(mainWindow.signalViewer.hWnd);
 	RepaintWindow(mainWindow.topLabelViewer.hWnd);
 	mainWindow.gridCounterViewer.Update();
+	UpdateMainChart(0, mainWindow.hWnd);
 }
 
 void App::UpdateLoopMainWindow(int delay)
 {
-	//static unsigned lastTime = 0;
-	//unsigned t = GetTickCount();
-	//if(lastTime + delay < t)
-	//{
-	//	lastTime = t;
-	//	QueueUserWorkItem(Updata, NULL, WT_EXECUTEDEFAULT);
-	//}
 	UpdateMainChart(delay, mainWindow.hWnd);
 }
 

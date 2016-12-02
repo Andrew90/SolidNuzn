@@ -108,8 +108,10 @@ wchar_t *CreateNameFile(wchar_t *subDir, wchar_t *typeSize, wchar_t *solidGroup,
 	int len = wcslen(path);
 	wsprintf(&path[len], L"%06d_%s_%s_%02d%02d%02d%02d%02d%02d.dat"
 		, CounterTubes::CountTypeAll()
-		, computeSolidGroup.typeSizeName.c_str()
-		, computeSolidGroup.currentGroupName.c_str()
+		//, computeSolidGroup.typeSizeName.c_str()
+		//, computeSolidGroup.currentGroupName.c_str()
+		, typeSize
+		, solidGroup
 		, now->tm_year - 100
 		, now->tm_mon + 1
 		, now->tm_mday

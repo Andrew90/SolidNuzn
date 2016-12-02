@@ -49,7 +49,7 @@ namespace Compute
 		ColorPanel::SetText(groupName, color);
 	}
 
-	void Recalculation(double &result, wchar_t *groupName, unsigned &color)
+	void Recalculation(double &result, wchar_t *&groupName, unsigned &color)
 	{
 		solidData.start = int(0.1 * solidData.currentOffset);
 		solidData.stop = solidData.currentOffset - solidData.start;

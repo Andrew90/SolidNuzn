@@ -96,7 +96,7 @@ struct GraphAxesTable
 	const wchar_t *name(){return L"GraphAxesTable";}
  };
 //------------------------------------------------------------------------------------------------------------
-DEFINE_PARAM(Frequency502, int, 4000)
+DEFINE_PARAM(Frequency502, int, 8000)
 DEFINE_PARAM(FrequencyGenerator, int, 6)
 DEFINE_PARAM(InputRangeSignal, int, 0)
 DEFINE_PARAM(ReferenceRangeSignal, int, 0)
