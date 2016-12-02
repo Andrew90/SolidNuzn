@@ -124,9 +124,9 @@ L502SolidGroup::L502SolidGroup()
 	, dataV(Singleton<SolenoidParametersTable>::Instance().items.get<InputRangeSignal>().value)
 	, READ_TIMEOUT(1500)
 {}
-bool  L502SolidGroup::Init(){return 0;}
+bool  L502SolidGroup::Init(){return true;}
 void  L502SolidGroup::Destroy(){}
-bool   L502SolidGroup::SetupParams(){return 0;}
+bool   L502SolidGroup::SetupParams(){return true;}
 int   L502SolidGroup::Start(){return 0;}
 int   L502SolidGroup::Stop(){return 0;}
 int L502SolidGroup::Read(unsigned &startChennel, double *data, unsigned &count){return 0;}

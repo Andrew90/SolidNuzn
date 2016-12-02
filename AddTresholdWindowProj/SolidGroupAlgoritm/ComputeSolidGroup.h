@@ -78,9 +78,9 @@ public:
 	bool AddSolidGroup(wchar_t *);
 	bool DelSolidGroup(wchar_t *);
 
-	bool OneFrame(double (&)[count_points], double &, wchar_t *&, unsigned &);
-	bool Frames(double* signal, double *reference, int start, int stop, double &, wchar_t *&, unsigned &);
-	bool FramesOne(double(&)[count_points], int(&)[count_points],double *signal, double *reference, int &start, int stop, double &, wchar_t *&, unsigned &);
+	bool OneFrame(double (&)[count_points], double &, wchar_t *, unsigned &);
+	bool Frames(double* signal, double *reference, int start, int stop, double &, wchar_t *, unsigned &);
+	bool FramesOne(double(&)[count_points], int(&)[count_points],double *signal, double *reference, int &start, int stop, double &, wchar_t *, unsigned &);
 private:
 	void InitRootAll();
 };

@@ -70,7 +70,7 @@ void FrameWindow::IncDecFrame()
 	int offsets[8];
 	double thresh[8];
 	double result;
-	wchar_t *nameGroup;
+	wchar_t *nameGroup = L"";
 	unsigned color;
 	computeSolidGroup.offset = frameViewer.x;
 	if(computeSolidGroup.FramesOne(

@@ -38,8 +38,7 @@ namespace Compute
 			, Wchar_from<double>(result)()
 			);
 
-		if(NULL != groupName)computeSolidGroup.currentGroupName = groupName;
-		else computeSolidGroup.currentGroupName = L"";
+		computeSolidGroup.currentGroupName = groupName;
 
 		Singleton<L502Signal>::Instance().Set(solidData.signal, solidData.currentOffset);
 		Singleton<L502Reference>::Instance().Set(solidData.reference, solidData.currentOffset);

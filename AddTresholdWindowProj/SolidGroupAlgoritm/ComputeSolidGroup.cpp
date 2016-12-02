@@ -713,7 +713,7 @@ namespace
 	};
 }
 
-bool ComputeSolidGroup::OneFrame(double (&points)[count_points], double &result, wchar_t *&groupName, unsigned &color)
+bool ComputeSolidGroup::OneFrame(double (&points)[count_points], double &result, wchar_t *groupName, unsigned &color)
 {
 	std::map<int, CountCorel> corel;
 
@@ -763,7 +763,7 @@ bool ComputeSolidGroup::OneFrame(double (&points)[count_points], double &result,
 }
 
 bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int stop
-	, double &result, wchar_t *&groupName, unsigned &color)
+	, double &result, wchar_t *groupName, unsigned &color)
 {	
 	double length = frequencySamples / (2 * 2 * frequencySignal);
 	int minL = int(0.9 * length);
@@ -895,7 +895,7 @@ bool ComputeSolidGroup::Frames(double* signal, double *reference, int start, int
 }
 //Скопипастено см. ComputeSolidGroup::Frames
 bool ComputeSolidGroup::FramesOne(double(&points)[count_points], int(&offsets)[count_points],double *signal, double *reference
-	, int &start, int stop, double &result, wchar_t *&groupName, unsigned &color)
+	, int &start, int stop, double &result, wchar_t *groupName, unsigned &color)
 {
 	double length = frequencySamples / (2 * 2 * frequencySignal);
 	int minL = int(0.9 * length);
@@ -965,7 +965,7 @@ bool ComputeSolidGroup::FramesOne(double(&points)[count_points], int(&offsets)[c
 			j->sumCorrelation += res;
 			
 
-			if(enabled == j->status && res >= maxCor)
+			if((enabled == j->status || new_item == j->status) && res >= maxCor)
 			{
 				maxCorelItem = ind;
 				maxCor = res;
