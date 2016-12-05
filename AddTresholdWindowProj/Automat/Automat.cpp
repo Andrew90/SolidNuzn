@@ -17,6 +17,7 @@
 namespace Automat
 {
 	HANDLE hStart = NULL;
+	HANDLE hStop = NULL;
 	HANDLE hThread = NULL;
 	bool &communicationRemoveUnit = Singleton<DifferentOptionsTable>::Instance().items.get<CommunicationRemoveUnit>().value;
 	bool &tubesStored = Singleton<DifferentOptionsTable>::Instance().items.get<TubesStored>().value;
@@ -33,32 +34,42 @@ namespace Automat
 	
 	const wchar_t *workStationDontWork =  L"<ff0000>Не могу подключится к рабочей станции";
 
+	const wchar_t *messWait = L"<ff>Ожидание трубы";
+
 	void Start()
 	{
+		App::PrintTopLabel((wchar_t *)messWait);
 		SetEvent(hStart);
 	}
 
 	void Stop()
 	{
 	   App::PrintTopLabel(L"<ff0000>Оператор вышел из цикла измерений");
-	   throw ResetException();
+	   SetEvent(hStop);
+	   AppKeyHandler::Stop();
 	}
 
 	void Init()
 	{
 		hStart = CreateEvent(NULL, TRUE, FALSE, NULL);
+		hStop = CreateEvent(NULL, FALSE, FALSE, NULL);
 	}
 
 	DWORD WINAPI  __Run__(LPVOID)
 	{
 		bool initTcp = true;
-		wchar_t buf[1024];
-		wchar_t *mess = L"<ff>Ожидание трубы";
+		wchar_t buf[1024];		
+		wchar_t *mess = (wchar_t *)messWait;
+		HANDLE hEvents[] = {hStart, hStop};
 		while(true)
 		{
+START:
 			try
 			{
-				WaitForSingleObject(hStart, INFINITE);
+				if(1 + WAIT_OBJECT_0 == WaitForMultipleObjects(2, hEvents, FALSE, INFINITE))
+				{
+					continue;
+				}
 
 				if(initTcp && communicationRemoveUnit)
 				{
@@ -82,7 +93,10 @@ namespace Automat
 				///< Ожидание бита "Труба в модуле"
 				do	 
 				{
-					Sleep(5);
+					if(WAIT_OBJECT_0 == WaitForSingleObject(hStop, 10))
+					{
+						goto START;
+					}
 					input = Device1730::Read();
 					///< Если бит "Устоновка включена" = 0 то выход из цикла
 					if(!(unitOn & input))
@@ -110,7 +124,10 @@ namespace Automat
 				unsigned tme = GetTickCount();
 				do
 				{
-					Sleep(10);
+					if(WAIT_OBJECT_0 == WaitForSingleObject(hStop, 10))
+					{
+						throw ResetException();
+					}
 					input = Device1730::Read();
 					if(!(unitOn & input))
 					{
@@ -122,14 +139,6 @@ namespace Automat
 					unsigned res = dimention_of(data);
 					l502SolidGroup.Read(first, data, res);
 					solidData.SetData(&data[first], res - first);
-					//unsigned t = GetTickCount();
-					//if(t - tme > 5000)
-					//{
-					//	///< обновление экрана через ~5 сек
-						//App::UpdateMainWindow();
-					//	dprint("count %d\n", res - first);
-					//	tme = t;
-					//}
 					App::UpdateLoopMainWindow(5000);
 				}
 				while(tubeInUnit & input);
@@ -177,7 +186,6 @@ namespace Automat
 						Device1730::Write( 1 << communicationID);
 					}
 				}
-
 				
 				App::UpdateMainWindow();				
 
@@ -197,7 +205,7 @@ namespace Automat
 					clientTreshold.Close();
 				}
 				initTcp = true;
-				AppKeyHandler::Stop();
+				//AppKeyHandler::Stop();
 			}
 		}
 		return 0;

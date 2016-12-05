@@ -101,7 +101,7 @@ wchar_t *CreateNameFile(wchar_t *subDir, wchar_t *typeSize, wchar_t *solidGroup,
 {
 	GetModuleFileName(0, path, 1024);
 	PathRemoveFileSpec(path);
-	wsprintf(path, L"\\%s\\", subDir);
+	wsprintf(&path[wcslen(path)], L"\\%s\\", subDir);
 	CreateDirectory(path, NULL);
 	time_t t = time(0);
 	struct tm *now = localtime( & t );
