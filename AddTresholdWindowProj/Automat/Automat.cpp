@@ -13,6 +13,7 @@
 #include "Dates\StoreResultBase.h"
 #include "tools_debug/DebugMess.h"
 #include "App\AppKeyHandler.h"
+#include "ColorPanel\ColorPanel.h"
 
 namespace Automat
 {
@@ -194,6 +195,7 @@ START:
 					, (wchar_t *)computeSolidGroup.currentGroupName.c_str()
 					, groupName
 					);
+				ColorPanel::SetText(groupName, color);
 
 			}
 			catch(ResetException)
