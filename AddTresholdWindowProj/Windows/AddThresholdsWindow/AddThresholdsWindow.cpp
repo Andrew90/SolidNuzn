@@ -12,7 +12,6 @@
 #include "DlgTemplates\ParamDlg.h"
 #include "FrameWindow\FrameWindow.h"
 
-//#pragma comment(lib, "Comctl32.lib")
 namespace
 {
 struct OkBtn
@@ -189,8 +188,8 @@ void AddThresholdWindow::operator()(TClose &l)
 		}
 		else if(IDNO == res)
 		{
-			//solidGroup.Clear();
-			//solidGroup.Load();
+			solidGroup.Clear();
+			solidGroup.Load();
 		}
 		else if(IDCANCEL == res)
 		{
