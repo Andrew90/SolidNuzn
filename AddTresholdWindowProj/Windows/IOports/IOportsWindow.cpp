@@ -53,9 +53,9 @@ void IOportsWindow::operator()(TGetMinMaxInfo &m)
 	}		
 }
 //------------------------------------------------------------------------
-unsigned IOportsWindow::operator()(TCreate &m)
+LRESULT IOportsWindow::operator()(TCreate &m)
 {
-	Menu<IOportsWindowMenu::MainMenu>().Init(m.hwnd);
+	//Menu<IOportsWindowMenu::MainMenu>().Init(m.hwnd);
 	viewer.Start();
 	return 0;
 }

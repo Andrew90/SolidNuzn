@@ -27,7 +27,7 @@ bool OpenMessagePanel_Check()
 		CBase base(ParametersBase().name());
 		if(base.IsOpen())
 		{
-			Update<ParametersTable>(base).set<MessagePanelVisible>(result)
+			Update<DifferentOptionsTable>(base).set<MessagePanelVisible>(result)
 				.Where().ID(1).Execute();
 		}
 		return result;

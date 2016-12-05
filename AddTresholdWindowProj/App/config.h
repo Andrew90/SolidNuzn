@@ -1,6 +1,6 @@
 #pragma once
 
-#undef DEBUG_ITEMS
+#define DEBUG_ITEMS
 
 #ifdef DEBUG_ITEMS
 #pragma message("–≈∆»Ã Œ“À¿ƒ ¿")

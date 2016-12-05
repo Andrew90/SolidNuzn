@@ -17,7 +17,7 @@ public:
 	void operator()(TSize &);
 	void operator()(TCommand &);
 	void operator()(TGetMinMaxInfo &);
-	unsigned operator()(TCreate &);
+	LRESULT operator()(TCreate &);
 	void operator()(TDestroy &);
 	void operator()(TPaint &);
 	void operator()(TLButtonDown &);

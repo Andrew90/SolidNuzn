@@ -28,7 +28,7 @@ bool IOportsDlg_Check()
 		CBase base(ParametersBase().name());
 		if(base.IsOpen())
 		{
-			Update<ParametersTable>(base).set<IOPortsVisible>(result)
+			Update<DifferentOptionsTable>(base).set<IOPortsVisible>(result)
 				.Where().ID(1).Execute();
 		}
 		return result;
