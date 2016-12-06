@@ -41,46 +41,13 @@ struct InputBitTable
 	const wchar_t *name(){return L"InputBitTable";}
  };
 
-//DEFINE_PARAM(oWork            , unsigned, 1 << 0)
-//DEFINE_PARAM(oToShiftThe      , unsigned, 1 << 1)
-//DEFINE_PARAM(oResult1         , unsigned, 1 << 2)
-//DEFINE_PARAM(oResult2         , unsigned, 1 << 3)
-//DEFINE_PARAM(oPowerBM         , unsigned, 1 << 4)
-//DEFINE_PARAM(oReserve         , unsigned, 1 << 5)
-//
-//struct OutputBitTable
-// {
-//	typedef TL::MkTlst<
-//		oWork      
-//		, oToShiftThe  //перекладка
-//		, oResult1   
-//		, oResult2   
-//		, oPowerBM   
-//		, oReserve   
-//	>::Result items_list;
-//	typedef TL::Factory<items_list> TItems;
-//	TItems items;
-//	const wchar_t *name(){return L"OutputBitTable";}
-// };
-
-// DEFINE_PARAM(Descriptor1730, unsigned, 0)
-//struct Descriptor1730Table
-// {
-//	typedef TL::MkTlst<
-//		Descriptor1730
-//	>::Result items_list;
-//	typedef TL::Factory<items_list> TItems;
-//	TItems items;
-//	const wchar_t *name(){return L"Descriptor1730Table";}
-// };
-
 DEFINE_PARAM(PrimarySignalMin , double, -10)
-DEFINE_PARAM(PrimarySignalMax , double, 10)
+DEFINE_PARAM(PrimarySignalMax , double, 12)
 DEFINE_PARAM(OffsetPointsMin  , double, -10)
-DEFINE_PARAM(OffsetPointsMax  , double, 10)
+DEFINE_PARAM(OffsetPointsMax  , double, 12)
 
-DEFINE_PARAM(PrimarySignalOffset  , int, 300)
-DEFINE_PARAM(PrimarySignalWidth  , int, 800)
+DEFINE_PARAM(PrimarySignalOffset  , int, 400)
+DEFINE_PARAM(PrimarySignalWidth  , int, 1200)
 struct GraphAxesTable
  {
 	typedef TL::MkTlst<
