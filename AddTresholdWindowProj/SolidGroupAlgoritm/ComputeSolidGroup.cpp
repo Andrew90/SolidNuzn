@@ -537,6 +537,7 @@ void ComputeSolidGroup::UpdateTresholds()
 				t -= data[0] + dY * (data[1] - data[0]);
 				i->points[j] = t;
 			}
+			i->status = new_item;
 			dprint("%f %f %f %f %f %f %f %f\n"
 				, i->points[0]
 			    , i->points[1]
