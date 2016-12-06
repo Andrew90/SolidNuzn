@@ -26,7 +26,7 @@ void EventDo(TCommand &m)
 		mii.fMask = MIIM_DATA;
 		if(GetMenuItemInfo(GetMenu(m.hwnd), m.id, false, &mii))
 		{
-			((void (__cdecl *)(HWND))(mii.dwItemData))(m.hwnd);
+			if(NULL != mii.dwItemData)((void (__cdecl *)(HWND))(mii.dwItemData))(m.hwnd);
 		}
 	}
 

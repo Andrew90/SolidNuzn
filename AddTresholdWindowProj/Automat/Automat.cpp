@@ -45,15 +45,16 @@ namespace Automat
 
 	void Stop()
 	{
-	   App::PrintTopLabel(L"<ff0000>Оператор вышел из цикла измерений");
-	   SetEvent(hStop);
-	   AppKeyHandler::Stop();
+		ResetEvent(hStart);
+		App::PrintTopLabel(L"<ff0000>Оператор вышел из цикла измерений");
+		SetEvent(hStop);
+		AppKeyHandler::Stop();	   
 	}
 
 	void Init()
 	{
 		hStart = CreateEvent(NULL, TRUE, FALSE, NULL);
-		hStop = CreateEvent(NULL, FALSE, FALSE, NULL);
+		hStop = CreateEvent(NULL, FALSE, FALSE, NULL);		
 	}
 
 	DWORD WINAPI  __Run__(LPVOID)
