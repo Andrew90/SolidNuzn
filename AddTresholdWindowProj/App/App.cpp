@@ -36,7 +36,7 @@ void App::Init()
 
 	bool run = Automat::Init1730();
 
-	Device1730::Write(0);
+	if(run)Device1730::Write(0);
 
 	if(!(l502SolidGroup.Init() && l502SolidGroup.SetupParams()))
 	{
