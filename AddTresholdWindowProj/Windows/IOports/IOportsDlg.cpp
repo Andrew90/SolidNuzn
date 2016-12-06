@@ -67,7 +67,6 @@ void IOportsDlg_Open()
 		ShowWindow(h, SW_SHOWNORMAL);
 		SetWindowPos(h, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 		DWORD dwStyle = GetWindowLong(h, GWL_STYLE);
-		//dwStyle &= ~(WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
 		dwStyle &= ~(WS_SYSMENU);
 		SetWindowLong(h, GWL_STYLE, dwStyle);
 	}
