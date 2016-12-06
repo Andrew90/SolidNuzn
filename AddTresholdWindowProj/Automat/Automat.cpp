@@ -207,7 +207,6 @@ START:
 					clientTreshold.Close();
 				}
 				initTcp = true;
-				//AppKeyHandler::Stop();
 			}
 		}
 		return 0;

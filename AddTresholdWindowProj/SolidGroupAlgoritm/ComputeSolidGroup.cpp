@@ -5,6 +5,7 @@
 #include "SolidBase.h"
 #include "tools_debug/DebugMess.h"
 #include "Dates\SaveLoadDates.h"
+#include "Dates\SolidData.h"
 
 namespace
 {
@@ -424,15 +425,28 @@ namespace
 void ComputeSolidGroup::AddThreshold()
 {
 	SolidItem s;
-//	static int count = 0;
-//	++count;
-	//wchar_t buf[128];
-	//wsprintf(buf, L"NONAME%2d", count);
-	//todo сохранение порога
 
 	wchar_t *solidFile = (wchar_t *)currentFile.c_str();
-	wchar_t *solidGroup = L"NONAME";
+	wchar_t *solidGroup = (wchar_t *)currentGroupName.c_str();
 	wchar_t *subDir = L"Config";
+
+	if('\0' == solidFile[0])
+	{
+		if(Singleton<SolidData>::Instance().currentOffset > 0)
+		{
+			wchar_t path[1024];
+			currentFile = CreateNameFile(
+				subDir
+				, (wchar_t *)typeSizeName.c_str()
+				, solidGroup
+				, path
+				);
+		}
+		else
+		{
+			return;
+		}
+	}
 
 	if(!FileExist(subDir, solidFile))
 	{
