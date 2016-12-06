@@ -399,29 +399,6 @@ namespace
 	}
 }
 
-//void ComputeSolidGroup::AddThreshold(wchar_t *groupName, wchar_t *solidFile, int offset, double(&points)[count_points])
-//{
-//	SolidItem s;
-//
-//	s.groupName = GetMapID(groupNameList, groupName);
-//	s.solidFile = GetMapID(fileNameList, solidFile);
-//
-//	s.offset = offset;
-//	memmove(s.points, points, sizeof(s.points));
-//	s.status = new_item;
-//	
-//	changeTresholds = true;
-//	double root = 0;
-//	for(int i = 0; i < count_points; ++i)
-//	{
-//		double a = points[i];
-//		root += a * a;
-//	}
-//	s.root = sqrt(root);
-//
-//	solidItems.insert(solidItems.begin(), s);
-//}
-
 void ComputeSolidGroup::AddThreshold()
 {
 	SolidItem s;
@@ -549,7 +526,6 @@ void ComputeSolidGroup::UpdateTresholds()
 
 			for(int j = 0; j < count_points; ++j)
 			{
-//todo XZZZZZXXZXXZXXZXZXZ
 				ofs = (i_offset + offsets[j] + offset) * sizeof(double) + sizeof(int);
 				fseek(f, ofs, SEEK_SET);
 				fread(data, sizeof(double), 2, f);
