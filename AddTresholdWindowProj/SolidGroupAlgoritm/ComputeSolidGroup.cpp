@@ -429,18 +429,18 @@ void ComputeSolidGroup::AddThreshold()
 	wchar_t *solidFile = (wchar_t *)currentFile.c_str();
 	wchar_t *solidGroup = (wchar_t *)currentGroupName.c_str();
 	wchar_t *subDir = L"Config";
-
+	wchar_t path[1024];
 	if('\0' == solidFile[0])
 	{
 		if(Singleton<SolidData>::Instance().currentOffset > 0)
-		{
-			wchar_t path[1024];
+		{			
 			currentFile = CreateNameFile(
 				subDir
 				, (wchar_t *)typeSizeName.c_str()
 				, solidGroup
 				, path
 				);
+			solidFile = (wchar_t *)currentFile.c_str();
 		}
 		else
 		{
@@ -450,7 +450,6 @@ void ComputeSolidGroup::AddThreshold()
 
 	if(!FileExist(subDir, solidFile))
 	{
-		wchar_t path[1024];
 		GetModuleFileName(0, path, 1024);
 		PathRemoveFileSpec(path);
 		wsprintf(&path[wcslen(path)], L"\\%s", subDir);
