@@ -14,89 +14,80 @@
 
 namespace
 {
-struct OkBtn
-{
-	static const int width = 120;
-	static const int height = 30;
-	static const int ID = IDOK;
-	wchar_t *Title(){return L"Применить";}
-	template<class O, class P>struct __ok_btn__
-	{
-		void operator()(O &o)
-		{
-			o.value.value =  __data_from_widget__<O, typename TL::Inner<O>::Result::type_value>()(o);
-		}
-	};
-	template<class Owner>void BtnHandler(Owner &owner, HWND h)
-	{
-		if(!TL::find<typename Owner::list, __test__>()(&owner.items, &h))return;
-		TL::foreach<typename Owner::list, __ok_btn__>()(owner.items);
-		//EndDialog(h, TRUE);	
-		ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
-		TL::foreach<__point_list__, __get_tresh__>()(owner.table.items, solidGroup.persents);
-		
-		solidGroup.UpdateTresholds();
-		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
-		if(NULL != hh)
-		{
-			((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
-		}
-	}
-};
+//struct OkBtn
+//{
+//	static const int width = 120;
+//	static const int height = 30;
+//	static const int ID = IDOK;
+//	wchar_t *Title(){return L"Применить";}
+//	template<class O, class P>struct __ok_btn__
+//	{
+//		void operator()(O &o)
+//		{
+//			o.value.value =  __data_from_widget__<O, typename TL::Inner<O>::Result::type_value>()(o);
+//		}
+//	};
+//	template<class Owner>void BtnHandler(Owner &owner, HWND h)
+//	{
+//		if(!TL::find<typename Owner::list, __test__>()(&owner.items, &h))return;
+//		TL::foreach<typename Owner::list, __ok_btn__>()(owner.items);
+//		ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
+//		TL::foreach<__point_list__, __get_tresh__>()(owner.table.items, solidGroup.persents);
+//		
+//		solidGroup.UpdateTresholds();
+//		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+//		if(NULL != hh)
+//		{
+//			((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
+//		}
+//	}
+//};
 
-typedef TL::CreateNumList<Point, 0, ComputeSolidGroup::count_points - 1>::Result __point_list__; 
+//typedef TL::CreateNumList<Point, 0, ComputeSolidGroup::count_points - 1>::Result __point_list__; 
+//
+//template<class O, class P>struct __set_tresh__;
+//template<int N, class P>struct __set_tresh__<Point<N>, P>
+//{
+//	void operator()(Point<N> &o, P &p)
+//	{
+//		o.value = p[N];
+//	}
+//};
+//
+//template<class O, class P>struct __get_tresh__;
+//template<int N, class P>struct __get_tresh__<Point<N>, P>
+//{
+//	void operator()(Point<N> &o, P &p)
+//	{
+//		p[N] = (int)o.value;
+//	}
+//};
+//
+//template<int N>struct ParamTitle<Point<N>>
+//{
+//	wchar_t buf[32];
+//	wchar_t *operator()()
+//	{
+//		wsprintf(buf, L"Точка %d", 1 + N);
+//		return buf;
+//	}
+//};
+//
+//template<int N>struct LessEqual<Point<N>>{typename Point<N>::type_value operator()(){return 0;}};
+//template<int N>struct Largen   <Point<N>>{typename Point<N>::type_value operator()(){return 100;}};
 
-template<class O, class P>struct __set_tresh__;
-template<int N, class P>struct __set_tresh__<Point<N>, P>
-{
-	void operator()(Point<N> &o, P &p)
-	{
-		o.value = p[N];
-	}
-};
-
-template<class O, class P>struct __get_tresh__;
-template<int N, class P>struct __get_tresh__<Point<N>, P>
-{
-	void operator()(Point<N> &o, P &p)
-	{
-		p[N] = (int)o.value;
-	}
-};
-
-template<int N>struct ParamTitle<Point<N>>
-{
-	wchar_t buf[32];
-	wchar_t *operator()()
-	{
-		wsprintf(buf, L"Точка %d", 1 + N);
-		return buf;
-	}
-};
-
-template<int N>struct LessEqual<Point<N>>{typename Point<N>::type_value operator()(){return 0;}};
-template<int N>struct Largen   <Point<N>>{typename Point<N>::type_value operator()(){return 100;}};
-
-void __set_points__(HWND h)
-{
-	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
-	TresholdsTable t;	
-	TL::foreach<__point_list__, __set_tresh__>()(t.items, solidGroup.persents);
-
-	if(TemplDialogList<NullType, TresholdsTable
-		, __point_list__
-		, TL::MkTlst<OkBtn, CancelBtn>::Result>(t).Do(h, L"Смещение порогов"))
-	{
-		//TL::foreach<__point_list__, __get_tresh__>()(t.items, solidGroup.persents);
-		//
-		//solidGroup.UpdateTresholds();
-		//HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
-		//if(NULL != hh)
-		//{
-		//	((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
-		//}
-	}
-}
+//void __set_points__(HWND h)
+//{
+//	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
+//	TresholdsTable t;	
+//	TL::foreach<__point_list__, __set_tresh__>()(t.items, solidGroup.persents);
+//
+//	if(TemplDialogList<NullType, TresholdsTable
+//		, __point_list__
+//		, TL::MkTlst<OkBtn, CancelBtn>::Result>(t).Do(h, L"Смещение порогов"))
+//	{
+//	}
+//}
 namespace
 {
 	void SaveOptions(HWND h)
@@ -134,17 +125,17 @@ namespace
 	MENU_TEXT(L"Настройки", TopMenu<Options>)				   
 	  
 	struct WindowPos    : WindowPositionDlg<AddThresholdWindow>{}; 
-	struct OffsPoints    {static void Do(HWND h){__set_points__(h);}}; 
+	//struct OffsPoints    {static void Do(HWND h){__set_points__(h);}}; 
 															   
 	MENU_ITEM(L"Сохранить координаты окна", WindowPos)	   
-	MENU_ITEM(L"Точки смещения", OffsPoints)
+	//MENU_ITEM(L"Точки смещения", OffsPoints)
 															   
 	template<>struct TopMenu<Options>						   
 	{														   
 		typedef TL::MkTlst<
-			MenuItem<OffsPoints>
-			, Separator<0>
-			, MenuItem<WindowPos>						   
+		//	MenuItem<OffsPoints>
+		//	, Separator<0>
+			 MenuItem<WindowPos>						   
 		>::Result list;										   
 	};														   
 	   

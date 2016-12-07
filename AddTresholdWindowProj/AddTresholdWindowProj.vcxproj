@@ -187,6 +187,7 @@
     <ClInclude Include="Windows\AddThresholdsWindow\GridWindow.h" />
     <ClInclude Include="Windows\AddThresholdsWindow\TableData.h" />
     <ClInclude Include="Windows\AddThresholdsWindow\ThresholdDataTable.h" />
+    <ClInclude Include="Windows\AddThresholdsWindow\TreshWindow.h" />
     <ClInclude Include="Windows\ColorPanel\ColorPanel.h" />
     <ClInclude Include="Windows\Common\Viewer.h" />
     <ClInclude Include="Windows\Dialogs\Dialogs.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Windows\AddThresholdsWindow\AddThresholdsWindow.cpp" />
     <ClCompile Include="Windows\AddThresholdsWindow\GridWindow.cpp" />
     <ClCompile Include="Windows\AddThresholdsWindow\ThresholdDataTable.cpp" />
+    <ClCompile Include="Windows\AddThresholdsWindow\TreshWindow.cpp" />
     <ClCompile Include="Windows\ColorPanel\ColorPanel.cpp" />
     <ClCompile Include="Windows\Common\Viewer.cpp" />
     <ClCompile Include="Windows\Dialogs\AboutWindow.cpp" />

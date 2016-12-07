@@ -361,6 +361,7 @@ void ComputeSolidGroup::Save()
 				t.items.get<ID<SolidParametersTable>>().value = currentID;
 				Insert_Into<TresholdsTable>(t, base).Execute();
 				i->ID = Select<TresholdsTable>(base).eq_all<TresholdsTable::items_list>(&t.items).Execute();
+				i->changed = false;
 			}
 			else if(i->changed)
 			{
@@ -537,7 +538,7 @@ void ComputeSolidGroup::UpdateTresholds()
 				t -= data[0] + dY * (data[1] - data[0]);
 				i->points[j] = t;
 			}
-			i->status = new_item;
+			i->changed = true;
 			dprint("%f %f %f %f %f %f %f %f\n"
 				, i->points[0]
 			    , i->points[1]

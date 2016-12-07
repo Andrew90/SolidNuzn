@@ -448,6 +448,9 @@
     <ClInclude Include="App\AppKeyHandler.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\AddThresholdsWindow\TreshWindow.h">
+      <Filter>windows\AddTresholdsWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -644,6 +647,9 @@
     </ClCompile>
     <ClCompile Include="App\AppKeyHandler.cpp">
       <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\AddThresholdsWindow\TreshWindow.cpp">
+      <Filter>windows\AddTresholdsWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

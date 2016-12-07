@@ -19,6 +19,9 @@
 #include "App\UpdateMainChart.h"
 #include "App\AppKeyHandler.h"
 #include "window_tool\HookKey.h"
+//----------debug
+#include "AddThresholdsWindow\TreshWindow.h"
+//debug
 
 namespace
 {
@@ -29,6 +32,7 @@ namespace
 
 void App::Init()
 {
+#if 1
 	AppBase().Init();
 	NameParam::type_value &nameParam = Singleton<ParametersTable>::Instance().items.get<NameParam>().value;
 	computeSolidGroup.Load(nameParam);
@@ -43,8 +47,6 @@ void App::Init()
 		MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка !!!", MB_ICONERROR);
 		run = false;
 	}
-	
-#if 1
 	RECT r;
 	WindowPosition::Get<MainWindow>(r);
 	HWND h = WindowTemplate(&mainWindow, L"Группа прочности", r.left, r.top, r.right, r.bottom);
@@ -66,15 +68,10 @@ void App::Init()
 		Automat::Run();
 	}
 #else
-#if 1
- //  ComputeSolidGroup &sg = Singleton<ComputeSolidGroup>::Instance();
- //  double p[] = {0, 1, 2, 3, 4, 5, 6, 7};
- //  sg.AddThreshold(L"NONAME", L"File", 200, p);
- //
- //  double p1[] = {5,6,7,8,9,10,11,12};
- //  sg.AddThreshold(L"NONAME", L"File1", 300, p1);
-#endif
-	//AddThresholdWindow::Show();
+	AppBase().Init();
+	NameParam::type_value &nameParam = Singleton<ParametersTable>::Instance().items.get<NameParam>().value;
+	computeSolidGroup.Load(nameParam);
+	TreshWindow::Show();
 #endif
 }
 

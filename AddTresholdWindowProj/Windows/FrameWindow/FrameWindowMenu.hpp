@@ -6,6 +6,7 @@
 #include "window_tool\WindowsPosition.h"
 #include "AddThresholdsWindow\AddThresholdsWindow.h"
 #include "Dialogs\Dialogs.h"
+#include "AddThresholdsWindow\TreshWindow.h"
 
 namespace FrameWindowMenu
 {
@@ -33,14 +34,17 @@ namespace FrameWindowMenu
 	MENU_TEXT(L"Настройки", TopMenu<MainOptionUnits>)
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	struct ThresholdsMenuItem{static void Do(HWND){AddThresholdWindow::Show();}};
+	struct OffsetsMenuItem{static void Do(HWND){TreshWindow::Show();}};
 
 	MENU_ITEM(L"Пороги", ThresholdsMenuItem)
+	MENU_ITEM(L"Смещения", OffsetsMenuItem)
 	MENU_ITEM(L"Сохранить координаты окна", WindowPositionDlg<FrameWindow>)
 
 	template<>struct TopMenu<MainOptionUnits>
 	{
 		typedef TL::MkTlst<
 			MenuItem<ThresholdsMenuItem>
+			, MenuItem<OffsetsMenuItem>
 			, Separator<0>
 			, MenuItem<WindowPositionDlg<FrameWindow>>
 		>::Result list;
