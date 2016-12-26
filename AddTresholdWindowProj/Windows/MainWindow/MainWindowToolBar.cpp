@@ -72,11 +72,20 @@ namespace
 //-------------------------------------------------------------------------------
 	void Key<IDB_OptionsBtn>::Click(HWND h)
 	{
-		zprint("IDB_OptionsBtn\n");
-		RECT r;
-		WindowPosition::Get<FrameWindow>(r);
-		HWND hh = WindowTemplate(&Singleton<FrameWindow>::Instance(), L"", r.left, r.top, r.right, r.bottom);
-		ShowWindow(hh, SW_SHOWNORMAL);
+		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+		if(NULL != hh)
+		{
+			RepaintWindow(hh);
+			SendMessage(hh, WM_SYSCOMMAND, SC_RESTORE, 0);
+			SetForegroundWindow(hh);
+		}
+		else
+		{
+			RECT r;
+			WindowPosition::Get<FrameWindow>(r);
+			hh = WindowTemplate(&Singleton<FrameWindow>::Instance(), L"", r.left, r.top, r.right, r.bottom);
+			ShowWindow(hh, SW_SHOWNORMAL);
+		}
 	}
 //------------------------------------------------------------------------------
 #ifdef DEBUG_ITEMS

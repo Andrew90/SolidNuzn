@@ -6,6 +6,10 @@
 #include "MainWindow\MainWindowMenu.hpp"
 #include "Dates\CounterTubes.h"
 #include "MainWindow\MainWindow.h"
+#include "window_tool\Emptywindow.h"
+#include "AddThresholdsWindow\TreshWindow.h"
+#include "AddThresholdsWindow\AddThresholdsWindow.h"
+#include "FrameWindow\FrameWindow.h"
 
 namespace SelectHandler
 {
@@ -63,5 +67,11 @@ namespace SelectHandler
 				Singleton<MainWindow>::Instance().gridCounterViewer.Update();
 			}
 		}
+		HWND hh = FindWindow(WindowClass<TreshWindow>()(), 0);
+		if(NULL != hh) DestroyWindow(hh);
+		hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+		if(NULL != hh) DestroyWindow(hh);
+		hh = FindWindow(WindowClass<AddThresholdWindow>()(), 0);
+		if(NULL != hh) DestroyWindow(hh);
 	}
 }
