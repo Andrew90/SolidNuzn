@@ -1,7 +1,9 @@
 #pragma once
-struct CommunicationTCP
+namespace CommunicationTCP
 {
-	static unsigned short TubeNumber;
-	static int Result;
-	static void Receive(char *inputData, int inputCount, char *outputData, int &outputCount);
+	//extern unsigned short TubeNumber;
+	//extern int Result;
+	void Init();
+	void Receive(char *inputData, int inputCount, char *outputData, int &outputCount);
+	void SetResult(int);
 };

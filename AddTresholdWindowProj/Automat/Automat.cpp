@@ -54,7 +54,8 @@ namespace Automat
 	void Init()
 	{
 		hStart = CreateEvent(NULL, TRUE, FALSE, NULL);
-		hStop = CreateEvent(NULL, FALSE, FALSE, NULL);		
+		hStop = CreateEvent(NULL, FALSE, FALSE, NULL);	
+		CommunicationTCP::Init();
 	}
 
 	DWORD WINAPI  __Run__(LPVOID)
@@ -62,7 +63,7 @@ namespace Automat
 		bool initTcp = true;
 		wchar_t buf[1024];		
 		wchar_t *mess = (wchar_t *)messWait;
-		HANDLE hEvents[] = {hStart, hStop};
+		HANDLE hEvents[] = {hStart, hStop};		
 		while(true)
 		{
 START:
@@ -109,7 +110,6 @@ START:
 				}
 				while(0 == (tubeInUnit & input));
 
-				CommunicationTCP::Result = 0;
 				if(paintMarker)
 				{
 					Device1730::Write(0);
@@ -180,15 +180,14 @@ START:
 					);
 
 				unsigned communicationID = computeSolidGroup.communicationIDItems.GetID(groupName);
-				if(-1 == communicationID)
+				if(-1 != communicationID)
 				{
-					CommunicationTCP::Result = communicationID;
 					if(paintMarker && communicationID >= 10 && communicationID <= 15)
 					{
 						Device1730::Write( 1 << communicationID);
 					}
 				}
-				
+				CommunicationTCP::SetResult(communicationID);
 				App::UpdateMainWindow();				
 
 				StoreResultBase(
