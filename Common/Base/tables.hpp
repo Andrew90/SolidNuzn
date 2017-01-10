@@ -1161,15 +1161,11 @@ struct CMD
 	}
 	template<class T>CMD &GetValue(wchar_t *nameParam, T &value)
 	{
-		//_variant_t rowsAffected; 
-		//ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 		value = rec->Fields->GetItem(nameParam)->GetValue();
 		return *this;
 	}
     CMD &GetValue(wchar_t *nameParam, wchar_t (&value)[128])
 	{
-	//	_variant_t rowsAffected; 
-	//	ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
         wchar_t *s = _bstr_t(rec->Fields->GetItem(nameParam)->GetValue());
 		wcsncpy(value, s, dimention_of(value));
 		return *this;
@@ -1177,7 +1173,6 @@ struct CMD
 	CMD &Execute()
 	{
 		_variant_t rowsAffected; 
-		//ADODB::_RecordsetPtr rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 	    rec = cmd->Execute( &rowsAffected, 0, ADODB::adCmdText);
 		return *this;
 	}
