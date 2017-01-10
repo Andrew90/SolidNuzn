@@ -45,7 +45,7 @@ void TreshWindow::OkBtn::Do(TCommand &l)
 	TL::foreach<dlg_list, TreshWindow_ok_btn__>()(owner->dlg_items);
 	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
 	TL::foreach<offset_list, __get_tresh__>()(owner->items, solidGroup.persents);
-
+	solidGroup.persentsChanged = true;
 	solidGroup.UpdateTresholds();
 	HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
 	if(NULL != hh)
