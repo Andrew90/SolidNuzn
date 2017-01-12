@@ -19,7 +19,6 @@ namespace MainWindowMenu
 		static void Do(HWND h)
 		{
 			LoadDateFile::Do(h);
-			//Singleton<Compute>::Instance().Recalculation();
 			Compute::Recalculation();
 		}
 	};
@@ -69,13 +68,26 @@ namespace MainWindowMenu
 	MENU_ITEM(L"Удалить типоразмер", MainDeleteTypeSize)
 	MENU_ITEM(L"Обнулить счётчик", MainClearCounter)
 
+	struct CounterShowDlg__
+	{
+		static void Do(HWND h)
+		{
+			bool x = CounterShowDlg::Do();
+			CheckMenu<MenuItem<CounterShowDlg__>>(h, x);
+		}
+	};
+
+	MENU_ITEM(L"Счётчик труб", CounterShowDlg__)
+
 	template<>struct TopMenu<MainOptionTypeSize>
 	{
 		typedef TL::MkTlst<
 			 MenuItem<MainCreateTypesize>
 			, MenuItem<MainDeleteTypeSize>
 			, Separator<1>
-			, MenuItem<MainClearCounter>
+			, MenuItem<CounterShowDlg__>
+			, Separator<2>
+			, MenuItem<MainClearCounter>			
 		>::Result list;
 	};
 
@@ -113,7 +125,7 @@ namespace MainWindowMenu
 	MENU_ITEM(L"Дескриптор платы 1730"          , Descriptor1730Item)
 	MENU_ITEM(L"Сохранить координаты окна", SaveWindowPosition)
 	MENU_ITEM(L"Панель сообщений", MessagePanel)
-	MENU_ITEM(L"Просмотр дискретных входов", IOportsDlg__)
+	MENU_ITEM(L"Просмотр дискретных входов", IOportsDlg__)	
 
 	MENU_ITEM(L"Идентификатор типоразмера для передачи по для сети", CommunicationIDMenu)
 
@@ -146,7 +158,7 @@ namespace MainWindowMenu
 			, Separator<1>			
 			, MenuItem<SaveWindowPosition>
 			, MenuItem<MessagePanel>
-			, MenuItem<IOportsDlg__>
+			, MenuItem<IOportsDlg__>			
 		>::Result list;
 	};
 
@@ -163,6 +175,14 @@ namespace MainWindowMenu
 		int operator()(HWND)
 		{
 			return IOportsDlg_Init();
+		}
+	};
+
+	template<>struct EnableMenuInit<MenuItem<CounterShowDlg__>>
+	{
+		int operator()(HWND)
+		{
+			return MFS_UNCHECKED;
 		}
 	};
 

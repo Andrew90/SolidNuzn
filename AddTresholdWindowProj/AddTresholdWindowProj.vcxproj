@@ -260,6 +260,7 @@
     <ClCompile Include="Windows\Dialogs\CommunicationIDWindow.cpp" />
     <ClCompile Include="Windows\Dialogs\Descriptor1730Dlg.cpp" />
     <ClCompile Include="Windows\Dialogs\DigitalInputsDlg.cpp" />
+    <ClCompile Include="Windows\Dialogs\GridCounterDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\SolenoidParametersTableDlg.cpp" />
     <ClCompile Include="Windows\Dialogs\TcpCommunications.cpp" />
     <ClCompile Include="Windows\Dialogs\ThresholdDlg.cpp" />

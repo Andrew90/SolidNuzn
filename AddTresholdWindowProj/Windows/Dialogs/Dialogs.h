@@ -46,6 +46,12 @@ struct IOportsDlg
 {
 	static bool Do();
 };
+
+struct CounterShowDlg
+{
+	static bool Do();
+};
+
 int IOportsDlg_Init();
 void IOportsDlg_Start();
 

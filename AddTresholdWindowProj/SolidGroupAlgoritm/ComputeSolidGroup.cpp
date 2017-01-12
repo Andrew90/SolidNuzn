@@ -539,16 +539,6 @@ void ComputeSolidGroup::UpdateTresholds()
 				i->points[j] = t;
 			}
 			i->changed = true;
-			dprint("%f %f %f %f %f %f %f %f\n"
-				, i->points[0]
-			    , i->points[1]
-			    , i->points[2]
-			    , i->points[3]
-			    , i->points[4]
-			    , i->points[5]
-			    , i->points[6]
-			    , i->points[7]
-				);
 			fclose(f);
 			i->root = 0;
 			for(int j = 0; j < count_points; ++j)

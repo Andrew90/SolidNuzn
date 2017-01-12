@@ -651,6 +651,9 @@
     <ClCompile Include="Windows\AddThresholdsWindow\TreshWindow.cpp">
       <Filter>windows\AddTresholdsWindow</Filter>
     </ClCompile>
+    <ClCompile Include="Windows\Dialogs\GridCounterDlg.cpp">
+      <Filter>windows\Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Common\Resource\rc.rc">

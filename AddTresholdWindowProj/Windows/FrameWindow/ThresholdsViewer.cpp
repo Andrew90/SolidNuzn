@@ -5,6 +5,8 @@
 #include "window_tool\MenuAPI.h"
 #include "FrameWindow\FrameWindow.h"
 #include "window_tool\Emptywindow.h"
+#include "Dates\SaveLoadDates.h"
+#include "Dates\Compute.h"
 
 using namespace Gdiplus;
 
@@ -35,10 +37,11 @@ ThresholdsViewer::FrameLine::FrameLine(Chart &c)
 	LineSeries::SetData(data, 8);
 }
 
-LRESULT ThresholdsViewer::operator()(TCreate &)
+LRESULT ThresholdsViewer::operator()(TCreate &l)
 {
 	chart.minAxesX = 1;
 	chart.maxAxesX = 8;
+	DragAcceptFiles(l.hwnd, TRUE);
 	return 0;
 }
 
@@ -148,4 +151,23 @@ void ThresholdsViewer::operator()(TRButtonDown &l)
 void ThresholdsViewer::operator()(TUser &l)
 {
 	l.ptr(l.data);
+}
+
+void ThresholdsViewer::operator()(TDropFiles &l)
+{
+	int count = DragQueryFile(l.hDrop,-1,NULL,NULL);
+	wchar_t path[1024];
+	for(int i = 0; i < count; ++i)
+	{
+		DragQueryFile(l.hDrop,i, path, dimention_of(path));
+		if(0 == wcsncmp(L".dat", &path[wcslen(path) - 4], 4))
+		{
+			HWND hParent = GetParent(l.hwnd);
+			SetWindowText(hParent, path);
+			LoadDateFile::Do(path);
+			Compute::Recalculation();
+			((FrameWindow *)GetWindowLongPtr(hParent, GWLP_USERDATA))->IncDecFrame();
+		}
+	}
+	DragFinish(l.hDrop);
 }

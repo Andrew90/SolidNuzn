@@ -46,8 +46,9 @@ void FrameWindow::operator()(TCommand &l)
 	EventDo(l);
 }
 
-void FrameWindow::operator()(TMouseWell &)
+void FrameWindow::operator()(TMouseWell &l)
 {
+	if(l.delta < 0) IncFrame(); else DecFrame();
 }
 	
 void FrameWindow::operator()(TGetMinMaxInfo &l)

@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <windowsx.h>
+#include <Shellapi.h>
 //---------------------------------------------------------------------------
 #pragma pack(2)
 struct TMessage
@@ -220,6 +221,16 @@ struct TContextMenu
 {
   HWND hwnd; UINT uMsg; WPARAM wParam; LPARAM lParam;
 };
+
+//WM_DROPFILES
+struct TDropFiles
+{
+	HWND hwnd;
+	UINT message;
+	HDROP hDrop;
+	LPARAM noused; 
+};
+
 #pragma pack()
 //------------------------------------------------------------------------------------------------
 

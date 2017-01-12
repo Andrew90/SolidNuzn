@@ -3,9 +3,7 @@
 #include <windows.h>
 #include "window_tool\message.h"
 #include "window_tool\TEvent.h"
-//#include "App/AppBase.h"
 #include "SolidGroupAlgoritm\SolidBase.h"
-//#include "templates\templates.hpp"
 #include "DlgTemplates\ParamDlg.hpp"
 
 class TreshWindow
@@ -20,6 +18,8 @@ public:
 
 	class CancelBtn: TEvent
 	{
+		friend TreshWindow;
+		TreshWindow *owner;
 		void Do(TCommand &);
 	};
 	static const int width = 300;
@@ -31,15 +31,14 @@ public:
 		, DlgItem
 	>::Result dlg_list;
 	TL::Factory<dlg_list> dlg_items;
+	int persents[8];
 public:
 	HWND hWnd;
 	OkBtn okBtn;
 	CancelBtn cancelBtn;
-	//void operator()(TSize &);
-	TreshWindow();//: dlg_items(items){}
+	TreshWindow();
 	void operator()(TCommand &);
 	void operator()(TGetMinMaxInfo &);
 	LRESULT operator()(TCreate &);
-//	void operator()(TLButtonDown &);
 	static void Show();
 };

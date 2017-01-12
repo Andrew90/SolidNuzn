@@ -60,3 +60,5 @@ template<class T>HWND WindowTemplate(
 
 void RepaintWindow(HWND h);
 
+void CloseWindow(const wchar_t *typeWindow);
+

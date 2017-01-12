@@ -29,7 +29,20 @@ void FrameViewer::VThreshold::Draw()
 	for(int i = 0; i < dimention_of(owner->points); ++i)
 	{
 		value = owner->points[i];
+		int offs = owner->points[i] - owner->x;
 		VBorder::Draw();
+		SumSig &sumSig = (*(TChart *)&chart).items.get<SumSig>();
+		if(NULL != sumSig.reference && NULL != sumSig.signal)
+		{
+			double dX = (double)(chart.rect.right - chart.rect.left - chart.offsetAxesLeft - chart.offsetAxesRight) / (chart.maxAxesX - chart.minAxesX);
+			int x =  int(chart.rect.left + chart.offsetAxesLeft + (value - chart.minAxesX) * dX);
+			double minY = chart.minAxesY;
+			double dY = (double) (chart.rect.bottom - chart.rect.top - chart.offsetAxesBottom - chart.offsetAxesTop) / (chart.maxAxesY - chart.minAxesY);
+			double yOffs = chart.rect.bottom - chart.offsetAxesBottom;
+
+			int y = int(yOffs - (sumSig.signal[offs] - sumSig.reference[offs] - minY) * dY);
+			chart.g->FillEllipse(&SolidBrush(0xff000000), x - 4, y - 4, 8, 8);
+		}		
 	}
 	chart.g->SetClip(&Region());
 }

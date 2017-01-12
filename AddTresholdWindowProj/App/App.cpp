@@ -118,8 +118,11 @@ void App::SelMenuItem(wchar_t *n)
 
 void App::ClearCounter()
 {
-	CounterTubes::Clear();
-	mainWindow.gridCounterViewer.Update();
+	if(TypesizePasswordDlg().Do(mainWindow.hWnd))
+	{
+		CounterTubes::Clear();
+		mainWindow.gridCounterViewer.Update();
+	}
 }
 
 void App::UpdateGroupCounter()

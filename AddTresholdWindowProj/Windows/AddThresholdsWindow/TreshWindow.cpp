@@ -6,15 +6,10 @@
 #include "window_tool\WindowsPosition.h"
 #include "templates/templates.hpp"
 #include "FrameWindow\FrameWindow.h"
-//-------------------------------------------------------------------------
-//void TreshWindow::operator()(TSize &l)
-//{
-//	if(l.resizing == SIZE_MINIMIZED)  return;	
-//}
 //------------------------------------------------------------------------
 TreshWindow::TreshWindow()
-	//: items((TL::Factory<offset_list> &)Singleton<SolidParametersTable>::Instance().items.get<Offset<0>>())
-    : dlg_items(items){}
+    : dlg_items(items)
+{}
 //-------------------------------------------------------------------------
 template<class O, class P>struct __get_tresh__;
 template<int N, class P>struct __get_tresh__<Offset<N>, P>
@@ -56,13 +51,44 @@ void TreshWindow::OkBtn::Do(TCommand &l)
 //-------------------------------------------------------------------------------
 void TreshWindow::CancelBtn::Do(TCommand &l)
 {
+	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
+	if(solidGroup.persentsChanged)
+	{
+		if(TypesizePasswordDlg().Do(l.hwnd))
+		{
+			solidGroup.Save();
+		}
+		else
+		{
+			memmove(solidGroup.persents, owner->persents, sizeof(owner->persents));
+			solidGroup.persentsChanged = false;
+		}
+		solidGroup.UpdateTresholds();
+		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+		if(NULL != hh)
+		{
+			((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
+		}
+	}
 	SetWindowLongPtr(l.hwnd, GWLP_USERDATA, NULL);
 	DestroyWindow(l.hwnd);
 }
 //------------------------------------------------------------------------
+/*
+struct TCommand
+{
+	HWND hwnd;
+	UINT uMsg;
+	WORD id;
+	WORD isAcselerator;
+	HWND hControl;
+};
+*/
 void TreshWindow::operator()(TCommand &l)
 {
 	EventDo(l);
+	static int c;
+	++c;
 }
 //------------------------------------------------------------------------
 void TreshWindow::operator()(TGetMinMaxInfo &l)
@@ -75,7 +101,7 @@ void TreshWindow::operator()(TGetMinMaxInfo &l)
 		l.pMinMaxInfo->ptMaxTrackSize.y = height;		
 	}		
 }
-//------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 PARAM_TITLE(Offset<0>, L"Смещение 1")
 PARAM_TITLE(Offset<1>, L"Смещение 2")
 PARAM_TITLE(Offset<2>, L"Смещение 3")
@@ -124,7 +150,10 @@ LRESULT TreshWindow::operator()(TCreate &l)
 {
 	height = 10;
 	int __width = width;
+
 	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
+	memmove(persents, solidGroup.persents, sizeof(persents));
+
 	TL::foreach<offset_list, __set_tresh__>()(items, solidGroup.persents);
 	TL::foreach<dlg_list, __init__>()(&dlg_items, &__table_data__(l.hwnd, __width, height));
 	height += 80;
@@ -140,6 +169,7 @@ LRESULT TreshWindow::operator()(TCreate &l)
 		, WS_VISIBLE | WS_CHILD | WS_TABSTOP
 		, 10 + w, height - btnH - 45, w, btnH, l.hwnd, NULL, l.create->hInstance, NULL
 		);
+	cancelBtn.owner = this;
 	SetWindowLongPtr(h, GWLP_USERDATA, (DWORD)&cancelBtn);
 	RECT r;
 	GetClientRect(GetDesktopWindow(), &r);
@@ -150,20 +180,12 @@ LRESULT TreshWindow::operator()(TCreate &l)
 void TreshWindow::Show()
 {
 	HWND h = FindWindow(WindowClass<TreshWindow>()(), 0);
-	if(NULL != h)
+	if(NULL == h)
 	{			
-		//RepaintWindow(h);
-		//SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
-		//SetForegroundWindow(h);
-	}
-	else
-	{		
 		TreshWindow &self = Singleton<TreshWindow>::Instance();
 		RECT r;
 		GetClientRect(GetDesktopWindow(), &r);
-		HWND h = WindowTemplate(&self, L"Смещение порогов", 0,0//(r.right - width)/ 2, (r.bottom - self.height) / 2
-			,0,0//, width, self.height
-			, IDI_UPLOAD, (HBRUSH)COLOR_WINDOW);		
+		HWND h = WindowTemplate(&self, L"Смещение порогов", 0,0,0,0, IDI_UPLOAD, (HBRUSH)COLOR_WINDOW);		
 		SetWindowPos(h, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 		DWORD dwStyle = GetWindowLong(h, GWL_STYLE);
 		dwStyle &= ~(WS_SYSMENU);

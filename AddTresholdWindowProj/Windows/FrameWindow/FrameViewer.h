@@ -23,6 +23,7 @@ public:
 	{
 		unsigned color;
 		Chart &chart;
+	public:
 		double *reference, *signal;
 		int count;
 	public:
@@ -39,7 +40,7 @@ public:
 	int x;
 	int points[8];
 public:
-	ChartDraw<Chart, TL::MkTlst<
+	typedef ChartDraw<Chart, TL::MkTlst<
 		LeftAxes
 		, BottomAxes  
 		, Signal
@@ -47,7 +48,8 @@ public:
 		, SumSig
 		, Grid	
 		, VThreshold
-	>::Result> chart;
+	>::Result> TChart;
+	TChart chart;
 public:
 	typedef View Parent;
 	HWND hWnd;

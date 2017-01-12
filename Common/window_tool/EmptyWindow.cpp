@@ -55,3 +55,9 @@ void RepaintWindow(HWND h)
 	SendMessage(h, WM_SIZE, 0, (r.bottom << 16) | r.right); 
 	InvalidateRect(h, NULL, true);
 }
+
+void CloseWindow(const wchar_t *typeWindow)
+{
+	HWND h = FindWindow(typeWindow, 0);
+	if(NULL != h) DestroyWindow(h);
+}

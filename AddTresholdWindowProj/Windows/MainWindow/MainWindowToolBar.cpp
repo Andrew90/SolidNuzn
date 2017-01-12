@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "App\config.h"
 #include "MainWindowToolBar.h"
+#include "MainWindow.h"
 #include "..\resource.h"
 #include "templates\templates.hpp"
 #include "window_tool\InitToolbar.hpp"
@@ -57,11 +58,19 @@ namespace
 //----------------------------------------------------------------------------------
 	static bool closed_packet_dialog = true;
 	static bool run_once_per_sycle = false;
+
+	const wchar_t *name_window[] = {
+	   L"FrameWindow"
+	   , L"AddThresholdWindow"
+	   , L"TreshWindow"
+	};
+
 	void Key<IDB_CycleBtn>::Click(HWND h)
 	{
 		Automat::Start();
 		AppKeyHandler::Run();
 		dprint("IDB_CycleBtn\n");
+		for(int i = 0; i < dimention_of(name_window); ++i)	CloseWindow(name_window[i]);
 	}
 //-----------------------------------------------------------------------------
 	void Key<IDB_Reset>::Click(HWND h)
@@ -92,12 +101,16 @@ namespace
 	void Key<IDB_arrow_down>::Click(HWND h)
 	{
 		App::CheckMenuItem();
+		MainWindow &mainWindow = Singleton<MainWindow>::Instance();
+
+		ShowWindow(mainWindow.gridCounterViewer.grid.hWnd, SW_HIDE); 
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_up>::Click(HWND h)
 	{
-		CounterTubes::Inc(L"D");
-		 App::UpdateMainWindow();
+		  MainWindow &mainWindow = Singleton<MainWindow>::Instance();
+
+		ShowWindow(mainWindow.gridCounterViewer.grid.hWnd, SW_SHOWNORMAL); 
 	}
 //------------------------------------------------------------------------------
 	void Key<IDB_arrow_left>::Click(HWND h)

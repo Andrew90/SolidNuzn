@@ -37,5 +37,6 @@ public:
 	void operator()(TPaint &);
 	void operator()(TRButtonDown &);
 	void operator()(TUser &l);
+	void operator()(TDropFiles &);
 	static void Draw(double *);	
 };

@@ -9,6 +9,7 @@ struct SaveDateFile
 struct LoadDateFile
 {
 	static void Do(HWND );
+	static bool Do(wchar_t *);
 };
 
 void StoreDataFile(wchar_t *path);

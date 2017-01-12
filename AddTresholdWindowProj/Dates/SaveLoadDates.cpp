@@ -40,38 +40,68 @@ void SaveDateFile::Do(HWND h)
 void LoadDateFile::Do(HWND h)
 {
 	OpenData o(h);
-	bool b = false;
+//	bool b = false;
 	if(o())
 	{
-		FILE *f = _wfopen(o.sFile, L"rb");
-		close_file c_f(f);
-		if(NULL != f)
-		{
-			int len = wcslen(o.sFile);
-			wchar_t *s = o.sFile;
-			for(int i = len; i > 0; --i)
-			{
-				if(s[i] == '\\' || s[i] == '/')
-				{
-					computeSolidGroup.currentFile = &s[i+1];
-					break;
-				}
-			}
-			if(fread(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f))
-			{
-				if(solidData.currentOffset < SolidData::MAX_ZONES_COUNT)
-				{
-					b = fread(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
-						&& fread(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
-						;
-				}
-			}
-		}
-		if(!b)
+		//FILE *f = _wfopen(o.sFile, L"rb");
+		//close_file c_f(f);
+		//if(NULL != f)
+		//{
+		//	int len = wcslen(o.sFile);
+		//	wchar_t *s = o.sFile;
+		//	for(int i = len; i > 0; --i)
+		//	{
+		//		if(s[i] == '\\' || s[i] == '/')
+		//		{
+		//			computeSolidGroup.currentFile = &s[i+1];
+		//			break;
+		//		}
+		//	}
+		//	if(fread(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f))
+		//	{
+		//		if(solidData.currentOffset < SolidData::MAX_ZONES_COUNT)
+		//		{
+		//			b = fread(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
+		//				&& fread(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
+		//				;
+		//		}
+		//	}
+		//}
+		if(!Do(o.sFile))
 		{
 			MessageBox(0, L"Файл не загружен", L"Ошибка !!!", MB_ICONERROR);
 		}
 	}
+}
+
+bool LoadDateFile::Do(wchar_t *path)
+{
+	FILE *f = _wfopen(path, L"rb");
+	close_file c_f(f);
+	bool b = false;
+	if(NULL != f)
+	{
+		int len = wcslen(path);
+		wchar_t *s = path;
+		for(int i = len; i > 0; --i)
+		{
+			if(s[i] == '\\' || s[i] == '/')
+			{
+				computeSolidGroup.currentFile = &s[i+1];
+				break;
+			}
+		}
+		if(fread(&solidData.currentOffset, sizeof(solidData.currentOffset), 1, f))
+		{
+			if(solidData.currentOffset < SolidData::MAX_ZONES_COUNT)
+			{
+				b = fread(solidData.reference, sizeof(double) * solidData.currentOffset, 1, f)
+					&& fread(&solidData.signal, sizeof(double) * solidData.currentOffset, 1, f)
+					;
+			}
+		}
+	}
+	return b;
 }
 
 

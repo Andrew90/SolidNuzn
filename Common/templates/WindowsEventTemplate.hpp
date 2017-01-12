@@ -46,6 +46,8 @@ namespace{
 	template<>struct TypeToEvent<TTimer>{static const int value =  WM_TIMER;};
 	template<>struct TypeToEvent<TClose>{static const int value =  WM_CLOSE;};
 	template<>struct TypeToEvent<TCopyData>{static const int value =  WM_COPYDATA;};
+	template<>struct TypeToEvent<TDropFiles>{static const int value =  WM_DROPFILES;};
+	template<>struct TypeToEvent<TSysKeyDown>{static const int value = WM_SYSKEYDOWN;};
 
 	template<class O, class P>class IsFuncExist
 	{
@@ -123,7 +125,7 @@ namespace{
 		, TUser, TCommand, TDestroy
 		, TGetMinMaxInfo, TMouseWell, TRButtonDown, TMoving, TSizing
 		, TMessage, TTimer, TClose
-		, TCopyData
+		, TCopyData, TDropFiles	, TSysKeyDown
 	>::Result type_events_all_list; //<-------см. ниже комментарий
 
 	template<class T, class tmp>struct AddTypeEvent<NullType, T, tmp>

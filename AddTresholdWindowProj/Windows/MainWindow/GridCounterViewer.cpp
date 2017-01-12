@@ -98,6 +98,7 @@ void GridCounterViewer::Create(HWND hwnd)
 	grid.Create(hwnd, this);
 	HFONT font = CreateFont(12,0,0,90,900,TRUE,0,0,ANSI_CHARSET,0,0,0,0, L"Times New Roman"); 
 	SendMessage(grid.hWnd, WM_SETFONT, (WPARAM)font, (LPARAM)0);
+	ShowWindow(grid.hWnd, SW_HIDE);
 }
 //------------------------------------------------------------
 typedef TL::ListToWapperList<GridCounterViewerSpace::list, GridCounterViewerSpace::DataToGrid>::Result __proc_list__;
