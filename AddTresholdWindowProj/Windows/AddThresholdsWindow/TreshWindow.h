@@ -31,7 +31,6 @@ public:
 		, DlgItem
 	>::Result dlg_list;
 	TL::Factory<dlg_list> dlg_items;
-	int persents[8];
 public:
 	HWND hWnd;
 	OkBtn okBtn;

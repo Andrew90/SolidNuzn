@@ -5,4 +5,6 @@ namespace SelectHandler
 {
 	void Init(HWND);
 	void Do(HWND, wchar_t *);
+
+	void Restore();
 }

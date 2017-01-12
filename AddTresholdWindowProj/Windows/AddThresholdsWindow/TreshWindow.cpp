@@ -6,6 +6,7 @@
 #include "window_tool\WindowsPosition.h"
 #include "templates/templates.hpp"
 #include "FrameWindow\FrameWindow.h"
+#include "App\SelectHandler.h"
 //------------------------------------------------------------------------
 TreshWindow::TreshWindow()
     : dlg_items(items)
@@ -60,8 +61,7 @@ void TreshWindow::CancelBtn::Do(TCommand &l)
 		}
 		else
 		{
-			memmove(solidGroup.persents, owner->persents, sizeof(owner->persents));
-			solidGroup.persentsChanged = false;
+			SelectHandler::Restore();
 		}
 		solidGroup.UpdateTresholds();
 		HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
@@ -69,21 +69,13 @@ void TreshWindow::CancelBtn::Do(TCommand &l)
 		{
 			((FrameWindow *)GetWindowLongPtr(hh, GWLP_USERDATA))->IncDecFrame();
 		}
+		solidGroup.persentsChanged = false;
+		solidGroup.changeTresholds = false;
 	}
 	SetWindowLongPtr(l.hwnd, GWLP_USERDATA, NULL);
 	DestroyWindow(l.hwnd);
 }
 //------------------------------------------------------------------------
-/*
-struct TCommand
-{
-	HWND hwnd;
-	UINT uMsg;
-	WORD id;
-	WORD isAcselerator;
-	HWND hControl;
-};
-*/
 void TreshWindow::operator()(TCommand &l)
 {
 	EventDo(l);
@@ -152,7 +144,6 @@ LRESULT TreshWindow::operator()(TCreate &l)
 	int __width = width;
 
 	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
-	memmove(persents, solidGroup.persents, sizeof(persents));
 
 	TL::foreach<offset_list, __set_tresh__>()(items, solidGroup.persents);
 	TL::foreach<dlg_list, __init__>()(&dlg_items, &__table_data__(l.hwnd, __width, height));

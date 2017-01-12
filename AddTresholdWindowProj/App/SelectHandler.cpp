@@ -74,4 +74,25 @@ namespace SelectHandler
 		hh = FindWindow(WindowClass<AddThresholdWindow>()(), 0);
 		if(NULL != hh) DestroyWindow(hh);
 	}
+
+	void Restore()
+	{
+		CBase base(ParametersBase().name());
+		if(base.IsOpen())
+		{			
+			NameParam::type_value name;
+			name = Singleton<ParametersTable>::Instance().items.get<NameParam>().value;
+			ParametersTable typeSizeParam;
+			
+			int id = Select<ParametersTable>(base).eq<NameParam>(name).Execute(typeSizeParam);
+			if(id != 0)
+			{
+				CurrentParametersTable t;
+				t.items.get<CurrentID>().value = id;
+				UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
+				AppBase::InitTypeSizeTables(base);
+				Singleton<ComputeSolidGroup>::Instance().Load(name.buffer);
+			}
+		}
+	}
 }
