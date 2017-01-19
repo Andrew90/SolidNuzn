@@ -42,7 +42,7 @@ void App::Init()
 
 	if(run)Device1730::Write(0);
 
-	if(!(l502SolidGroup.Init() && l502SolidGroup.SetupParams()))
+	if(run && !(l502SolidGroup.Init() && l502SolidGroup.SetupParams()))
 	{
 		MessageBox(0, L"Не могу инициировать плату L502", L"Ошибка !!!", MB_ICONERROR);
 		run = false;
@@ -59,7 +59,7 @@ void App::Init()
 	AppKeyHandler::Init();
 
 
-	IOportsDlg_Start();
+	if(run)IOportsDlg_Start();
 	ColorPanel::Open();
 
 	Automat::Init();
