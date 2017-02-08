@@ -166,6 +166,7 @@
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\AppBase.h" />
     <ClInclude Include="App\AppKeyHandler.h" />
+    <ClInclude Include="App\ChangeStandard.h" />
     <ClInclude Include="App\config.h" />
     <ClInclude Include="App\SelectHandler.h" />
     <ClInclude Include="App\PasswordDlg.hpp" />
@@ -233,6 +234,7 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="App\AppBase.cpp" />
     <ClCompile Include="App\AppKeyHandler.cpp" />
+    <ClCompile Include="App\ChangeStandard.cpp" />
     <ClCompile Include="App\SelectHandler.cpp" />
     <ClCompile Include="App\UpdateMainChart.cpp" />
     <ClCompile Include="Automat\Automat.cpp" />

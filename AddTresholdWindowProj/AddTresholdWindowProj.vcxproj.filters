@@ -451,6 +451,9 @@
     <ClInclude Include="Windows\AddThresholdsWindow\TreshWindow.h">
       <Filter>windows\AddTresholdsWindow</Filter>
     </ClInclude>
+    <ClInclude Include="App\ChangeStandard.h">
+      <Filter>App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -653,6 +656,9 @@
     </ClCompile>
     <ClCompile Include="Windows\Dialogs\GridCounterDlg.cpp">
       <Filter>windows\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="App\ChangeStandard.cpp">
+      <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

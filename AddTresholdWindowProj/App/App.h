@@ -6,6 +6,7 @@ class App
 {
 	struct Impl;
 public:
+	static bool isStandard;
 	static void Init();
 	static void Destroy();
 	static void PrintTopLabel(wchar_t *);

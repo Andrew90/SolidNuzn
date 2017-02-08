@@ -14,6 +14,7 @@
 #include "tools_debug/DebugMess.h"
 #include "App\AppKeyHandler.h"
 #include "ColorPanel\ColorPanel.h"
+#include "App\ChangeStandard.h"
 
 namespace Automat
 {
@@ -147,12 +148,13 @@ START:
 
 				l502SolidGroup.Stop();
 
-				double result; 
+				double result = 0; 
 				wchar_t *groupName = L""; 
 				unsigned color;
 				Compute::Recalculation(result, groupName, color);
 				computeSolidGroup.currentGroupName = groupName;
 				App::UpdateGroupCounter();
+				
 
 				if(tubesStored)
 				{
@@ -196,6 +198,8 @@ START:
 					, groupName
 					);
 				ColorPanel::SetText(groupName, color);
+
+				ChangeStandard(0 == result);
 
 			}
 			catch(ResetException)

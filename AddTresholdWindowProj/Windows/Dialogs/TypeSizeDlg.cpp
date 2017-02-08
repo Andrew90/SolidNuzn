@@ -53,7 +53,6 @@ namespace
 
 					SelectHandler::Do(h, buf);
 					App::AddMenuItem(buf);
-
 					EndDialog(h, TRUE);
 				}
 			}

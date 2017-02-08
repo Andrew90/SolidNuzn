@@ -25,17 +25,17 @@ namespace
 			UpdateRow(o.grid.hWnd);
 		}
 	}
-//////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////
 	struct MainFile{};										   
 	MENU_TEXT(L"Файл", TopMenu<MainFile>)					   
-		   
+
 	struct MainExit{static void Do(HWND h){DestroyWindow(h);}};
 	struct MainSaveOptions{static void Do(HWND h){SaveOptions(h);}};
-															   
+
 	MENU_ITEM(L"Выход", MainExit)
-	MENU_ITEM(L"Сохранить настройки", MainSaveOptions)
-															   
-	template<>struct TopMenu<MainFile>						   
+		MENU_ITEM(L"Сохранить настройки", MainSaveOptions)
+
+		template<>struct TopMenu<MainFile>						   
 	{														   
 		typedef TL::MkTlst<	
 			MenuItem<MainSaveOptions>
@@ -43,29 +43,51 @@ namespace
 			, MenuItem<MainExit>								   
 		>::Result list;										   
 	};														   
-	   
-	struct Options{};										   
+
+	struct Options{};
+
 	MENU_TEXT(L"Настройки", TopMenu<Options>)				   
-	  
+
 	struct WindowPos    : WindowPositionDlg<AddThresholdWindow>{}; 
+	struct EnableStandard
+	{
+		static void Do(HWND h)
+		{
+			App::isStandard ^= true;
+			CheckMenu<MenuItem<EnableStandard>>(h, App::isStandard);
+			Singleton<AddThresholdWindow>::Instance().ChangeStandard(App::isStandard);
+		}
+	};
 	//struct OffsPoints    {static void Do(HWND h){__set_points__(h);}}; 
-															   
+
+
+
 	MENU_ITEM(L"Сохранить координаты окна", WindowPos)	   
-	//MENU_ITEM(L"Точки смещения", OffsPoints)
-															   
-	template<>struct TopMenu<Options>						   
+		MENU_ITEM(L"Эталон", EnableStandard)	
+		//MENU_ITEM(L"Точки смещения", OffsPoints)
+
+		template<>struct TopMenu<Options>						   
 	{														   
 		typedef TL::MkTlst<
-		//	MenuItem<OffsPoints>
-		//	, Separator<0>
-			 MenuItem<WindowPos>						   
+			MenuItem<EnableStandard>
+			, Separator<0>
+			, MenuItem<WindowPos>						   
 		>::Result list;										   
 	};														   
-	   
+
 	typedef TL::MkTlst<										   
 		TopMenu<MainFile>									   
 		, TopMenu<Options>									   
-	>::Result MainMenu;										   
+	>::Result MainMenu;										  
+
+	template<>struct EnableMenuInit<MenuItem<EnableStandard>>
+	{
+		int operator()(HWND)
+		{
+			return MFS_UNCHECKED;
+		}
+	};
+
 }
 
 LRESULT AddThresholdWindow::operator()(TCreate &l)
@@ -119,6 +141,7 @@ void AddThresholdWindow::operator()(TClose &l)
 			return;
 		}
 	}
+    ChangeStandard(false);
 	DestroyWindow(l.hwnd);
 }
 
@@ -151,8 +174,8 @@ void AddThresholdWindow::Show()
 	}		
 }
 
- void AddThresholdWindow::Update()
- {
+void AddThresholdWindow::Update()
+{
 	HWND h = FindWindow(WindowClass<AddThresholdWindow>()(), 0);
 	if(NULL != h)
 	{			
@@ -160,4 +183,138 @@ void AddThresholdWindow::Show()
 		SendMessage(h, WM_SYSCOMMAND, SC_RESTORE, 0);
 		SetForegroundWindow(h);
 	}
- }
+}
+/*
+CBase base(ParametersBase().name());
+if(base.IsOpen())
+{			
+NameParam::type_value name;
+name = buf;
+ParametersTable typeSizeParam;
+int id = Select<ParametersTable>(base).eq<NameParam>(name).Execute(typeSizeParam);
+if(id != 0)
+{
+CurrentParametersTable t;
+t.items.get<CurrentID>().value = id;
+UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
+AppBase::InitTypeSizeTables(base);
+Singleton<ComputeSolidGroup>::Instance().Load(buf);
+Singleton<ComputeSolidGroup>::Instance().typeSizeName = buf;
+bool x = Singleton<DifferentOptionsTable>::Instance().items.get<MessagePanelVisible>().value;
+CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
+CounterTubes::Load(buf);
+Singleton<MainWindow>::Instance().gridCounterViewer.Update();
+}
+}
+
+HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
+if(NULL != hh)
+{
+RepaintWindow(hh);
+SendMessage(hh, WM_SYSCOMMAND, SC_RESTORE, 0);
+SetForegroundWindow(hh);
+}
+
+CBase base(Owner::Base().name());
+if(base.IsOpen())
+{
+NameParam n;
+n.value = buf;
+unsigned id = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
+if(0 != id)
+{
+MessageBox(h, L"Название типоразмера есть в базе", L"Предупреждение!!!", MB_ICONWARNING);
+return;
+}
+
+Owner::Table &table = Singleton<Owner::Table>::Instance();
+table.items.get<NameParam>().value = buf;
+
+Insert_Into<Owner::Table>(table, base).Execute();
+CurrentID cId;
+cId.value = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
+Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
+Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
+
+SelectHandler::Do(h, buf);
+App::AddMenuItem(buf);
+EndDialog(h, TRUE);
+}
+*/
+
+void AddThresholdWindow::ChangeStandard(bool isStandard)
+{	
+	
+	ComputeSolidGroup &solidGroup = Singleton<ComputeSolidGroup>::Instance();
+	if(solidGroup.changeTresholds)
+	{
+		int res = MessageBox(hWnd, L"Данные изменены!\nСохранить?", L"Cообщение", MB_ICONQUESTION | MB_YESNOCANCEL);
+		if(IDYES == res)
+		{
+			if(TypesizePasswordDlg().Do(hWnd))
+			{
+				solidGroup.Save();
+			}
+		}
+	}
+
+	wchar_t st[] = L"_standard";
+	wchar_t buf[128];
+	wcscpy(buf, Singleton<ComputeSolidGroup>::Instance().typeSizeName.c_str());
+	int len = wcslen(buf);
+
+	int k =  len - (dimention_of(st) - 1);
+	bool standardBool  = k > 0;
+	if(standardBool)
+	{
+		
+		wchar_t *s = &buf[k];
+		standardBool = standardBool && 0 == wcsncmp(s, st, dimention_of(st) - 1);
+	}
+
+	CBase base(ParametersBase().name());
+	if(base.IsOpen())
+	{
+		ParametersTable &table = Singleton<ParametersTable>::Instance();
+
+		if(isStandard)
+		{
+			if(!standardBool) wcscat(buf, st);
+
+			table.items.get<NameParam>().value = buf;
+			int id = Select<ParametersTable>(base).eq<NameParam>(table.items.get<NameParam>().value).Execute();
+			if(id == 0)
+			{
+				table.items.get<NameParam>().value = buf;
+				Insert_Into<ParametersTable>(table, base).Execute();
+
+				id = Select<ParametersTable>(base).eq<NameParam>(table.items.get<NameParam>().value).Execute();
+
+				CurrentParametersTable t;
+				t.items.get<CurrentID>().value = id;
+				UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
+			}
+			
+		}
+		else
+		{
+			if(standardBool)
+			{
+				if(k > 0)buf[k]	= 0;
+			}
+		}
+		ParametersTable typeSizeParam;
+		table.items.get<NameParam>().value = buf;
+		int id = Select<ParametersTable>(base).eq<NameParam>(table.items.get<NameParam>().value).Execute(typeSizeParam);
+		if(id != 0)
+		{
+			CurrentParametersTable t;
+			t.items.get<CurrentID>().value = id;
+			UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
+			AppBase::InitTypeSizeTables(base);
+			Singleton<ComputeSolidGroup>::Instance().Load(buf);
+			Singleton<ComputeSolidGroup>::Instance().typeSizeName = buf;
+		}
+	}
+	RepaintWindow(FindWindow(WindowClass<AddThresholdWindow>()(), 0));
+}

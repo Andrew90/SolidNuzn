@@ -21,4 +21,6 @@ public:
 
 	static void Show();
 	static void Update();
+
+	void ChangeStandard(bool);
 };

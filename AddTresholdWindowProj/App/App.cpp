@@ -30,6 +30,8 @@ namespace
 	L502SolidGroup &l502SolidGroup = Singleton<L502SolidGroup>::Instance();
 }
 
+bool App::isStandard = false;
+
 void App::Init()
 {
 #if 1
