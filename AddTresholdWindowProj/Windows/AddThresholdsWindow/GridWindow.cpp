@@ -146,6 +146,7 @@ GridWindow::GridWindow()
 
 void GridWindow::SetHeaderToGrid(HWND h)
 {	
+	hWnd = h;
 	SetGridHeader<__header_list__> _(h);
 	HIMAGELIST	himlSmall = ImageList_Create(
 		GetSystemMetrics(SM_CXSMICON),GetSystemMetrics(SM_CYSMICON),
@@ -167,6 +168,12 @@ void GridWindow::SetHeaderToGrid(HWND h)
 
 	SetRow(h, solidGroup.solidItems.size());
 }
+
+void GridWindow::Update()
+{
+	SetRow(hWnd, solidGroup.solidItems.size());
+}
+
 void GridWindow::SetDataToGrid(LV_DISPINFO *d)
 {
 	unsigned i = d->item.iItem;

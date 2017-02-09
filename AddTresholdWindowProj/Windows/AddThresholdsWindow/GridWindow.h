@@ -3,6 +3,7 @@
 
 class GridWindow: public GridHandlers
 {
+	HWND hWnd;
 public:
 	GridWindow();
 	void SetHeaderToGrid(HWND);
@@ -10,4 +11,5 @@ public:
 	void SetColorToGrid(NMLVCUSTOMDRAW *);
 	void LClick(LPNMITEMACTIVATE );
 	void RClick(LPNMITEMACTIVATE );	
+	void Update();
 };

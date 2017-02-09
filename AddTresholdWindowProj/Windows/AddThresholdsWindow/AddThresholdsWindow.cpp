@@ -184,63 +184,6 @@ void AddThresholdWindow::Update()
 		SetForegroundWindow(h);
 	}
 }
-/*
-CBase base(ParametersBase().name());
-if(base.IsOpen())
-{			
-NameParam::type_value name;
-name = buf;
-ParametersTable typeSizeParam;
-int id = Select<ParametersTable>(base).eq<NameParam>(name).Execute(typeSizeParam);
-if(id != 0)
-{
-CurrentParametersTable t;
-t.items.get<CurrentID>().value = id;
-UpdateWhere<CurrentParametersTable>(t, base).ID(1).Execute();
-AppBase::InitTypeSizeTables(base);
-Singleton<ComputeSolidGroup>::Instance().Load(buf);
-Singleton<ComputeSolidGroup>::Instance().typeSizeName = buf;
-bool x = Singleton<DifferentOptionsTable>::Instance().items.get<MessagePanelVisible>().value;
-CheckMenu<MenuItem<MainWindowMenu::MessagePanel>>(h, x);
-CounterTubes::Load(buf);
-Singleton<MainWindow>::Instance().gridCounterViewer.Update();
-}
-}
-
-HWND hh = FindWindow(WindowClass<FrameWindow>()(), 0);
-if(NULL != hh)
-{
-RepaintWindow(hh);
-SendMessage(hh, WM_SYSCOMMAND, SC_RESTORE, 0);
-SetForegroundWindow(hh);
-}
-
-CBase base(Owner::Base().name());
-if(base.IsOpen())
-{
-NameParam n;
-n.value = buf;
-unsigned id = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
-if(0 != id)
-{
-MessageBox(h, L"Название типоразмера есть в базе", L"Предупреждение!!!", MB_ICONWARNING);
-return;
-}
-
-Owner::Table &table = Singleton<Owner::Table>::Instance();
-table.items.get<NameParam>().value = buf;
-
-Insert_Into<Owner::Table>(table, base).Execute();
-CurrentID cId;
-cId.value = Select<Owner::Table>(base).eq<NameParam>(n.value).Execute();
-Update<CurrentParametersTable>(base).set<CurrentID>(cId.value).Where().ID(1).Execute();
-Singleton<SelectTypeSizeList>::Instance().AddMenuItem(buf);
-
-SelectHandler::Do(h, buf);
-App::AddMenuItem(buf);
-EndDialog(h, TRUE);
-}
-*/
 
 void AddThresholdWindow::ChangeStandard(bool isStandard)
 {	
@@ -314,6 +257,7 @@ void AddThresholdWindow::ChangeStandard(bool isStandard)
 			AppBase::InitTypeSizeTables(base);
 			Singleton<ComputeSolidGroup>::Instance().Load(buf);
 			Singleton<ComputeSolidGroup>::Instance().typeSizeName = buf;
+			Singleton<AddThresholdWindow>::Instance().gridViewer.Update();
 		}
 	}
 	RepaintWindow(FindWindow(WindowClass<AddThresholdWindow>()(), 0));
