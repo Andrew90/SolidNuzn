@@ -52,10 +52,8 @@ void IOportsDlg_Open()
 	{
 		RECT r;
 		WindowPosition::Get<IOportsWindow>(r);
-		wchar_t *title = //App::measurementOfRunning
-		//	? 
+		wchar_t *title = 
 			L"Просмотр дискретных входов-выходов"
-		//	: L"Управление дискретными выходами"
 		;
 		
 		h = WindowTemplate(

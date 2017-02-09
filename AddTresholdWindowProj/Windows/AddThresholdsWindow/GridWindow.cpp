@@ -355,7 +355,6 @@ void ColorCell(HWND h, int i)
 		clr = ((clr&0xff)<<16)|((clr>>16)&0xff)|(clr&0xff00);
 		solidGroup.groupNameList[solidGroup.solidItems[i].groupName].color = clr;
 		solidGroup.groupNameList[solidGroup.solidItems[i].groupName].added = true;
-	//	solidGroup.solidItems[i].status = ComputeSolidGroup::new_item;
 		solidGroup.changeTresholds = true;
 		UpdateRow(h);
 	}

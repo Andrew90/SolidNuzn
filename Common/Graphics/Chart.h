@@ -133,7 +133,7 @@ public:
 	LineSeries(Chart &chart);
 	int color;
 	void Draw();
-	void SetData(double *data, int countSamples);//, double minValue, double maxValue);
+	void SetData(double *data, int countSamples);
 };
 class Cursor
 {

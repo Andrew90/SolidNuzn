@@ -1,37 +1,5 @@
 #include "stdafx.h"
 #include "SelectTypeSizeList.h"
-//#include <WindowsX.h>
-//#include "AppBase.h"
-//#include "App.h"
-//#include "message.h"
-//#include "MainWindow.h"
-//#include "ut_files.h"
-
-//namespace
-//{
-//
-//	template<class T, class D>struct __sel__
-//	{
-//		bool operator()(unsigned, T &t, D &d)
-//		{
-//			ComboBox_AddString(d, t.items.get<NameParam>().value);
-//			return false;
-//		}
-//	};
-//
-//	void FillSelect(HWND hWnd)
-//	{
-//		////////CBase base(ParametersBase().name());
-//		////////if(base.IsOpen())
-//		////////{
-//		////////	Select<ParametersTable>(base).ExecuteLoop<__sel__>(hWnd);
-//		////////	int num = ComboBox_FindStringExact(hWnd, 0, Singleton<ParametersTable>::Instance().items.get<NameParam>().value);
-//		////////	if(CB_ERR != num) ComboBox_SetCurSel(hWnd, num);
-//		////////}
-//	}
-//}
-
- 
 
 SelectTypeSizeList::SelectTypeSizeList(): ptr(NULL){}
 
@@ -44,7 +12,6 @@ void SelectTypeSizeList::Create(HWND h)
 	SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG)this);
 	HFONT font = CreateFont(40,0,0,90,900,TRUE,0,0,ANSI_CHARSET,0,0,0,0, L"Times New Roman"); 
 	SendMessage(hWnd, WM_SETFONT, (WPARAM)font, (LPARAM)0);
-	////FillSelect(hWnd);
 }
 
 void SelectTypeSizeList::Size(int x, int y, int width)

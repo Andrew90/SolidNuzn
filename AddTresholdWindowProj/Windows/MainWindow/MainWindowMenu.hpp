@@ -22,12 +22,11 @@ namespace MainWindowMenu
 			Compute::Recalculation();
 		}
 	};
-	struct SaveDateFile__:  SaveDateFile{};//{static void Do(HWND){}};
+	struct SaveDateFile__:  SaveDateFile{};
 	struct Compute__     
 	{
 		static void Do(HWND)
 		{
-			//Singleton<Compute>::Instance().Recalculation();
 			Compute::Recalculation();
 		}
 	};
@@ -130,13 +129,7 @@ namespace MainWindowMenu
 	MENU_ITEM(L"Идентификатор типоразмера для передачи по для сети", CommunicationIDMenu)
 
 	struct Descriptor1730__{};
-	//template<>struct SubMenu<Descriptor1730__>
-	//{
-	//	typedef TL::TypeToTypeLst<
-	//		typename TL::MkTlst<InputBit, Descriptor1730Item>::Result
-	//		, MenuItem
-	//	>::Result list;
-	//};
+	
 	template<>struct SubMenu<Descriptor1730__>
 	{
 		typedef TL::MkTlst<
@@ -152,7 +145,6 @@ namespace MainWindowMenu
 		typedef TL::MkTlst<
 			MenuItem<NetOptions>
 			, MenuItem<SolenoidParametersTable>
-		//	, MenuItem<InputBit>
 			, SubMenu<Descriptor1730__>
 			, MenuItem<CommunicationIDMenu>
 			, Separator<1>			

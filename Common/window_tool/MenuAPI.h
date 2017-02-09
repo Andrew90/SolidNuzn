@@ -234,13 +234,6 @@ LRESULT EventDo(TNotify &m);
 #define MENU_TEXT(txt, item)template<>struct NameMenu<item >{wchar_t *operator()(HWND){return txt;}};
 #define MENU_ITEM(txt, item) MENU_TEXT(txt, MenuItem<item>) template<>struct Event<MenuItem<item> >:item{};
 
-//template<class T>CheckMenuItem(HWND h, bool b)
-//{
-//	unsigned t = MF_BYCOMMAND | MF_ENABLED;
-//	t |= b ? MF_CHECKED: MF_UNCHECKED;
-//	CheckMenuItem(h, (ULONG_PTR)Event<O>::Do, 
-//}
-
 template<class T>void CheckMenu(HWND h, bool state = true)
 {
 	MENUITEMINFO mii = {};

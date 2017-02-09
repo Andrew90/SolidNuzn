@@ -141,8 +141,7 @@ void App::CheckMenuItem()
 {
 	static bool x = true;
 	x ^= true;
-   CheckMenu<TopMenu<MainWindowMenu::MainOptionUnits>>(mainWindow.hWnd, x);
-	//EnableMenu<Event<MainWindowMenu::L502ParamDlg>>(mainWindow.hWnd, x);
+	CheckMenu<TopMenu<MainWindowMenu::MainOptionUnits>>(mainWindow.hWnd, x);	
 }
 HWND  App::MainWindowHWND()
 {

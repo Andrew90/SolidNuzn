@@ -180,10 +180,7 @@ template<class _1>struct __compare_param__<NullType, _1>
 {
 	typedef typename _1::__template_must_be_overridded__ noused;
 };
-//template<>struct __compare_param__<NullType, NullType>
-//{
-//	typedef __template_must_be_overridded__ noused;
-//};
+
 template<class T>struct __compare_param__<Less<T>, Largen<T> >
 {
 	bool operator()(typename T::type_value &t)
@@ -486,7 +483,7 @@ template<class T,  int min = 0, int max = 31, int edit_width = 60>struct UpDownS
 	HWND Init(HWND h, int &width, int &dy, T &t)
 	{
 		HWND hWnd = CreateWindowEx(WS_EX_CLIENTEDGE, L"edit", Wchar_from<typename T::type_value>(t.value)()
-			,  WS_CHILD | WS_VISIBLE// WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | WS_TABSTOP
+			,  WS_CHILD | WS_VISIBLE
 			, 10, dy, edit_width, 25, h, 0, (HINSTANCE)::GetModuleHandle(NULL), NULL
 			);
 

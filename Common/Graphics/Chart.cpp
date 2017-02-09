@@ -114,8 +114,6 @@ void Chart::Draw(Gdiplus::Graphics &graph)
 //------------------------------------------------------------------------------
 LeftAxes::LeftAxes(Chart &chart) 
 	: chart(chart)
-	// , minA(100)
-	// , maxA(100)
 {}
 //-----------------------------------------------------------------------------------
 void LeftAxes::Draw()
@@ -203,7 +201,7 @@ void BottomAxes::Draw()
 	StringFormat format;
 	format.SetAlignment(StringAlignmentCenter);
 	double height;	
-	//int y = chart.rect.bottom - chart.offsetAxesBottom;
+
 	chart.g->DrawLine(&pen, chart.rect.left + chart.offsetAxesLeft, y, chart.rect.right - chart.offsetAxesRight, y);
 
 	char buf[32];

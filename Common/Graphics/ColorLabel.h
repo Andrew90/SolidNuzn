@@ -1,6 +1,5 @@
 #pragma once
-//#include <GdiPlus.h>
-//#include <GdiPlusBitmap.h>
+
 class ColorLabel
 {		
 public:  

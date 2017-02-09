@@ -68,7 +68,6 @@ namespace AppKeyHandler
 
 	void Init()
 	{		
-		//__btn__<__all_button_xx__<button_list, On>::Result>()();
 		__btn__<
 			__all_button_OnOff__<
 			  button_list
@@ -89,13 +88,6 @@ namespace AppKeyHandler
 		>()();
 	}
 	
-	//void Continue()
-	//{
-	//	typedef TL::MkTlst<
-	//		On<IDB_Continue>, On<IDB_CycleBtn>
-	//	>::Result list;
-	//	__btn__<list>()();
-	//}
 	void Stop()
 	{
 		Init();

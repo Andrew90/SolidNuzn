@@ -58,13 +58,9 @@ namespace
 			Singleton<AddThresholdWindow>::Instance().ChangeStandard(App::isStandard);
 		}
 	};
-	//struct OffsPoints    {static void Do(HWND h){__set_points__(h);}}; 
-
-
 
 	MENU_ITEM(L"Сохранить координаты окна", WindowPos)	   
 		MENU_ITEM(L"Эталон", EnableStandard)	
-		//MENU_ITEM(L"Точки смещения", OffsPoints)
 
 		template<>struct TopMenu<Options>						   
 	{														   

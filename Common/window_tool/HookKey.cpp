@@ -12,11 +12,6 @@
 HHOOK hKeyHook;
 HWND hWnd;
 
-//void UserMessage(void *value)
-//{
-//	AppKeyHandler::KeyPressed((unsigned)value);
-//}
- 
 __declspec(dllexport) LRESULT CALLBACK KeyEvent (
 
   int nCode,      // The hook code
@@ -27,9 +22,7 @@ __declspec(dllexport) LRESULT CALLBACK KeyEvent (
     if  ((nCode == HC_ACTION) &&       // HC_ACTION means we may process this event
         ((wParam == WM_SYSKEYDOWN) ||  // Only react if either a system key ...
         (wParam == WM_KEYDOWN)))       // ... or a normal key have been pressed.
-    {
-		//PostMessage(hWnd, WM_GET_SCAN_CODE, 0, hooked->vkCode);
-		//PostMessage(hWnd, WM_USER, (WPARAM)UserMessage, hooked->vkCode);
+    {		
 		AppKeyHandler::KeyPressed((unsigned)hooked->vkCode);
     }
     return CallNextHookEx(hKeyHook, nCode, wParam, (LPARAM)hooked);
@@ -85,8 +78,7 @@ __declspec(dllexport) LRESULT CALLBACK __KeyEvent__ (
     if  ((nCode == HC_ACTION) &&       // HC_ACTION means we may process this event
         ((wParam == WM_SYSKEYDOWN) ||  // Only react if either a system key ...
         (wParam == WM_KEYDOWN)))       // ... or a normal key have been pressed.
-    {
-		//PostMessage(hWnd, WM_GET_SCAN_CODE, 0, hooked->vkCode);
+    {		
 		AppKeyHandler::KeyPressed( hooked->vkCode);
     }
     return CallNextHookEx(hKeyHook, nCode,wParam,(LPARAM)hooked);
